@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lekstuga</title>
+  <!--bootstrap css-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="css/app.css">
+  <!--bootstrap js-->
+  <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>-->
+  <!-- update the version number as needed -->
+  <script defer src="/__/firebase/3.9.0/firebase-app.js"></script>
+  <!-- include only the Firebase features as you need -->
+  <script defer src="/__/firebase/3.9.0/firebase-auth.js"></script>
+  <script defer src="/__/firebase/3.9.0/firebase-database.js"></script>
+  <script defer src="/__/firebase/3.9.0/firebase-messaging.js"></script>
+  <script defer src="/__/firebase/3.9.0/firebase-storage.js"></script>
+  <!-- initialize the SDK after all desired features are loaded -->
+  <script defer src="/__/firebase/init.js"></script>
+  <!-- AngularJS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
+
+  <!-- AngularFire -->
+  <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
+  <script src="js/app.js"></script>
+</head>
+
+<body ng-app="app">
+  <div ng-controller="MyCtrl as ctrl">
+    <div class="container-fluid" id="topbar">
+      <div class="col-xs-8" id="logo">Edu</div>
+      <div class="col-xs-4">
+        <div class="row">
+          <div class="col-xs-4">Email</div>
+          <div class="col-xs-4">Password</div>
+        </div>
+        <div class="row">
+          <input type="text" class="col-xs-4" ng-model="email">
+          <input type="text" class="col-xs-4" ng-model="password">
+          <button class="col-xs-4 btn btn-default pull-right" id="loginBtn" ng-click="signIn(email, password)">Login</button>
+        </div>
+      </div>
+  </div>
+  <p ng-if="firebaseUser"> Väkommen: {{ firebaseUser.email }}</p>
+  <p ng-if="error"> Error: {{ error }}</p>
+  
+  <br>
+  <!--<input type="text" ng-model="data.news">
+  <h1> You said: {{ data.news }}</h1>
+
+  <ul>
+    <li ng-repeat="message in messages">-->
+      <!--edit message-->
+      <!--<input ng-model="message.text" ng-change="messages.$save(message)" />-->
+      <!--delete message-->
+      <!--<button ng-click="messages.$remove(message)">Delete message</button>
+    </li>
+  </ul>
+  <form ng-submit="addMessage()">
+    <input ng-model="newMessageText" />
+    <button type="submit">Add Message</button>
+  </form>
+
+  </div>-->
+</body>
+
+</html>

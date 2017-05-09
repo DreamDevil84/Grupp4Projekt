@@ -1,0 +1,11 @@
+#topbar{
+    background: darkslategray;
+    color: lightslategray;
+}
+#logo{
+    font-weight: bold;
+    font-size: 2em;
+}
+#loginBtn{
+    padding: 4px
+}
