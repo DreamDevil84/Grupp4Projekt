@@ -1,11 +1,29 @@
 #topbar{
     background: darkslategray;
-    color: lightslategray;
+    color: lightblue;
+    height: 4em;
 }
 #logo{
     font-weight: bold;
-    font-size: 2em;
+    font-size: 3em;
+}
+#loginbox{
+    height: 4em;
+    position: relative;
 }
 #loginBtn{
-    padding: 4px
+    padding: 4px;
+    position: absolute;
+    width: 5em;
+    margin-left: 1em;
+    margin-top: 1em;
+}
+#usernamedisplay{
+    position: absolute;
+    margin-top: 1.2em;
+}
+.logininput{
+    color: black;
+    border-radius: .5em;
+    margin-left: 5px;
 }
