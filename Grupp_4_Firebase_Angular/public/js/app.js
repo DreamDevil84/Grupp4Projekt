@@ -13,37 +13,46 @@
 
     angular
         .module('app', ['firebase'])
-        .controller('MyCtrl', function ($scope, $firebaseObject, $firebaseArray, $firebaseAuth) {
-            var ref = firebase.database().ref().child('data');
-            var syncObject = $firebaseObject(ref);
-            syncObject.$bindTo($scope, 'data');
+        .factory('Auth', function($firebaseAuth){
+            return $firebaseAuth();
+        })
+        .controller('MyCtrl', function ($scope, Auth, $firebaseObject, $firebaseArray, $firebaseAuth) {
+            // var ref = firebase.database().ref().child('data');
+            // var syncObject = $firebaseObject(ref);
+            // syncObject.$bindTo($scope, 'data');
 
-            var msgRef = firebase.database().ref().child('messages');
-            $scope.messages = $firebaseArray(msgRef);
-            $scope.addMessage = function () {
-                $scope.messages.$add({
-                    text: $scope.newMessageText
-                });
-            };
+            // var msgRef = firebase.database().ref().child('messages');
+            // $scope.messages = $firebaseArray(msgRef);
+            // $scope.addMessage = function () {
+            //     $scope.messages.$add({
+            //         text: $scope.newMessageText
+            //     });
+            // };
 
-            var auth = $firebaseAuth();
+            $scope.auth = Auth;
 
-            $scope.email = 'daniel.edstrom1984@hotmail.com';
-            $scope.password = 'newton123';
+            $scope.auth.$onAuthStateChanged(function(firebaseUser){
+                $scope.firebaseUser = firebaseUser;
+            });
 
-            $scope.signIn = function (email, password) {
-                $scope.firebaseUser = null;
-                $scope.error = null;
+            // var auth = $firebaseAuth();
 
-                auth.$signInWithEmailAndPassword(email, password).then(function (firebaseUser) {
-                    $scope.firebaseUser = firebaseUser;
-                })
-                    .catch(function (error) {
-                        var errorCode = error.code;
-                        var errorMessage = error.message;
-                        $scope.error = error;
-                    });
-            };
+             $scope.email = 'daniel.edstrom1984@hotmail.com';
+             $scope.password = 'newton123';
+
+            // $scope.signIn = function (email, password) {
+            //     $scope.firebaseUser = null;
+            //     $scope.error = null;
+
+            //     auth.$signInWithEmailAndPassword(email, password).then(function (firebaseUser) {
+            //         $scope.firebaseUser = firebaseUser;
+            //     })
+            //         .catch(function (error) {
+            //             var errorCode = error.code;
+            //             var errorMessage = error.message;
+            //             $scope.error = error;
+            //         });
+            // };
         });
 
 

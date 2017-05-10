@@ -11,19 +11,24 @@
     height: 4em;
     position: relative;
 }
-#loginBtn{
-    padding: 4px;
-    position: absolute;
-    width: 5em;
-    margin-left: 1em;
-    margin-top: 1em;
-}
 #usernamedisplay{
     position: absolute;
     margin-top: 1.2em;
 }
+.loginbtn{
+    padding: 4px;
+    width: 5em;
+    margin-left: 1em;
+    margin-top: 1em;
+}
+.loginrow{
+    height: 1em;
+}
 .logininput{
     color: black;
     border-radius: .5em;
-    margin-left: 5px;
+    margin-right: 1em;
+}
+.content{
+    position: absolute;
 }

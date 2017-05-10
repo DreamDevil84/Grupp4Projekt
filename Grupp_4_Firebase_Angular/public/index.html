@@ -35,40 +35,51 @@
 <body ng-app="app">
   <div ng-controller="MyCtrl as ctrl">
     <div class="container-fluid" id="topbar">
-      <div class="col-xs-8" id="logo">Edu</div>
-
-      <div class="col-xs-4" id="loginbox">
-        <div ng-hide="firebaseUser" class="row">
-          <div class="col-xs-4">Email</div>
-          <div class="col-xs-4">Password</div>
-        <button class="col-xs-4 btn btn-default pull-right" id="loginBtn" ng-click="signIn(email, password)">Login</button>
+      <div class="col-xs-8">
+        <div>
+          <span id="logo">Edu</span>
         </div>
-        <div ng-hide="firebaseUser" class="row">
-          <input type="text" class="col-xs-4 logininput" ng-model="email">
-          <input type="text" class="col-xs-4 logininput" ng-model="password">
-        </div>
-        <strong ng-if="firebaseUser" id="usernamedisplay">{{ firebaseUser.email }}</strong>
       </div>
 
+      <div ng-hide="firebaseUser" class="col-xs-4" id="loginbox">
+        <div class="row loginrow">
+          <div class="col-xs-4">Email</div>
+          <div class="col-xs-4">Password</div>
+          <button class="btn btn-default pull-right loginbtn" ng-click="auth.$signInWithEmailAndPassword(email, password)">Login</button>
+        </div>
+        <divclass="row loginrow">
+          <input type="text" class="col-xs-4 logininput" ng-model="email">
+          <input type="text" class="col-xs-4 logininput" ng-model="password">
+      </div>
+      <div ng-if="firebaseUser" class="col-xs-4">
+        <strong class="col-xs-3" id="usernamedisplay">{{ firebaseUser.email }}</strong>
+        <button class="col-xs-1 btn btn-default pull-right loginbtn" ng-click="auth.$signOut()">Log Out</button>
+      </div>
+      <p ng-if="error"> Error: {{ error }}</p>
     </div>
-    <p ng-if="error"> Error: {{ error }}</p>
-    <!--<input type="text" ng-model="data.news">
+  </div>
+  <div class="content">
+    <div>
+    </div>
+  </div>
+
+  <!--<input type="text" ng-model="data.news">
   <h1> You said: {{ data.news }}</h1>
 
   <ul>
     <li ng-repeat="message in messages">-->
-    <!--edit message-->
-    <!--<input ng-model="message.text" ng-change="messages.$save(message)" />-->
-    <!--delete message-->
-    <!--<button ng-click="messages.$remove(message)">Delete message</button>
+  <!--edit message-->
+  <!--<input ng-model="message.text" ng-change="messages.$save(message)" />-->
+  <!--delete message-->
+  <!--<button ng-click="messages.$remove(message)">Delete message</button>
     </li>
   </ul>
   <form ng-submit="addMessage()">
     <input ng-model="newMessageText" />
     <button type="submit">Add Message</button>
-  </form>
+  </form>-->
 
-  </div>-->
+  </div>
 </body>
 
 </html>
