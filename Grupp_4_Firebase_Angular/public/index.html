@@ -23,6 +23,7 @@
   <script defer src="/__/firebase/init.js"></script>
   <!-- AngularJS -->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
 
   <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
@@ -33,7 +34,7 @@
 </head>
 
 <body ng-app="app">
-  <div ng-controller="MyCtrl as ctrl">
+  <div ng-controller="LoginCtrl">
     <div class="container-fluid" id="topbar">
       <div class="col-xs-8">
         <div>
@@ -57,9 +58,12 @@
       </div>
       <p ng-if="error"> Error: {{ error }}</p>
     </div>
-  </div>
-  <div class="content">
-    <div>
+    <div class="content">
+      <div ng-view></div>
+      <start-content></start-content>
+      <admin-content></admin-content>
+      <teacher-content></teacher-content>
+      <student-content></student-content>
     </div>
   </div>
 
