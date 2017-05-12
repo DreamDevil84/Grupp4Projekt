@@ -99,6 +99,7 @@ ul.grid{
 -------------*/
 
 header{
+	background-color: #000;
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -456,3 +457,4 @@ footer p a{
 @media (max-width: 1200px) {
 	#bsaHolder{ display:none;}
 }
+
