@@ -32,3 +32,10 @@
 .content{
     position: absolute;
 }
+.fullscreen{
+    height: 100%;
+}
+.redback{
+    background-color: darkred;
+    height: 100%;
+}

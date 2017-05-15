@@ -21,17 +21,15 @@
 
             $scope.auth.$onAuthStateChanged(function (firebaseUser) {
                 $scope.firebaseUser = firebaseUser;
-                if($scope.firebaseUser === null)
-                {
+                if ($scope.firebaseUser === null) {
                     $location.path('/home');
                 }
-                else
-                {
-                    $location.path('/admin');
+                else {
+                    $location.path('/student');
                 }
             });
-            $scope.email = 'daniel.edstrom1984@hotmail.com';
-            $scope.password = 'newton123';
+            $scope.email = 'student@edu.com';
+            $scope.password = '123456';
 
         })
         //denna function är till för att se om användaren inte är autensierad och blir då sparkad till förstasidan
@@ -65,70 +63,86 @@
                             return Auth.$requireSignIn();
                         }
                     }
+                }).when(
+                '/student',
+                {
+                    controller: 'StudentCtrl',
+                    templateUrl: 'views/student/home.html',
+                    resolve:
+                    {
+                        'currentAuth': function (Auth) {
+                            return Auth.$requireSignIn();
+                        }
+                    }
+                }).when(
+                '/teacher',
+                {
+                    controller: 'TeacherCtrl',
+                    templateUrl: 'views/teacher/home.html',
+                    resolve:
+                    {
+                        'currentAuth': function (Auth) {
+                            return Auth.$requireSignIn();
+                        }
+                    }
                 });
         })
         .controller('HomeCtrl', function (currentAuth) {
 
+           
+
+
         })
-        .controller('AdminCtrl', function (currentAuth) {
+        .controller('StudentCtrl', function (currentAuth, $firebaseObject, $firebaseArray, $scope) { 
+
+            var user = currentAuth.uid;
+            var courseRef = firebase.database().ref().child('courses');
+            var userRef = firebase.database().ref().child('users/' + user);
+            var userCourseRef = firebase.database().ref().child('users/' + user + '/courses');
+            
+            courseRef.once('value')
+            .then(function(snapshot){
+                snapshot.forEach(function(childSnapshot){
+                    var key = childSnapshot.key;
+                    console.log(key);
+                    var childData = childSnapshot.val();
+                    console.log(childData);
+                })
+            });
+
+            var courses = $firebaseArray(courseRef);
+            var userCourses = $firebaseArray(userCourseRef);
+
+            $scope.courses = courses;
+            $scope.courseRef = userCourseRef;
+            $scope.userCourses = userCourses;
+            
+            $scope.user = $firebaseObject(userRef);
+
+            
+
+
+            $scope.showDescription = function(){
+            };
+
+
+
+            // var ref = firebase.database().ref().child('data');
+            // var syncObject = $firebaseObject(ref);
+            // syncObject.$bindTo($scope, 'data');
+
+            // var msgRef = firebase.database().ref().child('messages');
+            // $scope.messages = $firebaseArray(msgRef);
+            // $scope.addMessage = function () {
+            //     $scope.messages.$add({
+            //         text: $scope.newMessageText
+            //     });
+            // };
+
+        })
+        .controller('TeacherCtrl', function (currentAuth) {
 
         });
-
-
-
-
-    // .directive('startContent', function(){
-    //     return {
-    //         restrict: 'E',
-    //         templateUrl: 'views/home/home.html'
-    //     };
-    // })
-    // .directive('adminContent', function(){
-    //     return {
-    //         restrict: 'E',
-    //         templateUrl: 'views/admin/home.html'
-    //     };
-    // })
-    // .directive('teacherContent', function(){
-    //     return {
-    //         restrict: 'E',
-    //         templateUrl: 'views/teacher/home.html'
-    //     };
-    // })
-    // .directive('studentContent', function(){
-    //     return {
-    //         restrict: 'E',
-    //         templateUrl: 'views/student/home.html'
-    //     };
-    // });
-
-
-
-    // var auth = $firebaseAuth();
-    // $scope.signIn = function (email, password) {
-    //     $scope.firebaseUser = null;
-    //     $scope.error = null;
-
-    //     auth.$signInWithEmailAndPassword(email, password).then(function (firebaseUser) {
-    //         $scope.firebaseUser = firebaseUser;
-    //     })
-    //         .catch(function (error) {
-    //             var errorCode = error.code;
-    //             var errorMessage = error.message;
-    //             $scope.error = error;
-    //         });
-    // };
-    // var ref = firebase.database().ref().child('data');
-    // var syncObject = $firebaseObject(ref);
-    // syncObject.$bindTo($scope, 'data');
-
-    // var msgRef = firebase.database().ref().child('messages');
-    // $scope.messages = $firebaseArray(msgRef);
-    // $scope.addMessage = function () {
-    //     $scope.messages.$add({
-    //         text: $scope.newMessageText
-    //     });
-    // };
 
 
 
