@@ -89,40 +89,53 @@
         })
         .controller('HomeCtrl', function (currentAuth) {
 
-           
+
 
 
         })
-        .controller('StudentCtrl', function (currentAuth, $firebaseObject, $firebaseArray, $scope) { 
+        .controller('StudentCtrl', function (currentAuth, $firebaseObject, $firebaseArray, $scope) {
 
             var user = currentAuth.uid;
             var courseRef = firebase.database().ref().child('courses');
             var userRef = firebase.database().ref().child('users/' + user);
             var userCourseRef = firebase.database().ref().child('users/' + user + '/courses');
+
+
+            $scope.studentCourses = [];
+            $scope.studentGrades = [];
             
-            courseRef.once('value')
-            .then(function(snapshot){
-                snapshot.forEach(function(childSnapshot){
-                    var key = childSnapshot.key;
-                    console.log(key);
-                    var childData = childSnapshot.val();
-                    console.log(childData);
-                })
-            });
+            $scope.userCourse = userCourseRef.once('value')
+                .then(function (snapshot) {
+                    snapshot.forEach(function (childSnapshot) {
+                        // var key = childSnapshot.key;
+                        var childData = childSnapshot.val();
+                        $scope.studentCourses.push(childData.id);
+                        // console.log(childData.id);
+                    })
+                });
 
             var courses = $firebaseArray(courseRef);
             var userCourses = $firebaseArray(userCourseRef);
 
+            $scope.testval = 'test1';
+
+
+            $scope.filterByStudent = function (course) {
+                return ($scope.studentCourses.indexOf(course.id) !== -1);
+            };
+
+
+
             $scope.courses = courses;
             $scope.courseRef = userCourseRef;
             $scope.userCourses = userCourses;
-            
+
             $scope.user = $firebaseObject(userRef);
 
-            
 
 
-            $scope.showDescription = function(){
+
+            $scope.showDescription = function () {
             };
 
 

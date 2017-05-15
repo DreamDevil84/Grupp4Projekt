@@ -1,31 +1,37 @@
-<<<<<<< HEAD
-<h1>Hej {{user.email}}</h1>
-{{firebaseUser.uid}} <br>
-Hej {{user.firstName}}
-<br>
-<ul>
-    <li ng-repeat="course in courses">
-        <button class="btn btn-clear">{{course.title}}</button>
-        <strong>{{course.description}}</strong>
-    </li>
-</ul>
-{{courses}}<br>
-<br>
-{{userCourses}}
+<<<<<<< HEAD <h1>Hej {{user.email}}</h1>
+    {{firebaseUser.uid}} <br> Hej {{user.firstName}}
+    <br>
+    <div class="row">
+        <ul>
+            <li ng-repeat="course in courses | filter:filterByStudent">
+                <button class="btn btn-clear">{{course.title}}</button>
+                <strong>{{course.description}}</strong>
+            </li>
+        </ul>
+        <ul>
+            <li ng-repeat="course in userCourses">{{course.grade}}</li>
+        </ul>
+    </div>
+    <br>
+    <!--<ul>
+    <li ng-repeat="x in userCourses">{{x.id}}</li>
+</ul>-->
+
+    <!--{{userCourses}}
 <br>
 <br>
 <br>
 {{courseRef}}
 <br>
 <br>
-{{user}}<br>
-<br>
+{{user}}<br>-->
+    <br>
 
 
 
 
 
-<!--<input type="text" ng-model="data.news">
+    <!--<input type="text" ng-model="data.news">
 <h1> You said: {{ data.news }}</h1>
 
 <ul>
@@ -38,7 +44,7 @@ Hej {{user.firstName}}
     <input ng-model="newMessageText" />
     <button type="submit">Add Message</button>
 </form>-->
-=======
+    <!--=======
 <!DOCTYPE html>
 
 <html lang= "en">
@@ -119,4 +125,4 @@ Hej {{user.firstName}}
 
 </body>
 </html>
->>>>>>> eb84564b5107f07e80aa1e48baddf1608f84d548
+>>>>>>> eb84564b5107f07e80aa1e48baddf1608f84d548-->

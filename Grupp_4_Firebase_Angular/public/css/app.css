@@ -1,4 +1,4 @@
-body { 
+/*body { 
   background-color: lightgrey;
   color:#000305;
   font-size:87.5%;
@@ -176,7 +176,7 @@ color: #FFF;
 
 
 
-
+*/
 
 #topbar{
     background: darkslategray;
@@ -212,7 +212,6 @@ color: #FFF;
 .content{
     position: absolute;
 }
-<<<<<<< HEAD
 .fullscreen{
     height: 100%;
 }
@@ -220,6 +219,3 @@ color: #FFF;
     background-color: darkred;
     height: 100%;
 }
-=======
-
->>>>>>> eb84564b5107f07e80aa1e48baddf1608f84d548
