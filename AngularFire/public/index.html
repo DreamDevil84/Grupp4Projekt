@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EDU</title>
+  <!--bootstrap css-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
+  <link rel="stylesheet" href="css/app.css">
+  <!--bootstrap js-->
+  <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+    crossorigin="anonymous"></script>-->
+  <!-- update the version number as needed -->
+  <script defer src="/__/firebase/3.9.0/firebase-app.js"></script>
+  <!-- include only the Firebase features as you need -->
+  <script defer src="/__/firebase/3.9.0/firebase-auth.js"></script>
+  <script defer src="/__/firebase/3.9.0/firebase-database.js"></script>
+  <script defer src="/__/firebase/3.9.0/firebase-messaging.js"></script>
+  <script defer src="/__/firebase/3.9.0/firebase-storage.js"></script>
+  <!-- initialize the SDK after all desired features are loaded -->
+  <script defer src="/__/firebase/init.js"></script>
+  <!-- AngularJS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+
+
+
+  <!-- AngularFire -->
+  <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
+  <script src="js/app.js"></script>
+</head>
+
+<body ng-app="app">
+  <div ng-controller="MyCtrl">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+
+        <div id="navbar">
+          <form class="navbar-form navbar-right" autocomplete="on">
+            <div class="form-group">
+              <input ng-model="signInEmail"  type="email" placeholder="Email" class="form-control">
+            </div>
+            <div class="form-group">
+              <input ng-model="signInPassword"  type="password" placeholder="Password" class="form-control">
+            </div>
+            <button type="button" id="btnSignIn" class="btn btn-success">Sign In</button>
+            <button type="button"  class="btn btn-success" data-target="#myModal" data-toggle="modal">Sign Up</button>
+
+            <a ng-click="resetPassword()" id="resetPassword" style="color: white;cursor:pointer"> Forgot password?</a>
+            <button ng-click="logOut()" type="button" id="btnLogOut" class="btn btn-success">Log Out</button>
+          </form>
+         </div>
+
+      </div>
+ 
+  </nav>
+
+ 
+  <!-- Modal -->
+  <div class="modal fade" id="myModal">
+    <div class="modal-dialog" class="modalBox">
+      <!-- this is the entire modal form, including the background -->
+      <div class="modal-content">
+        <!-- this is the container wrapper -->
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Sign Up</h4>
+        </div>
+        <div class="modal-body" id="signup">
+          <!-- sign up form -->
+          <form>
+            <p>
+              <input class="full-width has-padding has-border" id="signup-firstname" type="text" placeholder="First name" required="required">
+            </p>
+
+            <p>
+              <input class="full-width has-padding has-border" id="signup-aftername" type="text" placeholder="After name" required="required">
+            </p>
+
+            <p>
+              <input class="full-width has-padding has-border" ng-model="signUpEmail" id="signUpEmail" type="email" placeholder="Email" required="required">
+            </p>
+
+            <p>
+              <input class="full-width has-padding has-border" ng-model="signUpPassword" id="signUpPassword" type="password" placeholder="Password" required="required">
+            </p>
+
+            <button type="button" id="btnSignUp" data-dismiss="modal" class="full-width has-padding btn btn-success" ng-click="signUp(email, password)">Submit</button>
+
+          </form>
+        </div>
+        <!-- signup -->
+      </div>
+    </div>
+  </div>
+
+  </div>
+
+<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
+<script type="text/javascript" src="config.js" ></script>
+
+</body>
+
+</html>

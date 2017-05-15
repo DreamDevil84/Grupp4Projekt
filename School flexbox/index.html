@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>EDU platform</title>
+
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="index.js"></script>
+
+</head>
+
+<body ng-app="bestApp" ng-controller="bestCtrl">
+
+	<header>
+		<h2><a href="#">EDU</a></h2>
+		<nav>
+			<li><a href="#">Courses</a></li>
+			<li><a href="#">My results</a></li>
+			<li><a href="#" ng-click="myFunc()">Settings</a></li>
+		</nav>
+	</header>
+
+
+	<section class="hero">
+		<div class="background-image" style="background-image: url(assets/img/school.jpg);"></div>
+		<h1>Welcome: {{loggedinName}}</h1>
+		<h3>In this site you will be able to read an overview of your courses, see the result from your done courses and find news about Newton</h3>
+		
+	</section>
+
+
+	<section class="courses">
+		<h3 class="title">My courses for: {{apps}}</h3>
+		<h3>Application development</h3>
+		<p>Application development...</p>
+		<h3>Java</h3>
+		<p>Java...</p>
+		<h3>UX</h3>
+		<p>User experience...</p>
+		<hr>
+
+	</section>
+
+
+	<footer>
+		<ul>
+			<li><a href="#"><i class="fa fa-envelope"></i></a></li>
+			<li><a href="https://www.facebook.com/Newton.Yh"><i class="fa fa-facebook-square"></i></a></li>
+		</ul>
+		
+		
+	</footer>
+
+</body>
+
+</html>
