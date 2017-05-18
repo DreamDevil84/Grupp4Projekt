@@ -18,7 +18,7 @@
 <body ng-app="bestApp" ng-controller="bestCtrl">
 
 	<header>
-		<h2><a href="#">EDU</a></h2>
+		<h2><a href="index.html">EDU</a></h2>
 		<nav>
 			<li><a href="Mycourses.html">Courses</a></li>
 			<li><a href="Myresults.html">My results</a></li>
@@ -26,9 +26,20 @@
 		</nav>
 	</header>
 
+<section class="courses">
+		<h3 class="title">My courses for: {{apps}}</h3>
+		<h3>Application development</h3>
+		<p>Application development...</p>
+		<h3>Java</h3>
+		<p>Java...</p>
+		<h3>UX</h3>
+		<p>User experience...</p>
+		<hr>
+
+	</section>
 
 	<section class="hero">
-		<div class="background-image" style="background-image: url(assets/img/school.jpg);"></div>
+		
 		<h1>Welcome: {{loggedinName}}</h1>
 		<h3>In this site you will be able to read an overview of your courses, see the result from your done courses and find news about Newton</h3>
 		
