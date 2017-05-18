@@ -23,8 +23,10 @@
                 $scope.firebaseUser = firebaseUser;
                 if ($scope.firebaseUser) {
                     var ref = firebase.database().ref().child('users/' + $scope.firebaseUser.uid);
+                    console.log($scope.firebaseUser.uid);
                     var login = $firebaseObject(ref);
                     login.$loaded().then(function (user) {
+                        console.log(user.type);
                         $location.path('/' + user.type);
                     });
                 } else {
@@ -33,6 +35,7 @@
             });
             $scope.email = 'student@edu.com';
             $scope.password = '123456';
+
 
         })
         //denna function är till för att se om användaren inte är autensierad och blir då sparkad till förstasidan
@@ -89,11 +92,15 @@
                             return Auth.$requireSignIn();
                         }
                     }
+                }).when(
+                '/test',
+                {
+                    templateUrl: 'views/student/test.html'
                 });
         })
         .controller('HomeCtrl', function (currentAuth) {
         })
-        .controller('StudentCtrl', function (currentAuth, $firebaseObject, $firebaseArray, $scope) {
+        .controller('StudentCtrl', function (currentAuth, $firebaseObject, $firebaseArray, $scope, $location) {
 
             //filtrera kurser för studenten
             var user = currentAuth.uid;
@@ -122,6 +129,11 @@
             $scope.user = $firebaseObject(userRef);
 
 
+            $scope.gototest = function () {
+                $location.path('/test');
+            };
+
+
             //feedback funktioner
 
             //funktion för veckonummer, den finns ej i standard javascript så jag hittade en som funkar på stackoverflow
@@ -133,6 +145,7 @@
             //ge feedback, 2 parametrar, första är värdet på rösten, andra är vilken typ, tex daglig eller veckans, text är för veckofeedback
             $scope.giveFeedback = function (reaction, type, text) {
                 var date = new Date();
+                text = 'tomt';
                 var feedbackRef, feedbackRecordRef;
                 if (type === 'daily') {
                     var today = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate();
@@ -174,7 +187,36 @@
                     }
                 })
 
-            }
+            };
+
+            //NÄRVARO
+
+            $scope.attendance = function () {
+                var attendanceRef = firebase.database().ref().child('attendance/today/' + user);
+                attendanceRef.once('value').then(function (attend) {
+                    console.log(attend.val().status);
+                    if (!attend.status.exists()) {
+                        attendanceRef.set({
+                            status: 'Present'
+                        })
+                    } else {
+                        console.log(attend.val().status);
+                        if (attend.val().status === 'Present') {
+                            attendanceRef.update({
+                                status: 'Late'
+                            })
+                        } else if (attend.val().status === 'Late') {
+                            attendanceRef.update({
+                                status: 'Absent'
+                            })
+                        } else if (attend.val().status === 'Absent') {
+                            attendanceRef.update({
+                                status: 'Present'
+                            })
+                        }
+                    }
+                });
+            };
 
 
 
