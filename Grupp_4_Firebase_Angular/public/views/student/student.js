@@ -1,4 +1,4 @@
-// angular.module("app", ['firebase', 'ngRoute'])
+angular.module("app", ['firebase', 'ngRoute'])
     .controller('StudentCtrl', function (currentAuth, $firebaseObject, $firebaseArray, $scope) {
 
         var user = currentAuth.uid;

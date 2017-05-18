@@ -21,12 +21,19 @@
 
             $scope.auth.$onAuthStateChanged(function (firebaseUser) {
                 $scope.firebaseUser = firebaseUser;
-                if ($scope.firebaseUser === null) {
+                if ($scope.firebaseUser) {
+                    $scope.ref = firebase.database().ref().child('users/' + $scope.firebaseUser.uid);
+                    $scope.type = 'null';
+                    $scope.ref.once('value').then(function (snapshot) {
+                        console.log('snapshot.val().type= ' + snapshot.val().type)
+                        $scope.type = snapshot.val().type;
+                        console.log($scope.type);
+                        $location.path('/' + $scope.type);
+                        // setLocation($scope.type);
+                    });
+                } else {
                     $location.path('/home');
-                }
-                else {
-                    $location.path('/student');
-                }
+                };
             });
             $scope.email = 'student@edu.com';
             $scope.password = '123456';
@@ -37,6 +44,7 @@
             $rootScope.$on('$routeChangeError', function (event, next, previous, error) {
                 if (error === 'AUTH_REQUIRED') {
                     $location.path('/home');
+                    console.log('AUTH REQUIRED');
                 }
             });
         })
@@ -88,35 +96,26 @@
                 });
         })
         .controller('HomeCtrl', function (currentAuth) {
-
-
-
-
         })
         .controller('StudentCtrl', function (currentAuth, $firebaseObject, $firebaseArray, $scope) {
 
+            //filtrera kurser för studenten
             var user = currentAuth.uid;
             var courseRef = firebase.database().ref().child('courses');
             var userRef = firebase.database().ref().child('users/' + user);
             var userCourseRef = firebase.database().ref().child('users/' + user + '/courses');
-
 
             $scope.studentCourses = [];
             $scope.studentGrades = [];
             $scope.userCourse = userCourseRef.once('value')
                 .then(function (snapshot) {
                     snapshot.forEach(function (childSnapshot) {
-                        // var key = childSnapshot.key;
                         var childData = childSnapshot.val();
                         $scope.studentCourses.push(childData.id);
-                        // console.log(childData.id);
                     })
                 });
             var courses = $firebaseArray(courseRef);
             var userCourses = $firebaseArray(userCourseRef);
-
-            $scope.testval = 'test1';
-
 
             $scope.filterByStudent = function (course) {
                 return ($scope.studentCourses.indexOf(course.id) !== -1);
@@ -124,35 +123,61 @@
             $scope.courses = courses;
             $scope.courseRef = userCourseRef;
             $scope.userCourses = userCourses;
-
             $scope.user = $firebaseObject(userRef);
 
 
-            //feedback funktion
-            var feedbackRef = firebase.database().ref().child('feedback/daily/today');
-            // var feedbackRecord = firebase.database().ref().child('feedback/daily/today/hasVoted');
-            // var record = $firebaseArray(feedbackRecord);
-            // $scope.feedback = $firebaseArray(feedbackRef); //Kanske inte behöver
-            $scope.giveFeedback = function (reaction) {
-                var storedLikes = null;
-                var storedVotes = null;
-                feedbackRef.once('value').then(function (snapshot) {
-                    var storedLikes = snapshot.val().likes;
-                    storedLikes = storedLikes + reaction;
-                    var storedVotes = snapshot.val().votes;
-                    storedVotes++;
-                    feedbackRef.set({
-                        likes: storedLikes,
-                        votes: storedVotes
-                    });
-                })
-                var fdback = {
-                    hasVoted: {
-                        user: user,
-                        theirVote: reaction
-                    }
+            //feedback funktioner
+
+            //funktion för veckonummer, den finns ej i standard javascript så jag hittade en som funkar på stackoverflow
+            Date.prototype.getWeek = function () {
+                var onejan = new Date(this.getFullYear(), 0, 1);
+                return Math.ceil((((this - onejan) / 86400000) + onejan.getDay() + 1) / 7);
+            }
+
+            //ge feedback, 2 parametrar, första är värdet på rösten, andra är vilken typ, tex daglig eller veckans, text är för veckofeedback
+            $scope.giveFeedback = function (reaction, type, text) {
+                var date = new Date();
+                var feedbackRef, feedbackRecordRef;
+                if (type === 'daily') {
+                    var today = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate();
+                    feedbackRef = firebase.database().ref().child('feedback/daily/' + today);
+                    feedbackRecordRef = firebase.database().ref().child('feedback/daily/' + today + '/hasVoted/' + user);
+                    text = null;
+                } else if (type === 'weekly') {
+                    var thisWeek = date.getWeek();
+                    feedbackRef = firebase.database().ref().child('feedback/weekly/' + thisWeek);
+                    feedbackRecordRef = firebase.database().ref().child('feedback/weekly/' + thisWeek + '/hasVoted/' + user);
                 };
-                feedbackRef.push(fdback);
+                $scope.record = $firebaseArray(feedbackRecordRef);
+
+                feedbackRef.once('value').then(function (snapshot) {
+                    if (snapshot.child('hasVoted/' + user).exists()) {
+                        console.log('exists');
+                    } else {
+                        if (!snapshot.child('likes').exists()) {
+                            feedbackRef.set({
+                                votes: 1,
+                                likes: reaction,
+                                hasVoted: {
+                                    [user]: {
+                                        theirVote: reaction,
+                                        text: text
+                                    }
+                                }
+                            });
+                        } else {
+                            feedbackRef.update({
+                                likes: snapshot.val().likes + reaction,
+                                votes: snapshot.val().votes + 1
+                            });
+                            feedbackRecordRef.set({
+                                theirVote: reaction,
+                                text: text
+                            });
+                        }
+                    }
+                })
+
             }
 
 
@@ -171,6 +196,9 @@
 
         })
         .controller('TeacherCtrl', function (currentAuth) {
+
+        })
+        .controller('AdminCtrl', function (currentAuth) {
 
         });
 
