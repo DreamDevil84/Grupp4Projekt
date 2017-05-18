@@ -16,20 +16,16 @@
         .factory('Auth', function ($firebaseAuth) {
             return $firebaseAuth();
         })
-        .controller('LoginCtrl', function ($scope, Auth, $location) {
+        .controller('LoginCtrl', function ($scope, Auth, $firebaseObject, $location) {
             $scope.auth = Auth;
 
             $scope.auth.$onAuthStateChanged(function (firebaseUser) {
                 $scope.firebaseUser = firebaseUser;
                 if ($scope.firebaseUser) {
-                    $scope.ref = firebase.database().ref().child('users/' + $scope.firebaseUser.uid);
-                    $scope.type = 'null';
-                    $scope.ref.once('value').then(function (snapshot) {
-                        console.log('snapshot.val().type= ' + snapshot.val().type)
-                        $scope.type = snapshot.val().type;
-                        console.log($scope.type);
-                        $location.path('/' + $scope.type);
-                        // setLocation($scope.type);
+                    var ref = firebase.database().ref().child('users/' + $scope.firebaseUser.uid);
+                    var login = $firebaseObject(ref);
+                    login.$loaded().then(function (user) {
+                        $location.path('/' + user.type);
                     });
                 } else {
                     $location.path('/home');
