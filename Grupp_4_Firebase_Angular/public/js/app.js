@@ -24,10 +24,10 @@
                 $scope.firebaseUser = firebaseUser;
                 if ($scope.firebaseUser) {
                     var ref = firebase.database().ref().child('users/' + $scope.firebaseUser.uid);
-                    console.log($scope.firebaseUser.uid);
+                    // console.log($scope.firebaseUser.uid);
                     var login = $firebaseObject(ref);
                     login.$loaded().then(function (user) {
-                        console.log(user.type);
+                        // console.log(user.type);
                         $location.path('/' + user.type);
                     });
                 } else {
@@ -103,30 +103,52 @@
         })
         .controller('StudentCtrl', function (currentAuth, $firebaseObject, $firebaseArray, $scope, $location) {
 
+
+            //skaffar dagens datum, används för andra funktioner
+            var date = new Date();
+            var today = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate();
+
+            //funktion för veckonummer, den finns ej i standard javascript så jag hittade en som funkar på stackoverflow
+            Date.prototype.getWeek = function () {
+                var onejan = new Date(this.getFullYear(), 0, 1);
+                return Math.ceil((((this - onejan) / 86400000) + onejan.getDay() + 1) / 7);
+            }
+
             //filtrera kurser för studenten
             var user = currentAuth.uid;
             var courseRef = firebase.database().ref().child('courses');
             var userRef = firebase.database().ref().child('users/' + user);
             var userCourseRef = firebase.database().ref().child('users/' + user + '/courses');
 
-            $scope.studentCourses = [];
-            $scope.studentGrades = [];
-            userCourseRef.once('value')
-                .then(function (snapshot) {
-                    snapshot.forEach(function (childSnapshot) {
-                        var childData = childSnapshot.val();
-                        $scope.studentCourses.push(childData.id);
-                    })
-                });
-            var courses = $firebaseArray(courseRef);
-            var userCourses = $firebaseArray(userCourseRef);
 
-            $scope.filterByStudent = function (course) {
-                return ($scope.studentCourses.indexOf(course.id) !== -1);
-            };
-            $scope.courses = courses;
-            $scope.courseRef = userCourseRef;
-            $scope.userCourses = userCourses;
+            //här filtreras alla kurser som studenten läser in i ett nytt array, även betyget trycks in där
+            var studentCourses = [];
+            $scope.studentCourseDetails = [];
+            userCourseRef.once('value')
+                .then(function (data) {
+                    data.forEach(function (childDataSnap) {
+                        var childData = childDataSnap.val();
+                        var childDetail = { id: childData.id, grade: childData.grade };
+                        studentCourses.push(childDetail);
+                    });
+                    courseRef.once('value')
+                        .then(function (data) {
+                            data.forEach(function (childDataSnap) {
+                                var childData = childDataSnap.val();
+                                for (var x = 0; x < studentCourses.length; x++) {
+                                    if (childData.id === studentCourses[x].id) {
+                                        $scope.studentCourseDetails.push({
+                                            id: studentCourses[x].id,
+                                            grade: studentCourses[x].grade,
+                                            title: childData.title,
+                                            description: childData.description
+                                        });
+                                    };
+                                };
+                            })
+                        });
+                })
+            var courses = $firebaseArray(courseRef);
             $scope.user = $firebaseObject(userRef);
 
 
@@ -137,19 +159,11 @@
 
             //feedback funktioner
 
-            //funktion för veckonummer, den finns ej i standard javascript så jag hittade en som funkar på stackoverflow
-            Date.prototype.getWeek = function () {
-                var onejan = new Date(this.getFullYear(), 0, 1);
-                return Math.ceil((((this - onejan) / 86400000) + onejan.getDay() + 1) / 7);
-            }
-
             //ge feedback, 2 parametrar, första är värdet på rösten, andra är vilken typ, tex daglig eller veckans, text är för veckofeedback
             $scope.giveFeedback = function (reaction, type, text) {
-                var date = new Date();
                 text = 'tomt';
                 var feedbackRef, feedbackRecordRef;
                 if (type === 'daily') {
-                    var today = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate();
                     feedbackRef = firebase.database().ref().child('feedback/daily/' + today);
                     feedbackRecordRef = firebase.database().ref().child('feedback/daily/' + today + '/hasVoted/' + user);
                     text = null;
@@ -192,10 +206,12 @@
 
             //NÄRVARO
 
+            var attendanceRef = firebase.database().ref().child('attendance/' + today + '/' + user);
+
+            var syncAttend = $firebaseObject(attendanceRef);
+            syncAttend.$bindTo($scope, 'data');
+
             $scope.attendance = function () {
-                var date = new Date();
-                var today = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate();
-                var attendanceRef = firebase.database().ref().child('attendance/' + today + '/' + user);
                 attendanceRef.once('value').then(function (attend) {
                     if (!attend.exists()) {
                         attendanceRef.set({
@@ -235,25 +251,80 @@
             // };
 
         })
-        .controller('TeacherCtrl', function (currentAuth, $scope) {
+        // .factory('AttendanceList', function ($firebaseObject) {
+
+        //     return function (studentAtt) {
+        //         // create a reference to the database node where we will store our data
+        //         var ref = firebase.database().ref("rooms").push();
+        //         var profileRef = ref.child(studentAtt);
+
+        //         // return it as a synchronized object
+        //         return $firebaseObject(profileRef);
+        //     }
+        // })
+        .controller('TeacherCtrl', function (currentAuth, $scope, $firebaseObject, $firebaseArray) {
+
+            //skaffar dagens datum, används för andra funktioner
+            var date = new Date();
+            var today = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate();
+
+            //funktion för veckonummer, den finns ej i standard javascript så jag hittade en som funkar på stackoverflow
+            Date.prototype.getWeek = function () {
+                var onejan = new Date(this.getFullYear(), 0, 1);
+                return Math.ceil((((this - onejan) / 86400000) + onejan.getDay() + 1) / 7);
+            }
 
             var user = currentAuth.uid;
+
+            //hämta studenterna
             var usersRef = firebase.database().ref().child('users');
+            var attendanceRef = firebase.database().ref().child('attendance/' + today);
 
+            var students = [];
             $scope.students = [];
-
-            var getStudents = function () {
-                usersRef.once('value')
-                    .then(function (snapshot) {
-                        snapshot.forEach(function (childSnapshot) {
-                            var childData = childSnapshot.val();
-                            if (childData.type === 'student') {
-                                $scope.students.push(childData.firstName);
+            usersRef.once('value')
+                .then(function (data) {
+                    data.forEach(function (childSnapshot) {
+                        var childData = childSnapshot.val();
+                        var studentId = childSnapshot.key;
+                        if (childData.type === 'student') {
+                            // console.log(childSnapshot.key);
+                            var studentInfo = {
+                                firstName: childData.firstName,
+                                lastName: childData.lastName,
+                                id: studentId
                             };
-                        });
+                            students.push(studentInfo);
+                        };
                     });
-            };
-            getStudents();
+                    // console.log(students);
+                    attendanceRef.once('value')
+                        .then(function (attendData) {
+                            attendData.forEach(function (attendSnapshot) {
+                                var childData = {
+                                    status: attendSnapshot.val().status,
+                                    id: attendSnapshot.key
+                                };
+                                // console.log(childData);
+                                for (var x = 0; x < students.length; x++) {
+                                    if (childData.id === students[x].id) {
+                                        var studentsInfo = {
+                                            firstName: students[x].firstName,
+                                            id: childData.id,
+                                            lastName: students[x].lastName,
+                                            status: childData.status
+                                        };
+                                        $scope.students.push(studentsInfo);
+                                    };
+                                };
+                            });
+                        });
+                    // console.log($scope.students);
+                });
+            var attendance = $firebaseArray(attendanceRef);
+
+
+
         })
         .controller('AdminCtrl', function (currentAuth, $scope) {
             var user = currentAuth.uid;

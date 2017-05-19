@@ -1,9 +1,13 @@
 <div>
     <h1>Hej Läraren</h1>
 </div>
-
-<ul>
-    <li ng-repeat="student in students">{{student}}</li>
-</ul>
-
-<button class="btn btn-clear" ng-click="getStudents()">get students</button>
+<div class="col-xs-12 col-md-6 col-lg-4">
+    <ul class="list-unstyled list-group">
+        <li class="list-group-item" ng-repeat="student in students">
+            {{student.firstName}} {{student.lastName}}
+            <span ng-show="student.status === 2" class="badge badge-success">Här</span>
+            <span ng-show="student.status === 1" class="badge badge-warning">Sen</span>
+            <span ng-show="student.status === 0" class="badge badge-error">Ej Här</span>
+        </li>
+    </ul>
+</div>

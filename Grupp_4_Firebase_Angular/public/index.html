@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Lekstuga</title>
+  <title>Grupp 4 Projekt</title>
   <!--bootstrap css-->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
     crossorigin="anonymous">
@@ -35,31 +35,28 @@
 
 <body ng-app="app">
   <div ng-controller="LoginCtrl">
-    <div class="container-fluid" id="topbar">
-      <div class="col-xs-8">
+    <header class="container-fluid" id="topbar">
+      <div class="col-xs-6">
         <div>
           <span id="logo">Edu</span>
         </div>
       </div>
-      <div ng-hide="firebaseUser" class="col-xs-4" id="loginbox">
-        <div class="row loginrow">
-          <div class="col-xs-4">Email</div>
-          <div class="col-xs-4">Password</div>
-          <button class="btn btn-default pull-right loginbtn" ng-click="auth.$signInWithEmailAndPassword(email, password)">Login</button>
-        </div>
-        <divclass="row loginrow">
-          <input type="text" class="col-xs-4 logininput" ng-model="email">
-          <input type="text" class="col-xs-4 logininput" ng-model="password">
+      <div ng-hide="firebaseUser" class="col-xs-2">
+        <p>Email</p>
+        <input type="text" class="logininput" ng-model="email">
       </div>
-      <div ng-if="firebaseUser" class="col-xs-4">
-        <strong class="col-xs-3" id="usernamedisplay">{{ firebaseUser.email }}</strong>
-        <button class="col-xs-1 btn btn-default pull-right loginbtn" ng-click="auth.$signOut()">Log Out</button>
+      <div ng-hide="firebaseUser" class="col-xs-2">
+        <p>Password</p>
+        <input type="password" class="logininput" ng-model="password">
+      </div>
+      <button ng-hide="firebaseUser" class="btn btn-default col-xs-2 pull-right loginbutton" ng-click="auth.$signInWithEmailAndPassword(email, password)">Login</button>
+      <div ng-if="firebaseUser" class="col-xs-6 pull-right">
+        <strong class="col-xs-4" id="usernamedisplay" ng-click="auth.$signOut()">{{ firebaseUser.email }}</strong>
       </div>
       <p ng-if="error"> Error: {{ error }}</p>
-    </div>
-    <div class="content">
-      <div ng-view></div>
-    </div>
+    </header>
+    <div id="filler"></div>
+    <div ng-view></div>
   </div>
 
 </body>

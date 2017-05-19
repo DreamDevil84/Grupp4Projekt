@@ -1,149 +1,48 @@
 <div>
-	<h1>Hej {{user.email}}</h1>
-	{{firebaseUser.uid}} <br> Hej {{user.firstName}}
+	<h1>Hej {{user.firstName}}</h1>
 	<br>
 	<div class="row">
-		<ul>
-			<li ng-repeat="course in courses | filter:filterByStudent">
-				<button class="btn btn-clear">{{course.title}}</button>
-				<strong>{{course.description}}</strong>
-			</li>
-		</ul>
-		<ul>
-			<li ng-repeat="course in userCourses">{{course.grade}}</li>
-		</ul>
-	</div>
-	<br>
-	<br>
-	<button ng-click="giveFeedback(-1, 'daily')" class="btn btn-clear">:(</button>
-	<button ng-click="giveFeedback(0, 'daily')" class="btn btn-clear">:|</button>
-	<button ng-click="giveFeedback(1, 'daily')" class="btn btn-clear">:)</button>
-	<br>
-	<input type="text" ng-model="feedbackText">
-	<br>
-	<button ng-click="giveFeedback(-1, 'weekly', feedbackText)" class="btn btn-clear">:(</button>
-	<button ng-click="giveFeedback(0, 'weekly', feedbackText)" class="btn btn-clear">:|</button>
-	<button ng-click="giveFeedback(1, 'weekly', feedbackText)" class="btn btn-clear">:)</button>
-	<br>
-	<br>
-	<br>
-	Är du här?
-	<button class="btn btn-clear" ng-click="attendance()">Här</button>
-
-	<button ng-click="gototest()">test</button>
-	
-	<!--<ul>
-    <li ng-repeat="x in userCourses">{{x.id}}</li>
-</ul>-->
-
-	<!--{{userCourses}}
-<br>
-<br>
-<br>
-{{courseRef}}
-<br>
-<br>
-{{user}}<br>-->
-	<br>
-
-
-
-
-
-	<!--<input type="text" ng-model="data.news">
-<h1> You said: {{ data.news }}</h1>
-
-<ul>
-    <li ng-repeat="message in messages">
-<input ng-model="message.text" ng-change="messages.$save(message)" />
-<button ng-click="messages.$remove(message)">Delete message</button>
-    </li>
-</ul>
-<form ng-submit="addMessage()">
-    <input ng-model="newMessageText" />
-    <button type="submit">Add Message</button>
-</form>-->
-	<!--=======
-<!DOCTYPE html>
-
-<html lang= "en">
-
-
-<head>
- 
- <title>Student</title>
- <meta charset="utf-8"/>
-
- <script src="mysjs.js"></script> 
-<link rel="stylesheet" type="text/css" href="app.css">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-</head>
-
-<body class="body">
-   <header class="mainheader">
-      <img src="img/tangela1.png">
-
-      	<nav><ul>
-      		<li class="active"><a href="#">Home</a><li>
-      		<li><a href="#">Mina kurser</a><li>
-      		<li><a href="#">Mina resultat</a><li>
-      		
-      	</ul></nav>	
-    </header>  	
-
-<div class= "mainContent">
-	<div class= "content">
-		<article class= "topcontent">
-		<header>
-			<h2><a href="#" title="First post"> First post</a></h2>
-		</header>
-
-		<footer>
-			<p class="post-info"> This post is written by kingen </p>
-		</footer>	
-
-			<content>
-				<p> Albert Einstein var son till Hermann och Pauline Einstein, vilka var icke-religiösa judar och tillhörde medelklassen. Fadern var försäljare och drev senare en elektroteknisk fabrik. Familjen bosatte sig 1880 i München där Albert gick i katolsk skola. Mängder av myter cirkulerar om Albert Einsteins person. En av dessa är att han som barn skulle ha haft svårigheter med matematik, vilket dock motsägs av hans utmärkta betyg i ämnet. Han nämnde ofta senare att han inte trivdes i skolan på grund av dess pedagogik.
-				</p>
-			</content>
-
-		</article>
-
-		<article class= "bottomcontent">
-		<header>
-			<h2><a href="#" title="Second post"> Second Post</a></h2>
-		</header>
-
-		<footer>
-			<p class="post-info"> This post is written by kingen </p>
-		</footer>	
-
-			<content>
-				<p> Albert Einstein var son till Hermann och Pauline Einstein, vilka var icke-religiösa judar och tillhörde medelklassen. Fadern var försäljare och drev senare en elektroteknisk fabrik. Familjen bosatte sig 1880 i München där Albert gick i katolsk skola. Mängder av myter cirkulerar om Albert Einsteins person. En av dessa är att han som barn skulle ha haft svårigheter med matematik, vilket dock motsägs av hans utmärkta betyg i ämnet. Han nämnde ofta senare att han inte trivdes i skolan på grund av dess pedagogik.
-				</p>
-			</content>
-
-		</article>
-
+		<div class="col-xs-12 col-md-6 col-lg-4">
+			<ul class="list-unstyled list-group">
+				<li class="courses" ng-repeat="course in studentCourseDetails">
+					<div class="list-group-item"><strong class="coursetitle pull-left">{{course.title}}</strong>
+					<span ng-hide="course.grade === 'IG'" class="badge badge-success">{{course.grade}}</span>
+					<span ng-show="course.grade === 'IG'" class="badge badge-error">{{course.grade}}</span>
+						<br>
+						<p>{{course.description}}</p>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div class="col-xs-12 col-md-6 col-lg-4">
+			<div>
+				<p>Närvaro</p>
+				<button class="btn btn-clear" ng-click="attendance()">Tryck</button>
+				<br>
+				<span class="badge badge-success" ng-show="data.status === 2">Här</span>
+				<span class="badge badge-warning" ng-show="data.status === 1">Sen</span>
+				<span class="badge badge-error" ng-show="data.status === 0">Ej Här</span>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-6 col-lg-4">
+			<p>Dagens feedback:</p>
+			<button ng-click="giveFeedback(-1, 'daily')" class="btn btn-clear">:(</button>
+			<button ng-click="giveFeedback(0, 'daily')" class="btn btn-clear">:|</button>
+			<button ng-click="giveFeedback(1, 'daily')" class="btn btn-clear">:)</button>
+			<br>
+			<br>
+			<br>
+			<br>
+			<p>Veckans feedback:</p>
+			<br>
+			<p>Skriv detaljerad feedback först:</p>
+			<input type="text" ng-model="feedbackText">
+			<br>
+			<br>
+			<button ng-click="giveFeedback(-1, 'weekly', feedbackText)" class="btn btn-clear">:(</button>
+			<button ng-click="giveFeedback(0, 'weekly', feedbackText)" class="btn btn-clear">:|</button>
+			<button ng-click="giveFeedback(1, 'weekly', feedbackText)" class="btn btn-clear">:)</button>
+		</div>
 	</div>
 </div>
-
-<aside class="top-sidebar">
-	<article>
-		<h2> Top Sidebar </h2>
-		<p>Albert Einstein var son till Hermann och Pauline Einstein, vilka var icke-religiösa judar och tillhörde medelklassen. Fadern var försäljare och drev senare en elektroteknisk fabrik. Familjen bosatte sig 1880 i München där Albert gick i katolsk skola. Mängder av myter cirkulerar om Albert Einsteins person. En av dessa är att han som barn skulle ha haft svårigheter med matematik, vilket dock motsägs av hans utmärkta betyg i ämnet. Han nämnde ofta senare att han inte trivdes i skolan på grund av dess pedagogik. </p>
-	</article>
-</aside>
-
-<footer>
-	<p> Copyright &copy; Newton Grupp4 </p>
-</footer>
-
-</body>
-</html>
->>>>>>> eb84564b5107f07e80aa1e48baddf1608f84d548-->
-
 </div>
