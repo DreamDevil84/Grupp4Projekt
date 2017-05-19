@@ -19,6 +19,7 @@
         .controller('LoginCtrl', function ($scope, Auth, $firebaseObject, $location) {
             $scope.auth = Auth;
 
+            //Hämtar ett värde från databasen som visar vilken sorts användare det är
             $scope.auth.$onAuthStateChanged(function (firebaseUser) {
                 $scope.firebaseUser = firebaseUser;
                 if ($scope.firebaseUser) {
@@ -110,7 +111,7 @@
 
             $scope.studentCourses = [];
             $scope.studentGrades = [];
-            $scope.userCourse = userCourseRef.once('value')
+            userCourseRef.once('value')
                 .then(function (snapshot) {
                     snapshot.forEach(function (childSnapshot) {
                         var childData = childSnapshot.val();
@@ -192,27 +193,28 @@
             //NÄRVARO
 
             $scope.attendance = function () {
-                var attendanceRef = firebase.database().ref().child('attendance/today/' + user);
+                var date = new Date();
+                var today = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate();
+                var attendanceRef = firebase.database().ref().child('attendance/' + today + '/' + user);
                 attendanceRef.once('value').then(function (attend) {
-                    console.log(attend.val().status);
-                    if (!attend.status.exists()) {
+                    if (!attend.exists()) {
                         attendanceRef.set({
-                            status: 'Present'
-                        })
+                            status: 2
+                        });
                     } else {
                         console.log(attend.val().status);
-                        if (attend.val().status === 'Present') {
+                        if (attend.val().status === 2) {
                             attendanceRef.update({
-                                status: 'Late'
-                            })
-                        } else if (attend.val().status === 'Late') {
+                                status: 1
+                            });
+                        } else if (attend.val().status === 1) {
                             attendanceRef.update({
-                                status: 'Absent'
-                            })
-                        } else if (attend.val().status === 'Absent') {
+                                status: 0
+                            });
+                        } else if (attend.val().status === 0) {
                             attendanceRef.update({
-                                status: 'Present'
-                            })
+                                status: 2
+                            });
                         }
                     }
                 });
@@ -233,11 +235,56 @@
             // };
 
         })
-        .controller('TeacherCtrl', function (currentAuth) {
+        .controller('TeacherCtrl', function (currentAuth, $scope) {
 
+            var user = currentAuth.uid;
+            var usersRef = firebase.database().ref().child('users');
+
+            $scope.students = [];
+
+            var getStudents = function () {
+                usersRef.once('value')
+                    .then(function (snapshot) {
+                        snapshot.forEach(function (childSnapshot) {
+                            var childData = childSnapshot.val();
+                            if (childData.type === 'student') {
+                                $scope.students.push(childData.firstName);
+                            };
+                        });
+                    });
+            };
+            getStudents();
         })
-        .controller('AdminCtrl', function (currentAuth) {
+        .controller('AdminCtrl', function (currentAuth, $scope) {
+            var user = currentAuth.uid;
 
+            $scope.createCourse = function (code, name, description) {
+                var ref = firebase.database().ref().child('courses/' + code);
+                ref.set({
+                    id: code,
+                    title: name,
+                    description
+                })
+            };
+            $scope.createUser = function (fname, lname, email, password, type) {
+                var config = {
+                    apiKey: "AIzaSyB3UdUl1As-W_3gHCf-aDadJw0myIOvdR8",
+                    authDomain: "schoolweb-35754.firebaseapp.com",
+                    databaseURL: "https://schoolweb-35754.firebaseio.com"
+                };
+                var secondaryApp = firebase.initializeApp(config, "Secondary");
+                secondaryApp.auth().createUserWithEmailAndPassword(email, password).then(function (firebaseUser) {
+                    var ref = firebase.database().ref().child('users/' + firebaseUser.uid);
+                    ref.set({
+                        email: email,
+                        firstName: fname,
+                        lastName: lname,
+                        type: type
+                    });
+                    console.log("User " + firebaseUser.uid + " created successfully!");
+                    secondaryApp.auth().signOut();
+                });
+            };
         });
 
 

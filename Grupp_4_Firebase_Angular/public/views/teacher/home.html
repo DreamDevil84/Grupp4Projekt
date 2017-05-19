@@ -1,3 +1,9 @@
 <div>
     <h1>Hej Läraren</h1>
 </div>
+
+<ul>
+    <li ng-repeat="student in students">{{student}}</li>
+</ul>
+
+<button class="btn btn-clear" ng-click="getStudents()">get students</button>

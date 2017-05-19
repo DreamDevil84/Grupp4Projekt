@@ -1,3 +1,35 @@
 <div>
     <h1>Hej Admin</h1>
 </div>
+<br>
+Skapa ny kurs:
+<br>
+<form>
+    <div>Kurskod :</div>
+    <input type="text" ng-model="courseCode">
+    <br>
+    <div>Kursnamn :</div>
+    <input type="text" ng-model="courseName">
+    <br>
+    <div>Beskrivning: </div>
+    <input type="text" ng-model="description">
+    <br>
+    <button class="btn btn-clear" ng-click="createCourse(courseCode, courseName, description)">Skapa!</button>
+</form>
+<form>
+    <div>Förnamn :</div>
+    <input type="text" ng-model="firstName">
+    <br>
+    <div>Efternamn :</div>
+    <input type="text" ng-model="lastName">
+    <br>
+    <div>email: </div>
+    <input type="text" ng-model="newEmail">
+    <br>
+    <div>Lösenord :</div>
+    <input type="text" ng-model="newPassword">
+    <br>
+    <div>Typ :</div>
+    <input type="text" ng-model="type">
+    <button class="btn btn-clear" ng-click="createUser(firstName, lastName, newEmail, newPassword, type)">Skapa!</button>
+</form>
