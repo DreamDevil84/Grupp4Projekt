@@ -14,6 +14,7 @@ li>.list-group-item{
     position: fixed;
     width: 100%;
     top: 0px;
+    z-index: 1000;
 }
 #filler{
   height: 4em;
@@ -59,4 +60,42 @@ li>.list-group-item{
 }
 .badge-success {
   background-color: #468847;
+}
+.btn-feedback-good{
+  background-image: url("../img/smiley-face.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 4em;
+  width: 4em;
+}
+.btn-feedback-neutral{
+  background-image: url("../img/neutral-face.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 4em;
+  width: 4em;
+}
+.btn-feedback-bad{
+  background-image: url("../img/frowny-face.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 4em;
+  width: 4em;
+}
+.btn-feedback-good:active{
+  background-image: url("../img/smiley-face.png");
+}
+.btn-feedback-neutral:active{
+  background-image: url("../img/neutral-face.png");
+}
+.btn-feedback-bad:active{
+  background-image: url("../img/frowny-face.png");
+}
+.attendance-box{
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  height: 5em;
+  width: 10em;
 }

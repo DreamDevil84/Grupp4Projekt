@@ -160,6 +160,14 @@
             //feedback funktioner
 
             //ge feedback, 2 parametrar, första är värdet på rösten, andra är vilken typ, tex daglig eller veckans, text är för veckofeedback
+
+            var fref = firebase.database().ref().child('feedback/daily/' + today + '/hasVoted/' + user);
+            fref.on('value', function (data) {
+                    if (data.exists()){
+                        $scope.gaveFeedbackToday = true;
+                    };
+                });
+
             $scope.giveFeedback = function (reaction, type, text) {
                 text = 'tomt';
                 var feedbackRef, feedbackRecordRef;
@@ -215,21 +223,21 @@
                 attendanceRef.once('value').then(function (attend) {
                     if (!attend.exists()) {
                         attendanceRef.set({
-                            status: 2
+                            status: 3
                         });
                     } else {
-                        console.log(attend.val().status);
-                        if (attend.val().status === 2) {
+                        // console.log(attend.val().status);
+                        if (attend.val().status === 3) {
+                            attendanceRef.update({
+                                status: 2
+                            });
+                        } else if (attend.val().status === 2) {
                             attendanceRef.update({
                                 status: 1
                             });
                         } else if (attend.val().status === 1) {
                             attendanceRef.update({
-                                status: 0
-                            });
-                        } else if (attend.val().status === 0) {
-                            attendanceRef.update({
-                                status: 2
+                                status: 3
                             });
                         }
                     }
@@ -251,18 +259,16 @@
             // };
 
         })
-        // .factory('AttendanceList', function ($firebaseObject) {
+        .factory('AttendanceList', function ($firebaseObject) {
 
-        //     return function (studentAtt) {
-        //         // create a reference to the database node where we will store our data
-        //         var ref = firebase.database().ref("rooms").push();
-        //         var profileRef = ref.child(studentAtt);
-
-        //         // return it as a synchronized object
-        //         return $firebaseObject(profileRef);
-        //     }
-        // })
-        .controller('TeacherCtrl', function (currentAuth, $scope, $firebaseObject, $firebaseArray) {
+            return function (today, student) {
+                // create a reference to the database node where we will store our data
+                var ref = firebase.database().ref().child('attendance/' + today + '/' + student);
+                // return it as a synchronized object
+                return $firebaseObject(ref);
+            }
+        })
+        .controller('TeacherCtrl', function (currentAuth, AttendanceList, $scope, $firebaseObject, $firebaseArray) {
 
             //skaffar dagens datum, används för andra funktioner
             var date = new Date();
@@ -292,34 +298,13 @@
                             var studentInfo = {
                                 firstName: childData.firstName,
                                 lastName: childData.lastName,
-                                id: studentId
+                                id: studentId,
+                                attendance: AttendanceList(today, studentId)
                             };
-                            students.push(studentInfo);
+                            $scope.students.push(studentInfo);
                         };
                     });
-                    // console.log(students);
-                    attendanceRef.once('value')
-                        .then(function (attendData) {
-                            attendData.forEach(function (attendSnapshot) {
-                                var childData = {
-                                    status: attendSnapshot.val().status,
-                                    id: attendSnapshot.key
-                                };
-                                // console.log(childData);
-                                for (var x = 0; x < students.length; x++) {
-                                    if (childData.id === students[x].id) {
-                                        var studentsInfo = {
-                                            firstName: students[x].firstName,
-                                            id: childData.id,
-                                            lastName: students[x].lastName,
-                                            status: childData.status
-                                        };
-                                        $scope.students.push(studentsInfo);
-                                    };
-                                };
-                            });
-                        });
-                    // console.log($scope.students);
+                    console.log($scope.students);
                 });
             var attendance = $firebaseArray(attendanceRef);
 

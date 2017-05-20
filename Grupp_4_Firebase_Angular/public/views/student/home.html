@@ -6,8 +6,8 @@
 			<ul class="list-unstyled list-group">
 				<li class="courses" ng-repeat="course in studentCourseDetails">
 					<div class="list-group-item"><strong class="coursetitle pull-left">{{course.title}}</strong>
-					<span ng-hide="course.grade === 'IG'" class="badge badge-success">{{course.grade}}</span>
-					<span ng-show="course.grade === 'IG'" class="badge badge-error">{{course.grade}}</span>
+						<span ng-hide="course.grade === 'IG'" class="badge badge-success">{{course.grade}}</span>
+						<span ng-show="course.grade === 'IG'" class="badge badge-error">{{course.grade}}</span>
 						<br>
 						<p>{{course.description}}</p>
 					</div>
@@ -15,20 +15,22 @@
 			</ul>
 		</div>
 		<div class="col-xs-12 col-md-6 col-lg-4">
-			<div>
-				<p>Närvaro</p>
-				<button class="btn btn-clear" ng-click="attendance()">Tryck</button>
-				<br>
-				<span class="badge badge-success" ng-show="data.status === 2">Här</span>
-				<span class="badge badge-warning" ng-show="data.status === 1">Sen</span>
-				<span class="badge badge-error" ng-show="data.status === 0">Ej Här</span>
+			<div class="attendance-box">
+				<button class="btn btn-default" ng-click="attendance()">
+					<p>Dagens närvaro</p>
+					<div class="badge badge-success" ng-show="data.status === 3">Här</div>
+					<div class="badge badge-warning" ng-show="data.status === 2">Sen</div>
+					<div class="badge badge-error" ng-show="data.status === 1">Ej Här</div>
+					<div class="badge" ng-hide="data.status">Ej Svarat</div>
+				</button>
 			</div>
 		</div>
 		<div class="col-xs-12 col-md-6 col-lg-4">
 			<p>Dagens feedback:</p>
-			<button ng-click="giveFeedback(-1, 'daily')" class="btn btn-clear">:(</button>
-			<button ng-click="giveFeedback(0, 'daily')" class="btn btn-clear">:|</button>
-			<button ng-click="giveFeedback(1, 'daily')" class="btn btn-clear">:)</button>
+			<span ng-hide="gaveFeedbackToday" ng-click="giveFeedback(-1, 'daily')" class="btn btn-feedback-bad"></span>
+			<span ng-hide="gaveFeedbackToday" ng-click="giveFeedback(0, 'daily')" class="btn btn-feedback-neutral"></span>
+			<span ng-hide="gaveFeedbackToday" ng-click="giveFeedback(1, 'daily')" class="btn btn-feedback-good"></span>
+			<span ng-show="gaveFeedbackToday" >Du har gett feedback idag.</span>
 			<br>
 			<br>
 			<br>
@@ -39,9 +41,9 @@
 			<input type="text" ng-model="feedbackText">
 			<br>
 			<br>
-			<button ng-click="giveFeedback(-1, 'weekly', feedbackText)" class="btn btn-clear">:(</button>
-			<button ng-click="giveFeedback(0, 'weekly', feedbackText)" class="btn btn-clear">:|</button>
-			<button ng-click="giveFeedback(1, 'weekly', feedbackText)" class="btn btn-clear">:)</button>
+			<div ng-click="giveFeedback(-1, 'weekly', feedbackText)" class="btn btn-feedback-bad"></div>
+			<div ng-click="giveFeedback(0, 'weekly', feedbackText)" class="btn btn-feedback-neutral"></div>
+			<div ng-click="giveFeedback(1, 'weekly', feedbackText)" class="btn btn-feedback-good"></div>
 		</div>
 	</div>
 </div>
