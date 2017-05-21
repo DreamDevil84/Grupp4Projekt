@@ -47,7 +47,7 @@ public class StudentActivity extends AppCompatActivity {
 
         //welcome = (TextView) findViewById(R.id.welcome);
 
-        //get userinfo from mainactivity
+        //get userinfo and send it to a textview
         //FirebaseUser user = firebaseAuth.getCurrentUser();
         //welcome.setText("Welcome " + user.getEmail() + courses.title);
     }

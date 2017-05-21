@@ -10,4 +10,12 @@
     <string name="tab1frag">Tab1frag</string>
     <string name="tab2frag">tab2frag</string>
     <string name="tab3frag">tab3frag</string>
+    <string name="please_enter_your_presence_for_today">Please enter your presence for today</string>
+
+    <string-array name="presenceList">
+        <item>Here</item>
+        <item>Not here</item>
+        <item>Late</item>
+    </string-array>
+
 </resources>
