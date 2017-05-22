@@ -47,7 +47,7 @@ public class StudentActivity extends AppCompatActivity {
 
         //welcome = (TextView) findViewById(R.id.welcome);
 
-        //get userinfo and send it to a textview
+        //get userinfo from mainactivity
         //FirebaseUser user = firebaseAuth.getCurrentUser();
         //welcome.setText("Welcome " + user.getEmail() + courses.title);
     }
@@ -111,6 +111,11 @@ public class StudentActivity extends AppCompatActivity {
                 Intent intent2 = new Intent(this, PresenceActivity.class);
                 startActivity(intent2);
                 return true;
+            case R.id.myGrades:
+                Intent intent3 = new Intent(this, myGrades.class);
+                startActivity(intent3);
+                return true;
+
             case R.id.logout:
                 new AlertDialog.Builder(this)
                         .setTitle("Sign out")

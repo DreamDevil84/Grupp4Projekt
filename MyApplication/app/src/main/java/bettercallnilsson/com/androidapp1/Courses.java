@@ -6,6 +6,7 @@ public class Courses {
     public String courseid;
     public String title;
 
+
     public Courses(){};
 
     public Courses(String description, String courseid, String title){
@@ -13,6 +14,7 @@ public class Courses {
         this.description = description;
         this.courseid = courseid;
         this.title = title;
+
 
     }
 

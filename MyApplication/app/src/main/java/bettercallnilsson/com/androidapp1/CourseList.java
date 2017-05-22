@@ -11,9 +11,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-/**
- * Created by sebastiannilsson on 2017-05-17.
- */
+
 
 public class CourseList extends ArrayAdapter<Courses> {
 
