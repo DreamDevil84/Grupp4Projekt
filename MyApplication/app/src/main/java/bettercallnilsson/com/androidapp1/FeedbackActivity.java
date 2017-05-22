@@ -34,9 +34,7 @@ public class FeedbackActivity extends AppCompatActivity {
     private TextView nameTextView;
     private String userID;
 
-    private static final int positive = 1;
-    private static final int negative = -1;
-    private static final int middle = 0;
+
 
     private DatabaseReference database;
 
@@ -65,7 +63,7 @@ public class FeedbackActivity extends AppCompatActivity {
             public void onClick(View v) {
                 FirebaseUser user = mAuth.getCurrentUser();
                 String userID = user.getUid();
-                myRef.child("feedback").child("daily").child(getDate()).child("hasVoted").child(userID).child("theirVote").setValue(negative);
+                myRef.child("feedback").child("daily").child(getDate()).child("hasVoted").child(userID).child("theirVote").setValue(-1);
                 toastMessage("Thanks for your feed back");
 
             }
@@ -77,7 +75,7 @@ public class FeedbackActivity extends AppCompatActivity {
             public void onClick(View v) {
                 FirebaseUser user = mAuth.getCurrentUser();
                 String userID = user.getUid();
-                myRef.child("feedback").child("daily").child(getDate()).child("hasVoted").child(userID).child("theirVote").setValue(middle);
+                myRef.child("feedback").child("daily").child(getDate()).child("hasVoted").child(userID).child("theirVote").setValue(0);
                 toastMessage("Thanks for your feed back");
 
             }
@@ -88,7 +86,7 @@ public class FeedbackActivity extends AppCompatActivity {
             public void onClick(View v) {
                 FirebaseUser user = mAuth.getCurrentUser();
                 String userID = user.getUid();
-                myRef.child("feedback").child("daily").child(getDate()).child("hasVoted").child(userID).child("theirVote").setValue(happyBtn);
+                myRef.child("feedback").child("daily").child(getDate()).child("hasVoted").child(userID).child("theirVote").setValue(1);
                 toastMessage("Thanks for your feed back");
             }
         });
@@ -96,20 +94,20 @@ public class FeedbackActivity extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.N)
     private String getDate(){
         Calendar c = Calendar.getInstance();
-        SimpleDateFormat df = new SimpleDateFormat("yyyy/dd/MM");
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-dd-MM");
         String formattedDate = df.format(c.getTime());
         return  formattedDate;
 
     }
     /*myRef.child("feedback").child("daily").child("hasvoted").child("2017-4-18").child(userID).child("positive").setValue(positive);
                 toastMessage("Thanks for your feedback");*/
-    @Override
+/*    @Override
     protected void onStop() {
         super.onStop();
         if(mAuthListener!=null){
             mAuth.removeAuthStateListener(mAuthListener);
         }
-    }
+    }*/
 
 
     private void toastMessage(String message){
