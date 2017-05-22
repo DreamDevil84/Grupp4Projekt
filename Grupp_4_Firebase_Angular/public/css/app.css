@@ -19,6 +19,11 @@ li>.list-group-item{
 #filler{
   height: 4em;
 }
+#frontpage-image{
+  background-image: url("../img/smiling.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
 #logo{
     font-weight: bold;
     font-size: 3em;

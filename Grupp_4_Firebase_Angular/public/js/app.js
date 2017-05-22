@@ -106,8 +106,8 @@
 
             //skaffar dagens datum, används för andra funktioner
             var date = new Date();
-            var today = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate();
-
+            var today = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
+            
             //funktion för veckonummer, den finns ej i standard javascript så jag hittade en som funkar på stackoverflow
             Date.prototype.getWeek = function () {
                 var onejan = new Date(this.getFullYear(), 0, 1);
@@ -163,10 +163,10 @@
 
             var fref = firebase.database().ref().child('feedback/daily/' + today + '/hasVoted/' + user);
             fref.on('value', function (data) {
-                    if (data.exists()){
-                        $scope.gaveFeedbackToday = true;
-                    };
-                });
+                if (data.exists()) {
+                    $scope.gaveFeedbackToday = true;
+                };
+            });
 
             $scope.giveFeedback = function (reaction, type, text) {
                 text = 'tomt';
@@ -272,7 +272,7 @@
 
             //skaffar dagens datum, används för andra funktioner
             var date = new Date();
-            var today = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate();
+            var today = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
 
             //funktion för veckonummer, den finns ej i standard javascript så jag hittade en som funkar på stackoverflow
             Date.prototype.getWeek = function () {

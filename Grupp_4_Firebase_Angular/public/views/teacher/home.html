@@ -4,7 +4,7 @@
 <div class="col-xs-12 col-md-6 col-lg-4">
     <ul class="list-unstyled list-group">
         <li class="list-group-item" ng-repeat="student in students">
-            {{student.firstName}} {{student.lastName}} {{student.attendance.status}}
+            {{student.firstName}} {{student.lastName}}
             <span ng-show="student.attendance.status === 3" class="badge badge-success">Här</span>
             <span ng-show="student.attendance.status === 2" class="badge badge-warning">Sen</span>
             <span ng-show="student.attendance.status === 1" class="badge badge-error">Ej Här</span>
