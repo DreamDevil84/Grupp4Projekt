@@ -3,84 +3,21 @@
 
     <item
         is-multidex="true"
-        jar="/Users/sebastiannilsson/Documents/Plugg/NewtonUppgifter/Projektarbete/MyApplication/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jar="C:\Users\ericapalm\AndroidStudioProjects\AndroidnewProjects\MyApplication\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
         sha1="caff8e51a24901cfc9cd7e1cf83d84f4cb0c103b">
-        <dex dex="/Users/sebastiannilsson/Documents/Plugg/NewtonUppgifter/Projektarbete/MyApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_53e9353e5e724056d207c5ef62adec725adce6e5/classes.dex" />
+        <dex dex="C:\Users\ericapalm\AndroidStudioProjects\AndroidnewProjects\MyApplication\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_0ab141d36b2d0999614463f1475717bc0d30c48c\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="/Users/sebastiannilsson/.android/build-cache/e6a746c6eef785a4e189e67f11e0f89f11bdc05a/output/jars/classes.jar"
+        jar="C:\Users\ericapalm\AndroidStudioProjects\AndroidnewProjects\MyApplication\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="052f5f840f21174a3ecf6544130194e2652cbb73">
-        <dex dex="/Users/sebastiannilsson/Documents/Plugg/NewtonUppgifter/Projektarbete/MyApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_f55c83a28fdfbd199a8db525595288616fa4a542/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/sebastiannilsson/Documents/Plugg/NewtonUppgifter/Projektarbete/MyApplication/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="18369cf89c4308c1d75056cb86070e8e67ca3bfa">
-        <dex dex="/Users/sebastiannilsson/Documents/Plugg/NewtonUppgifter/Projektarbete/MyApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_4ad53932dfb1e471c64427b8db09ce2d3832036b/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/sebastiannilsson/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/25.3.1/support-annotations-25.3.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="bf8841d29fa39e077730e7a91222c2ce269fa7c9">
-        <dex dex="/Users/sebastiannilsson/Documents/Plugg/NewtonUppgifter/Projektarbete/MyApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-25.3.1_76b17e00600b8c168b3485c2942f016e72beb76a/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/sebastiannilsson/.android/build-cache/d1812699f759cf00a2c724ae01b77afd343a3329/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
-        <dex dex="/Users/sebastiannilsson/Documents/Plugg/NewtonUppgifter/Projektarbete/MyApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_d35b46a98641e966a56915822b6bbfc9141402b3/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/sebastiannilsson/.android/build-cache/ee5b79a32568f009eb1f8c5bdf1635219ac4715f/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="4a26a1154d053ab11aaf4c3967c42a4d66390991">
-        <dex dex="/Users/sebastiannilsson/Documents/Plugg/NewtonUppgifter/Projektarbete/MyApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_9921167b1982a947b257539a73b33428e26b0caf/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/sebastiannilsson/.android/build-cache/6a5f79b7335f50e86d0ba69eef4449f381fffddd/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="da27a32db6af8954ee8061537c7d476fcb1df46f">
-        <dex dex="/Users/sebastiannilsson/Documents/Plugg/NewtonUppgifter/Projektarbete/MyApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_b718ef279566b758152f9ed3a7b78543906e0ba9/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/sebastiannilsson/.android/build-cache/672d691fe895080477b335be97b250bdb89e3143/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="45f697922e6f072daa12f8a2995dc77ab03c11da">
-        <dex dex="/Users/sebastiannilsson/Documents/Plugg/NewtonUppgifter/Projektarbete/MyApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_887128b48dec6e246d58ae5b9f8410091a480d26/classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="/Users/sebastiannilsson/.android/build-cache/8edb836230dadc1662d2964077448dee9d992e6d/output/jars/classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="6ef31f1555bb4cc513ec8d52711365a8b89f3600">
-        <dex dex="/Users/sebastiannilsson/Documents/Plugg/NewtonUppgifter/Projektarbete/MyApplication/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_9b524249a69e7bc1b5abb968f88ae0bce98c1007/classes.dex" />
+        sha1="e75c5bdc2e9b98dea083ea2e94c82ab6d4c41836">
+        <dex dex="C:\Users\ericapalm\AndroidStudioProjects\AndroidnewProjects\MyApplication\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_a6d9a303ffb5a480220a344ef655ba74bb1db943\classes.dex" />
     </item>
 
 </items>
