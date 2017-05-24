@@ -104,3 +104,6 @@ li>.list-group-item{
   height: 5em;
   width: 10em;
 }
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none !important;
+}
