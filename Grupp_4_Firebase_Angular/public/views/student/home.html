@@ -1,19 +1,22 @@
-<div>
+<div class="ng-cloak">
 	<h1>Hej {{user.firstName}}</h1>
-	<br>
-	<div class="row">
-		<div class="col-xs-12 col-sm-6 col-md-4">
-			<ul class="list-unstyled list-group">
-				<li class="courses" ng-repeat="course in studentCourseDetails">
-					<div class="list-group-item"><strong class="coursetitle pull-left">{{course.title}}</strong>
-						<span ng-hide="course.grade === 'IG'" class="badge badge-success">{{course.grade}}</span>
-						<span ng-show="course.grade === 'IG'" class="badge badge-error">{{course.grade}}</span>
-						<br>
-						<p>{{course.description}}</p>
-					</div>
-				</li>
-			</ul>
-		</div>
+	<ul class="nav nav-tabs">
+		<li><a ng-click="setMainTab('daily')">Dagens aktivitet</a></li>
+		<li><a ng-click="setMainTab('onGoing')">Aktuella kurser</a></li>
+		<li><a ng-click="setMainTab('upComming')">Kommande Kurser</a></li>
+		<li><a ng-click="setMainTab('complete')">Färdiga kurser</a></li>
+	</ul>
+	<div ng-show="mainTab === 'daily'">
+		<ul class="list-unstyled list-group row">
+			<li class="col-xs-12 col-md-8 list-group-item" ng-repeat="news in studentNews" ng-show="$index >= newsIndex">
+				<p>{{news.date}}</p>
+				<h4>{{news.title}}</h4>
+				<p>{{news.content}}</p>
+				<p class="pull-right">{{news.time}}</p>
+				<br>
+			</li>
+		</ul>
+		<button class="row btn btn-clear" ng-click="showMoreNews()">Se mer</button>
 		<div class="col-xs-12 col-sm-6 col-md-4">
 			<div class="attendance-box">
 				<button class="btn btn-default" ng-click="attendance()">
@@ -30,10 +33,7 @@
 			<span ng-hide="gaveFeedbackToday" ng-click="giveFeedback(-1, 'daily')" class="btn btn-feedback-bad"></span>
 			<span ng-hide="gaveFeedbackToday" ng-click="giveFeedback(0, 'daily')" class="btn btn-feedback-neutral"></span>
 			<span ng-hide="gaveFeedbackToday" ng-click="giveFeedback(1, 'daily')" class="btn btn-feedback-good"></span>
-			<span ng-show="gaveFeedbackToday" >Du har gett feedback idag.</span>
-			<br>
-			<br>
-			<br>
+			<span ng-show="gaveFeedbackToday">Du har gett feedback idag.</span>
 			<br>
 			<p>Veckans feedback:</p>
 			<br>
@@ -46,5 +46,58 @@
 			<div ng-click="giveFeedback(1, 'weekly', feedbackText)" class="btn btn-feedback-good"></div>
 		</div>
 	</div>
+	<div ng-show="mainTab != 'daily'">
+		<div class="row">
+			<div class="col-xs-12 col-sm-6 col-md-4">
+				<ul class="list-unstyled list-group">
+					<li class="courses" ng-repeat="course in studentCourseDetails">
+						<div ng-show="course.status === mainTab" class="list-group-item" data-toggle="modal" data-target="#{{course.id}}"><strong class="coursetitle pull-left">{{course.title}}</strong>
+							<span ng-if="course.grade === 'G' || course.grade === 'VG'" class="badge badge-success">{{course.grade}}</span>
+							<span ng-if="course.grade === 'IG'" class="badge badge-error">{{course.grade}}</span>
+							<span class="badge" ng-hide="course.grade">Ej Klar</span>
+							<br>
+							<p>{{course.description}}</p>
+						</div>
+						<!-- Modal -->
+						<div class="modal" id="{{course.id}}" role="dialog" backdrop="static">
+							<div class="modal-dialog">
+								<!-- Modal content-->
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+										<h4 class="modal-title">Modal Header</h4>
+									</div>
+									<div class="modal-body">
+										<ul class="nav nav-tabs">
+											<li><a ng-click="setTab(1)">Kursdetaljer</a></li>
+											<li><a ng-click="setTab(2)">Schema</a></li>
+											<li><a ng-click="setTab(3)">Betyg</a></li>
+										</ul>
+										<div ng-show="showTab === 1">{{course.details}}</div>
+										<div ng-show="showTab === 2">{{course.status}}</div>
+										<div ng-show="showTab === 3">
+											<ul class="list-unstyled list-group">
+												<li class="list-group-item" ng-repeat="grade in course.gradeWork">{{grade.name}}
+													<span ng-hide="grade.grade === 'IG'" class="badge badge-success">{{grade.grade}}</span>
+													<span ng-show="grade.grade === 'IG'" class="badge badge-error">{{grade.grade}}</span>
+													<span class="badge" ng-hide="grade.grade">Ej Klar</span>
+												</li>
+											</ul>
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
 </div>
-</div>
+<!-- Trigger the modal with a button -->
+<!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>-->
+
+<!-- Modal -->

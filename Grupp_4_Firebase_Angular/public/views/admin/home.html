@@ -1,35 +1,89 @@
-<div>
-    <h1>Hej Admin</h1>
+<div class="ng-cloak">
+    <div>
+        <h1>Hej {{user.firstName}} {{user.lastName}}</h1>
+    </div>
+    <ul class="nav nav-tabs">
+        <li><a ng-click="setAdminTab('news')">Nyheter</a></li>
+        <li><a ng-click="setAdminTab('courses')">Kurser</a></li>
+        <li><a ng-click="setAdminTab('classes')">Klasser</a></li>
+        <li><a ng-click="setAdminTab('users')">Användare</a></li>
+    </ul>
+    <div class="row">
+        <div ng-show="adminTab === 'news'">
+            <ul class="nav nav-tabs">
+                <li><a ng-click="setAdminNewsTab('read')">Läs Nyheter</a></li>
+                <li><a ng-click="setAdminNewsTab('create')">Skapa Nyheter</a></li>
+            </ul>
+            <div ng-show="adminNewsTab === 'read'">
+                <ul class="col-xs-12 col-md-6 list-unstyled list-group">
+                    <li class="list-group-item" ng-repeat="news in allNews">
+                        <p>{{news.forWho}}: {{news.date}}</p>
+                        <h4>{{news.title}}</h4>
+                        <p>{{news.content}}</p>
+                        <p class="pull-right">{{news.time}}</p>
+                        <br>
+                    </li>
+                </ul>
+            </div>
+            <div ng-show="adminNewsTab === 'create'">
+                <form class="col-xs-6">
+                    <div>Titel</div>
+                    <input type="text" ng-model="newsTitle">
+                    <div>Nyheter</div>
+                    <input type="text" ng-model="news">
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="true">
+                            {{newsTypeName}}
+                            <span class="caret"></span>
+                            </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li><a ng-click="setNewsType('general', 'Alla')">Alla</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a ng-click="setNewsType('adminsOnly', 'Endast Admins')">Endast Admins</a></li>
+                        </ul>
+                    </div>
+                </form>
+                <br>
+                <button class="btn btn-clear" ng-click="createNews(news, newsTitle, newsType)">Skapa!</button>
+            </div>
+        </div>
+        <div ng-show="adminTab === 'courses'">
+            <form class="col-xs-6">
+                <h2>Skapa ny kurs</h2>
+                <div>Kurskod :</div>
+                <input type="text" ng-model="courseCode">
+                <br>
+                <div>Kursnamn :</div>
+                <input type="text" ng-model="courseName">
+                <br>
+                <div>Beskrivning: </div>
+                <input type="text" ng-model="description">
+                <br>
+                <button class="btn btn-clear" ng-click="createCourse(courseCode, courseName, description)">Skapa!</button>
+            </form>
+        </div>
+        <div ng-show="adminTab === 'classes'">
+
+        </div>
+        <div ng-show="adminTab === 'users'">
+            <form class="col-xs-6">
+                <div>Förnamn :</div>
+                <input type="text" ng-model="firstName">
+                <br>
+                <div>Efternamn :</div>
+                <input type="text" ng-model="lastName">
+                <br>
+                <div>email: </div>
+                <input type="text" ng-model="newEmail">
+                <br>
+                <div>Lösenord :</div>
+                <input type="text" ng-model="newPassword">
+                <br>
+                <div>Typ :</div>
+                <input type="text" ng-model="type">
+                <button class="btn btn-clear" ng-click="createUser(firstName, lastName, newEmail, newPassword, type)">Skapa!</button>
+            </form>
+        </div>
+    </div>
 </div>
-<br>
-Skapa ny kurs:
-<br>
-<form>
-    <div>Kurskod :</div>
-    <input type="text" ng-model="courseCode">
-    <br>
-    <div>Kursnamn :</div>
-    <input type="text" ng-model="courseName">
-    <br>
-    <div>Beskrivning: </div>
-    <input type="text" ng-model="description">
-    <br>
-    <button class="btn btn-clear" ng-click="createCourse(courseCode, courseName, description)">Skapa!</button>
-</form>
-<form>
-    <div>Förnamn :</div>
-    <input type="text" ng-model="firstName">
-    <br>
-    <div>Efternamn :</div>
-    <input type="text" ng-model="lastName">
-    <br>
-    <div>email: </div>
-    <input type="text" ng-model="newEmail">
-    <br>
-    <div>Lösenord :</div>
-    <input type="text" ng-model="newPassword">
-    <br>
-    <div>Typ :</div>
-    <input type="text" ng-model="type">
-    <button class="btn btn-clear" ng-click="createUser(firstName, lastName, newEmail, newPassword, type)">Skapa!</button>
-</form>

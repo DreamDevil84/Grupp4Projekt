@@ -103,22 +103,64 @@
         })
         .controller('StudentCtrl', function (currentAuth, $firebaseObject, $firebaseArray, $scope, $location) {
 
+            //referenser initieras
+            var user = currentAuth.uid;
+            var courseRef = firebase.database().ref().child('courses');
+            var userCourseRef = firebase.database().ref().child('users/' + user + '/courses');
+            var userRef = firebase.database().ref().child('users/' + user);
+            var studentNewsRef = firebase.database().ref().child('news/general');
+            $scope.user = $firebaseObject(userRef);
+
+            //tabs för studenten
+            $scope.mainTab = 'daily';
+            $scope.setMainTab = function (tab) {
+                $scope.mainTab = tab;
+            };
 
             //skaffar dagens datum, används för andra funktioner
             var date = new Date();
             var today = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
-            
+            var time = function () {
+                var date = new Date();
+                return ('00' + date.getHours()).slice(-2) + '-' + ('00' + date.getMinutes()).slice(-2) + '-' + ('00' + date.getSeconds()).slice(-2);
+            }
+
             //funktion för veckonummer, den finns ej i standard javascript så jag hittade en som funkar på stackoverflow
             Date.prototype.getWeek = function () {
                 var onejan = new Date(this.getFullYear(), 0, 1);
                 return Math.ceil((((this - onejan) / 86400000) + onejan.getDay() + 1) / 7);
-            }
+            };
 
-            //filtrera kurser för studenten
-            var user = currentAuth.uid;
-            var courseRef = firebase.database().ref().child('courses');
-            var userRef = firebase.database().ref().child('users/' + user);
-            var userCourseRef = firebase.database().ref().child('users/' + user + '/courses');
+            //nyheter för studenten
+            $scope.studentNews = [];
+            studentNewsRef.once('value')
+                .then(function (data) {
+                    data.forEach(function (dates) {
+                        var newsdate = dates.key;
+                        dates.forEach(function (times) {
+                            var news = times.val();
+                            var newstime = times.key;
+                            var theNews = {
+                                content: news.content,
+                                title: news.title,
+                                date: newsdate,
+                                time: newstime
+                            };
+                            $scope.studentNews.push(theNews);
+                        })
+                    })
+                    $scope.newsIndex = $scope.studentNews.length - 1;
+                });
+            
+            $scope.showMoreNews = function(){
+                if($scope.newsIndex - 2 < 0){
+                    if($scope.newsIndex - 1 === 0){
+                        $scope.newsIndex = $scope.newsIndex - 1;
+                    }
+                } else {
+                    $scope.newsIndex = $scope.newsIndex - 2;
+                };
+            };
 
 
             //här filtreras alla kurser som studenten läser in i ett nytt array, även betyget trycks in där
@@ -128,7 +170,12 @@
                 .then(function (data) {
                     data.forEach(function (childDataSnap) {
                         var childData = childDataSnap.val();
-                        var childDetail = { id: childData.id, grade: childData.grade };
+                        var childDetail = {
+                            id: childData.id,
+                            grade: childData.grade,
+                            status: childData.status,
+                            gradeWork: childData.gradeWork
+                        };
                         studentCourses.push(childDetail);
                     });
                     courseRef.once('value')
@@ -141,15 +188,24 @@
                                             id: studentCourses[x].id,
                                             grade: studentCourses[x].grade,
                                             title: childData.title,
-                                            description: childData.description
+                                            description: childData.description,
+                                            gradeReq: childData.gradeReq,
+                                            details: childData.details,
+                                            status: studentCourses[x].status,
+                                            gradeWork: studentCourses[x].gradeWork
                                         });
                                     };
                                 };
                             })
+                            // console.log($scope.studentCourseDetails);
                         });
                 })
             var courses = $firebaseArray(courseRef);
-            $scope.user = $firebaseObject(userRef);
+
+            $scope.showTab = 1;
+            $scope.setTab = function (tab) {
+                $scope.showTab = tab;
+            };
 
 
             $scope.gototest = function () {
@@ -269,16 +325,28 @@
             }
         })
         .controller('TeacherCtrl', function (currentAuth, AttendanceList, $scope, $firebaseObject, $firebaseArray) {
+            var user = currentAuth.uid;
+            var userRef = firebase.database().ref().child('users/' + user);
+            $scope.user = $firebaseObject(userRef);
 
             //skaffar dagens datum, används för andra funktioner
             var date = new Date();
             var today = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
+            var time = function () {
+                var date = new Date();
+                return ('00' + date.getHours()).slice(-2) + '-' + ('00' + date.getMinutes()).slice(-2) + '-' + ('00' + date.getSeconds()).slice(-2);
+            }
 
             //funktion för veckonummer, den finns ej i standard javascript så jag hittade en som funkar på stackoverflow
             Date.prototype.getWeek = function () {
                 var onejan = new Date(this.getFullYear(), 0, 1);
                 return Math.ceil((((this - onejan) / 86400000) + onejan.getDay() + 1) / 7);
             }
+
+            $scope.teacherTab = 'daily';
+            $scope.setMainTab = function (tab) {
+                $scope.teacherTab = tab;
+            };
 
             var user = currentAuth.uid;
 
@@ -311,9 +379,80 @@
 
 
         })
-        .controller('AdminCtrl', function (currentAuth, $scope) {
+        .controller('AdminCtrl', function (currentAuth, $scope, $firebaseObject, $firebaseArray) {
             var user = currentAuth.uid;
+            var userRef = firebase.database().ref().child('users/' + user);
+            $scope.user = $firebaseObject(userRef);
 
+            //skaffar dagens datum, används för andra funktioner
+            var date = new Date();
+            var today = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
+            var time = function () {
+                var date = new Date();
+                return ('00' + date.getHours()).slice(-2) + ':' + ('00' + date.getMinutes()).slice(-2) + ':' + ('00' + date.getSeconds()).slice(-2);
+            }
+
+            //funktion för veckonummer, den finns ej i standard javascript så jag hittade en som funkar på stackoverflow
+            Date.prototype.getWeek = function () {
+                var onejan = new Date(this.getFullYear(), 0, 1);
+                return Math.ceil((((this - onejan) / 86400000) + onejan.getDay() + 1) / 7);
+            };
+
+            //adminTabbar
+            $scope.adminTab = 'news';
+            $scope.setAdminTab = function (tab) {
+                $scope.adminTab = tab;
+            };
+
+            //admin nyheter
+            $scope.adminNewsTab = 'read';
+            $scope.setAdminNewsTab = function (tab) {
+                $scope.adminNewsTab = tab;
+            };
+            var newsRef = firebase.database().ref().child('news');
+            var regNewsRef = newsRef.child('general');
+            var adminNewsRef = newsRef.child('adminsOnly');
+
+            $scope.allNews = [];
+            newsRef.once('value').then(function (data) {
+                data.forEach(function (forWho) {
+                    var who = forWho.key;
+                    forWho.forEach(function (dates) {
+                        var newsdate = dates.key;
+                        dates.forEach(function (time) {
+                            var news = time.val();
+                            var newstime = time.key;
+                            var newsItem = {
+                                title: news.title,
+                                content: news.content,
+                                forWho: who,
+                                date: newsdate,
+                                time: newstime
+                            };
+                            $scope.allNews.push(newsItem);
+                        });
+                    });
+                });
+            });
+
+
+            $scope.newsType = 'general';
+            $scope.newsTypeName = 'Nyhetstyp';
+            $scope.setNewsType = function (type, name) {
+                $scope.newsType = type;
+                $scope.newsTypeName = name;
+            };
+
+            $scope.createNews = function (news, title, type) {
+                var ref = firebase.database().ref().child('news/' + type + '/' + today + '/' + time());
+                ref.set({
+                    content: news,
+                    title: title
+                });
+            };
+
+
+            //admin kurser
             $scope.createCourse = function (code, name, description) {
                 var ref = firebase.database().ref().child('courses/' + code);
                 ref.set({
@@ -322,6 +461,8 @@
                     description
                 })
             };
+
+            //admin användare
             $scope.createUser = function (fname, lname, email, password, type) {
                 var config = {
                     apiKey: "AIzaSyB3UdUl1As-W_3gHCf-aDadJw0myIOvdR8",
