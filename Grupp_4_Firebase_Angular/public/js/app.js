@@ -136,30 +136,37 @@
             studentNewsRef.once('value')
                 .then(function (data) {
                     data.forEach(function (dates) {
-                        var newsdate = dates.key;
-                        dates.forEach(function (times) {
-                            var news = times.val();
-                            var newstime = times.key;
-                            var theNews = {
-                                content: news.content,
-                                title: news.title,
-                                date: newsdate,
-                                time: newstime
-                            };
-                            $scope.studentNews.push(theNews);
-                        })
-                    })
-                    $scope.newsIndex = $scope.studentNews.length - 1;
+                        var datekey = dates.key;
+                        var news = dates.val();
+                        var date = datekey.substring(0, 10);
+                        var time = datekey.substring(11, 19);
+                        var theNews = {
+                            content: news.content,
+                            title: news.title,
+                            datekey: datekey,
+                            date: date,
+                            time: time
+                        };
+                        $scope.studentNews.push(theNews);
+                    });
+                    $scope.studentNews.sort(compare);
+                    console.log($scope.studentNews);
                 });
-            
-            $scope.showMoreNews = function(){
-                if($scope.newsIndex - 2 < 0){
-                    if($scope.newsIndex - 1 === 0){
-                        $scope.newsIndex = $scope.newsIndex - 1;
-                    }
-                } else {
-                    $scope.newsIndex = $scope.newsIndex - 2;
+
+            //används för att sortera nyheter
+            var compare = function (a, b) {
+                if (a.datekey > b.datekey) {
+                    return -1;
                 };
+                if (a.datekey < b.datekey) {
+                    return 1;
+                };
+                return 0;
+            };
+
+            $scope.newsIndex = 0;
+            $scope.moreNews = function () {
+                $scope.newsIndex = $scope.newsIndex + 2;
             };
 
 
@@ -413,28 +420,45 @@
             var regNewsRef = newsRef.child('general');
             var adminNewsRef = newsRef.child('adminsOnly');
 
+            $scope.newsIndex = 0;
+
             $scope.allNews = [];
             newsRef.once('value').then(function (data) {
                 data.forEach(function (forWho) {
                     var who = forWho.key;
                     forWho.forEach(function (dates) {
-                        var newsdate = dates.key;
-                        dates.forEach(function (time) {
-                            var news = time.val();
-                            var newstime = time.key;
-                            var newsItem = {
-                                title: news.title,
-                                content: news.content,
-                                forWho: who,
-                                date: newsdate,
-                                time: newstime
-                            };
-                            $scope.allNews.push(newsItem);
-                        });
+                        var datekey = dates.key;
+                        var news = dates.val();
+                        var date = datekey.substring(0, 10);
+                        var time = datekey.substring(11, 19);
+                        var newsItem = {
+                            title: news.title,
+                            content: news.content,
+                            forWho: who,
+                            datekey: datekey,
+                            date: date,
+                            time: time
+                        };
+                        $scope.allNews.push(newsItem);
                     });
+                    $scope.allNews.sort(compare);
                 });
             });
 
+            //används för att sortera nyheter
+            var compare = function (a, b) {
+                if (a.datekey > b.datekey) {
+                    return -1;
+                };
+                if (a.datekey < b.datekey) {
+                    return 1;
+                };
+                return 0;
+            };
+
+            $scope.moreNews = function () {
+                $scope.newsIndex = $scope.newsIndex + 2;
+            }
 
             $scope.newsType = 'general';
             $scope.newsTypeName = 'Nyhetstyp';
@@ -444,7 +468,7 @@
             };
 
             $scope.createNews = function (news, title, type) {
-                var ref = firebase.database().ref().child('news/' + type + '/' + today + '/' + time());
+                var ref = firebase.database().ref().child('news/' + type + '/' + today + '_' + time());
                 ref.set({
                     content: news,
                     title: title

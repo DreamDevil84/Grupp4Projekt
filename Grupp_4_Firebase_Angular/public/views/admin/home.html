@@ -16,7 +16,7 @@
             </ul>
             <div ng-show="adminNewsTab === 'read'">
                 <ul class="col-xs-12 col-md-6 list-unstyled list-group">
-                    <li class="list-group-item" ng-repeat="news in allNews">
+                    <li class="list-group-item" ng-repeat="news in allNews" ng-show="$index <= newsIndex">
                         <p>{{news.forWho}}: {{news.date}}</p>
                         <h4>{{news.title}}</h4>
                         <p>{{news.content}}</p>
@@ -25,6 +25,7 @@
                     </li>
                 </ul>
             </div>
+            <button class="btn btn-clear" ng-click="moreNews()">Fler nyheter</button>
             <div ng-show="adminNewsTab === 'create'">
                 <form class="col-xs-6">
                     <div>Titel</div>
