@@ -108,7 +108,7 @@
             var courseRef = firebase.database().ref().child('courses');
             var userCourseRef = firebase.database().ref().child('users/' + user + '/courses');
             var userRef = firebase.database().ref().child('users/' + user);
-            var studentNewsRef = firebase.database().ref().child('news/general');
+            var studentNewsRef = firebase.database().ref().child('news');
             $scope.user = $firebaseObject(userRef);
 
             //tabs för studenten
@@ -131,27 +131,7 @@
                 return Math.ceil((((this - onejan) / 86400000) + onejan.getDay() + 1) / 7);
             };
 
-            //nyheter för studenten
-            $scope.studentNews = [];
-            studentNewsRef.once('value')
-                .then(function (data) {
-                    data.forEach(function (dates) {
-                        var datekey = dates.key;
-                        var news = dates.val();
-                        var date = datekey.substring(0, 10);
-                        var time = datekey.substring(11, 19);
-                        var theNews = {
-                            content: news.content,
-                            title: news.title,
-                            datekey: datekey,
-                            date: date,
-                            time: time
-                        };
-                        $scope.studentNews.push(theNews);
-                    });
-                    $scope.studentNews.sort(compare);
-                    console.log($scope.studentNews);
-                });
+
 
             //används för att sortera nyheter
             var compare = function (a, b) {
@@ -178,19 +158,60 @@
                     data.forEach(function (childDataSnap) {
                         var childData = childDataSnap.val();
                         var childDetail = {
-                            id: childData.id,
+                            id: childDataSnap.key,
                             grade: childData.grade,
                             status: childData.status,
                             gradeWork: childData.gradeWork
                         };
                         studentCourses.push(childDetail);
                     });
+                    //nyheter för studenten
+                    $scope.studentNews = [];
+                    studentNewsRef.once('value')
+                        .then(function (types) {
+                            types.forEach(function (data) {
+                                if (data.key === 'general') {
+                                    data.forEach(function (dates) {
+                                        var datekey = dates.key;
+                                        var news = dates.val();
+                                        var theNews = {
+                                            content: news.content,
+                                            title: news.title,
+                                            datekey: datekey,
+                                            type: 'Alla',
+                                            date: datekey.substring(0, 10),
+                                            time: datekey.substring(11, 19)
+                                        };
+                                        $scope.studentNews.push(theNews);
+                                    });
+                                };
+                                for (var x = 0; x < studentCourses.length; x++) {
+                                    if (data.key === studentCourses[x].id) {
+                                        data.forEach(function (dates) {
+                                            var datekey = dates.key;
+                                            var news = dates.val();
+                                            var theNews = {
+                                                content: news.content,
+                                                title: news.title,
+                                                datekey: datekey,
+                                                type: data.key,
+                                                date: datekey.substring(0, 10),
+                                                time: datekey.substring(11, 19)
+                                            };
+                                            $scope.studentNews.push(theNews);
+                                        });
+                                    }
+                                }
+                                $scope.studentNews.sort(compare);
+                            });
+                            // console.log($scope.studentNews);
+                        });
                     courseRef.once('value')
                         .then(function (data) {
                             data.forEach(function (childDataSnap) {
                                 var childData = childDataSnap.val();
                                 for (var x = 0; x < studentCourses.length; x++) {
-                                    if (childData.id === studentCourses[x].id) {
+                                    if (childDataSnap.key === studentCourses[x].id) {
                                         $scope.studentCourseDetails.push({
                                             id: studentCourses[x].id,
                                             grade: studentCourses[x].grade,

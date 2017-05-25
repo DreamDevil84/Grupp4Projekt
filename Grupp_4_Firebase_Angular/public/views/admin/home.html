@@ -24,8 +24,8 @@
                         <br>
                     </li>
                 </ul>
-            </div>
             <button class="btn btn-clear" ng-click="moreNews()">Fler nyheter</button>
+            </div>
             <div ng-show="adminNewsTab === 'create'">
                 <form class="col-xs-6">
                     <div>Titel</div>
@@ -40,6 +40,8 @@
                             </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                             <li><a ng-click="setNewsType('general', 'Alla')">Alla</a></li>
+                            <li><a ng-click="setNewsType('APPS1', 'APPS1')">APPS1</a></li>
+                            <li><a ng-click="setNewsType('CROSS', 'CROSS')">CROSS</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a ng-click="setNewsType('adminsOnly', 'Endast Admins')">Endast Admins</a></li>
                         </ul>

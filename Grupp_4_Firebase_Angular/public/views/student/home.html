@@ -9,6 +9,7 @@
 	<div ng-show="mainTab === 'daily'">
 		<ul class="list-unstyled list-group row">
 			<li class="col-xs-12 col-md-8 list-group-item" ng-repeat="news in studentNews" ng-show="$index <= newsIndex">
+				<p class="badge">{{news.type}}</p>
 				<p>{{news.date}}</p>
 				<h4>{{news.title}}</h4>
 				<p>{{news.content}}</p>
