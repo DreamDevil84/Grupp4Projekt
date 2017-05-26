@@ -1,7 +1,5 @@
-angular.module('app', ['firebase'])
+(function () {
+    angular.module('app')
         .controller('HomeCtrl', function (currentAuth) {
-
-
-
-
-        });
+        })
+})();

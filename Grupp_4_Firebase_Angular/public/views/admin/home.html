@@ -3,16 +3,16 @@
         <h1>Hej {{user.firstName}} {{user.lastName}}</h1>
     </div>
     <ul class="nav nav-tabs">
-        <li><a ng-click="setAdminTab('news')">Nyheter</a></li>
-        <li><a ng-click="setAdminTab('courses')">Kurser</a></li>
-        <li><a ng-click="setAdminTab('classes')">Klasser</a></li>
-        <li><a ng-click="setAdminTab('users')">Användare</a></li>
+        <li ng-class="{active : adminTab === 'news'}"><a ng-click="setAdminTab('news')">Nyheter</a></li>
+        <li ng-class="{active : adminTab === 'courses'}"><a ng-click="setAdminTab('courses')">Kurser</a></li>
+        <li ng-class="{active : adminTab === 'classes'}"><a ng-click="setAdminTab('classes')">Klasser</a></li>
+        <li ng-class="{active : adminTab === 'users'}"><a ng-click="setAdminTab('users')">Användare</a></li>
     </ul>
     <div class="row">
         <div ng-show="adminTab === 'news'">
-            <ul class="nav nav-tabs">
-                <li><a ng-click="setAdminNewsTab('read')">Läs Nyheter</a></li>
-                <li><a ng-click="setAdminNewsTab('create')">Skapa Nyheter</a></li>
+            <ul class="nav nav-pills">
+                <li ng-class="{active : adminNewsTab === 'read'}"><a ng-click="setAdminNewsTab('read')">Läs Nyheter</a></li>
+                <li ng-class="{active : adminNewsTab === 'create'}"><a ng-click="setAdminNewsTab('create')">Skapa Nyheter</a></li>
             </ul>
             <div ng-show="adminNewsTab === 'read'">
                 <ul class="col-xs-12 col-md-6 list-unstyled list-group">
@@ -24,7 +24,7 @@
                         <br>
                     </li>
                 </ul>
-            <button class="btn btn-clear" ng-click="moreNews()">Fler nyheter</button>
+                <button class="btn btn-clear" ng-click="moreNews()">Fler nyheter</button>
             </div>
             <div ng-show="adminNewsTab === 'create'">
                 <form class="col-xs-6">

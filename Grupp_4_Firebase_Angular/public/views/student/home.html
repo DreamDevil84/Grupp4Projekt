@@ -1,22 +1,28 @@
 <div class="ng-cloak">
 	<h1>Hej {{user.firstName}}</h1>
-	<ul class="nav nav-tabs">
-		<li><a ng-click="setMainTab('daily')">Dagens aktivitet</a></li>
-		<li><a ng-click="setMainTab('onGoing')">Aktuella kurser</a></li>
-		<li><a ng-click="setMainTab('upComming')">Kommande Kurser</a></li>
-		<li><a ng-click="setMainTab('complete')">Färdiga kurser</a></li>
+	<ul class="nav nav-pills">
+		<li ng-class="{active : mainTab === 'daily'}"><a ng-click="setMainTab('daily')">Dagens aktivitet</a></li>
+		<li ng-class="{active : mainTab === 'onGoing'}"><a ng-click="setMainTab('onGoing')">Aktuella kurser</a></li>
+		<li ng-class="{active : mainTab === 'upComming'}"><a ng-click="setMainTab('upComming')">Kommande Kurser</a></li>
+		<li ng-class="{active : mainTab === 'complete'}"><a ng-click="setMainTab('complete')">Färdiga kurser</a></li>
 	</ul>
+	<br>
 	<div ng-show="mainTab === 'daily'">
-		<ul class="list-unstyled list-group row">
-			<li class="col-xs-12 col-md-8 list-group-item" ng-repeat="news in studentNews" ng-show="$index <= newsIndex">
-				<p class="badge">{{news.type}}</p>
-				<p>{{news.date}}</p>
-				<h4>{{news.title}}</h4>
-				<p>{{news.content}}</p>
-				<p class="pull-right">{{news.time}}</p>
-				<br>
-			</li>
-		</ul>
+		<div class="row">
+			<div class="col-xs-11 col-md-8 list-group-item">
+				<ul class="list-unstyled list-group">
+					<li ng-repeat="news in studentNews" ng-show="$index <= newsIndex">
+						<p class="badge">{{news.type}}</p>
+						<p>{{news.date}}</p>
+						<h4>{{news.title}}</h4>
+						<p>{{news.content}}</p>
+						<p class="pull-right">{{news.time}}</p>
+						<br>
+					</li>
+				</ul>
+			</div>
+		</div>
+
 		<button class="row btn btn-clear" ng-click="moreNews()">Se mer</button>
 		<div class="col-xs-12 col-sm-6 col-md-4">
 			<div class="attendance-box">

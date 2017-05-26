@@ -39,6 +39,14 @@
   <!-- AngularFire -->
   <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
   <script src="js/app.js"></script>
+  <script src="views/admin/admin.js"></script>
+  <script src="views/student/student.js"></script>
+  <script src="views/teacher/teacher.js"></script>
+  <script src="views/home/home.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/factory.js"></script>
+  <script src="js/loginCtrl.js"></script>
+
 </head>
 
 <body ng-app="app">
@@ -64,8 +72,8 @@
       <p ng-if="error"> Error: {{ error }}</p>
     </header>
     <div id="filler"></div>
-    <div ng-view></div>
   </div>
+  <div ng-view></div>
 
 </body>
 

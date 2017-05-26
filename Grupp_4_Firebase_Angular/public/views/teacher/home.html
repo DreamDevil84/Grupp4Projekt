@@ -3,11 +3,11 @@
         <h1>Hej {{user.firstName}}</h1>
     </div>
     <ul class="nav nav-tabs">
-        <li><a ng-click="setMainTab('daily')">Dina Klasser</a></li>
-        <li><a ng-click="setMainTab('attendanceDaily')">Dagens närvaro</a></li>
-        <li><a ng-click="setMainTab('archive')">Arkiv</a></li>
+        <li ng-class="{active : teacherTab === 'daily'}"><a ng-click="setMainTab('daily')">Dina Klasser</a></li>
+        <li ng-class="{active : teacherTab === 'attendanceDaily'}"><a ng-click="setMainTab('attendanceDaily')">Dagens närvaro</a></li>
+        <li ng-class="{active : teacherTab === 'archive'}"><a ng-click="setMainTab('archive')">Arkiv</a></li>
     </ul>
-    <div ng-show="teacherTab === daily">
+    <div ng-show="teacherTab === 'daily'">
         <div class="col-xs-12 col-md-6 col-lg-4">
             <ul class="list-unstyled list-group">
                 <li class="list-group-item" ng-repeat="student in students">
