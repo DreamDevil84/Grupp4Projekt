@@ -120,5 +120,21 @@
                                         secondaryApp.auth().signOut();
                                 });
                         };
+
+                        //skapa veckofeedback
+                        var weekFeedbackRef = firebase.database().ref().child('feedback/weekly/' + date.getWeek() + '/form');
+                        $scope.weekFeedbackType = 'Svarsalternativ';
+                        $scope.setWeeklyFeedbackAnswerType = function (type) {
+                                $scope.weekFeedbackType = type;
+                        };
+                        $scope.weeklyFeedbackForm = $firebaseArray(weekFeedbackRef);
+                        $scope.addWeeklyFeedbackQuestion = function (text, type) {
+                                if (type != 'Svarsalternativ') {
+                                        weekFeedbackRef.push({
+                                                question: text,
+                                                type: type
+                                        });
+                                };
+                        };
                 });
 })();

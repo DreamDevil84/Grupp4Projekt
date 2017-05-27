@@ -2,53 +2,56 @@
     <div>
         <h1>Hej {{user.firstName}} {{user.lastName}}</h1>
     </div>
-    <ul class="nav nav-tabs">
+    <ul class="nav nav-pills">
         <li ng-class="{active : adminTab === 'news'}"><a ng-click="setAdminTab('news')">Nyheter</a></li>
         <li ng-class="{active : adminTab === 'courses'}"><a ng-click="setAdminTab('courses')">Kurser</a></li>
         <li ng-class="{active : adminTab === 'classes'}"><a ng-click="setAdminTab('classes')">Klasser</a></li>
         <li ng-class="{active : adminTab === 'users'}"><a ng-click="setAdminTab('users')">Användare</a></li>
+        <li ng-class="{active : adminTab === 'feedback'}"><a ng-click="setAdminTab('feedback')">Feedback</a></li>
     </ul>
     <div class="row">
-        <div ng-show="adminTab === 'news'">
-            <ul class="nav nav-pills">
-                <li ng-class="{active : adminNewsTab === 'read'}"><a ng-click="setAdminNewsTab('read')">Läs Nyheter</a></li>
-                <li ng-class="{active : adminNewsTab === 'create'}"><a ng-click="setAdminNewsTab('create')">Skapa Nyheter</a></li>
-            </ul>
-            <div ng-show="adminNewsTab === 'read'">
-                <ul class="col-xs-12 col-md-6 list-unstyled list-group">
-                    <li class="list-group-item" ng-repeat="news in allNews" ng-show="$index <= newsIndex">
-                        <p>{{news.forWho}}: {{news.date}}</p>
-                        <h4>{{news.title}}</h4>
-                        <p>{{news.content}}</p>
-                        <p class="pull-right">{{news.time}}</p>
-                        <br>
-                    </li>
+        <div class="col-xs-12">
+            <div ng-show="adminTab === 'news'">
+                <ul class="nav nav-tabs">
+                    <li ng-class="{active : adminNewsTab === 'read'}"><a ng-click="setAdminNewsTab('read')">Läs Nyheter</a></li>
+                    <li ng-class="{active : adminNewsTab === 'create'}"><a ng-click="setAdminNewsTab('create')">Skapa Nyheter</a></li>
                 </ul>
-                <button class="btn btn-clear" ng-click="moreNews()">Fler nyheter</button>
-            </div>
-            <div ng-show="adminNewsTab === 'create'">
-                <form class="col-xs-6">
-                    <div>Titel</div>
-                    <input type="text" ng-model="newsTitle">
-                    <div>Nyheter</div>
-                    <input type="text" ng-model="news">
-                    <div class="dropdown">
-                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="true">
+                <div ng-show="adminNewsTab === 'read'">
+                    <ul class="col-xs-12 col-md-6 list-unstyled list-group">
+                        <li class="list-group-item" ng-repeat="news in allNews" ng-show="$index <= newsIndex">
+                            <p>{{news.forWho}}: {{news.date}}</p>
+                            <h4>{{news.title}}</h4>
+                            <p>{{news.content}}</p>
+                            <p class="pull-right">{{news.time}}</p>
+                            <br>
+                        </li>
+                    </ul>
+                    <button class="btn btn-clear" ng-click="moreNews()">Fler nyheter</button>
+                </div>
+                <div ng-show="adminNewsTab === 'create'">
+                    <form class="col-xs-6">
+                        <div>Titel</div>
+                        <input type="text" ng-model="newsTitle">
+                        <div>Nyheter</div>
+                        <input type="text" ng-model="news">
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="true">
                             {{newsTypeName}}
                             <span class="caret"></span>
                             </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                            <li><a ng-click="setNewsType('general', 'Alla')">Alla</a></li>
-                            <li><a ng-click="setNewsType('APPS1', 'APPS1')">APPS1</a></li>
-                            <li><a ng-click="setNewsType('CROSS', 'CROSS')">CROSS</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a ng-click="setNewsType('adminsOnly', 'Endast Admins')">Endast Admins</a></li>
-                        </ul>
-                    </div>
-                </form>
-                <br>
-                <button class="btn btn-clear" ng-click="createNews(news, newsTitle, newsType)">Skapa!</button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li><a ng-click="setNewsType('general', 'Alla')">Alla</a></li>
+                                <li><a ng-click="setNewsType('APPS1', 'APPS1')">APPS1</a></li>
+                                <li><a ng-click="setNewsType('CROSS', 'CROSS')">CROSS</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a ng-click="setNewsType('adminsOnly', 'Endast Admins')">Endast Admins</a></li>
+                            </ul>
+                        </div>
+                    </form>
+                    <br>
+                    <button class="btn btn-clear" ng-click="createNews(news, newsTitle, newsType)">Skapa!</button>
+                </div>
             </div>
         </div>
         <div ng-show="adminTab === 'courses'">
@@ -87,6 +90,35 @@
                 <input type="text" ng-model="type">
                 <button class="btn btn-clear" ng-click="createUser(firstName, lastName, newEmail, newPassword, type)">Skapa!</button>
             </form>
+        </div>
+        <div ng-show="adminTab === 'feedback'">
+            <div class="col-xs-6 col-md-4">
+                <h4>Skapa veckans feedback</h4>
+            </div>
+            <label class="col-xs-12">Fråga:</label>
+            <div class="col-xs-6 col-md-4">
+                <div class="form-group">
+                    <textarea class="form-control" rows="5" ng-model="weeklyFeedbackQuestion"></textarea>
+                    <br>
+                    <div class="dropdown">
+                        <button class="btn btn-clear" ng-click="addWeeklyFeedbackQuestion(weeklyFeedbackQuestion, weekFeedbackType)">Lägg till</button>
+                        <button class="btn btn-default dropdown-toggle" type="button" id="weekFeedbackType" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="true">{{weekFeedbackType}}<span class="caret"></span></button>
+                        <ul class="dropdown-menu" aria-labelledby="weekFeedbackType">
+                            <li><a ng-click="setWeeklyFeedbackAnswerType('Text')">Text</a></li>
+                            <li><a ng-click="setWeeklyFeedbackAnswerType('5-skala')">5-skala</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-6 col-md-4">
+                <ul class="list-unstyled list-group">
+                    <li class="list-group-item" ng-repeat="question in weeklyFeedbackForm">
+                        <p>{{question.question}}</p>
+                        <h4>{{question.type}}</h4>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>

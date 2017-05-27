@@ -9,48 +9,46 @@
 	<br>
 	<div ng-show="mainTab === 'daily'">
 		<div class="row">
-			<div class="col-xs-11 col-md-8 list-group-item">
+			<div class="col-xs-11 col-md-8">
+				<div ng-if="timeForWeeklyFeedback">
+					<button class="btn btn-clear" ng-click="setMainTab('feedbackWeekly')">Dags för veckans Feedback!!!</button>
+					<br><br>
+				</div>
 				<ul class="list-unstyled list-group">
-					<li ng-repeat="news in studentNews" ng-show="$index <= newsIndex">
-						<p class="badge">{{news.type}}</p>
-						<p>{{news.date}}</p>
+					<li class="list-group-item" ng-repeat="news in studentNews" ng-hide="$index > newsIndex">
+						<p>{{news.date}}<span ng-if="news.type != 'general'" class="badge pull-right">{{news.type}}</span><span ng-if="news.type === 'general'"
+							 class="badge pull-right">Alla</span></p>
 						<h4>{{news.title}}</h4>
-						<p>{{news.content}}</p>
-						<p class="pull-right">{{news.time}}</p>
-						<br>
+						<p>{{news.content}}<span class="pull-right">{{news.time}}</span></p>
 					</li>
 				</ul>
 			</div>
 		</div>
-
-		<button class="row btn btn-clear" ng-click="moreNews()">Se mer</button>
-		<div class="col-xs-12 col-sm-6 col-md-4">
-			<div class="attendance-box">
-				<button class="btn btn-default" ng-click="attendance()">
+		<div class="row">
+			<div class="col-xs-4">
+				<button class="btn btn-clear" ng-click="moreNews()">Se mer</button>
+			</div>
+		</div>
+		<br>
+		<div class="row">
+			<div class="col-xs-12 col-sm-6 col-md-4">
+				<div class="attendance-box">
+					<button class="btn btn-default" ng-click="attendance()">
 					<p>Dagens närvaro</p>
 					<div class="badge badge-success" ng-show="data.status === 3">Här</div>
 					<div class="badge badge-warning" ng-show="data.status === 2">Sen</div>
 					<div class="badge badge-error" ng-show="data.status === 1">Ej Här</div>
 					<div class="badge" ng-hide="data.status">Ej Svarat</div>
 				</button>
+				</div>
 			</div>
-		</div>
-		<div class="col-xs-12 col-sm-6 col-md-4">
-			<p>Dagens feedback:</p>
-			<span ng-hide="gaveFeedbackToday" ng-click="giveFeedback(-1, 'daily')" class="btn btn-feedback-bad"></span>
-			<span ng-hide="gaveFeedbackToday" ng-click="giveFeedback(0, 'daily')" class="btn btn-feedback-neutral"></span>
-			<span ng-hide="gaveFeedbackToday" ng-click="giveFeedback(1, 'daily')" class="btn btn-feedback-good"></span>
-			<span ng-show="gaveFeedbackToday">Du har gett feedback idag.</span>
-			<br>
-			<p>Veckans feedback:</p>
-			<br>
-			<p>Skriv detaljerad feedback först:</p>
-			<input type="text" ng-model="feedbackText">
-			<br>
-			<br>
-			<div ng-click="giveFeedback(-1, 'weekly', feedbackText)" class="btn btn-feedback-bad"></div>
-			<div ng-click="giveFeedback(0, 'weekly', feedbackText)" class="btn btn-feedback-neutral"></div>
-			<div ng-click="giveFeedback(1, 'weekly', feedbackText)" class="btn btn-feedback-good"></div>
+			<div class="col-xs-12 col-sm-6 col-md-4">
+				<p ng-hide="gaveFeedbackToday">Dagens feedback:</p>
+				<span ng-hide="gaveFeedbackToday" ng-click="giveFeedback(-1, 'daily')" class="btn btn-feedback-bad"></span>
+				<span ng-hide="gaveFeedbackToday" ng-click="giveFeedback(0, 'daily')" class="btn btn-feedback-neutral"></span>
+				<span ng-hide="gaveFeedbackToday" ng-click="giveFeedback(1, 'daily')" class="btn btn-feedback-good"></span>
+				<span ng-show="gaveFeedbackToday">Du har gett feedback idag.</span>
+			</div>
 		</div>
 	</div>
 	<div ng-show="mainTab != 'daily'">
@@ -58,7 +56,7 @@
 			<div class="col-xs-12 col-sm-6 col-md-4">
 				<ul class="list-unstyled list-group">
 					<li class="courses" ng-repeat="course in studentCourseDetails">
-						<div ng-show="course.status === mainTab" class="list-group-item" data-toggle="modal" data-target="#{{course.id}}"><strong class="coursetitle pull-left">{{course.title}}</strong>
+						<div ng-show="course.status === mainTab" class="list-group-item coursehover" data-toggle="modal" data-target="#{{course.id}}"><strong class="coursetitle pull-left">{{course.title}}</strong>
 							<span ng-if="course.grade === 'G' || course.grade === 'VG'" class="badge badge-success">{{course.grade}}</span>
 							<span ng-if="course.grade === 'IG'" class="badge badge-error">{{course.grade}}</span>
 							<span class="badge" ng-hide="course.grade">Ej Klar</span>
@@ -76,13 +74,13 @@
 									</div>
 									<div class="modal-body">
 										<ul class="nav nav-tabs">
-											<li><a ng-click="setTab(1)">Kursdetaljer</a></li>
-											<li><a ng-click="setTab(2)">Schema</a></li>
-											<li><a ng-click="setTab(3)">Betyg</a></li>
+											<li ng-class="{active: showCourseTab === 1}"><a ng-click="setCourseTab(1)">Kursdetaljer</a></li>
+											<li ng-class="{active: showCourseTab === 2}"><a ng-click="setCourseTab(2)">Schema</a></li>
+											<li ng-class="{active: showCourseTab === 3}"><a ng-click="setCourseTab(3)">Betyg</a></li>
 										</ul>
-										<div ng-show="showTab === 1">{{course.details}}</div>
-										<div ng-show="showTab === 2">{{course.status}}</div>
-										<div ng-show="showTab === 3">
+										<div ng-show="showCourseTab === 1">{{course.details}}</div>
+										<div ng-show="showCourseTab === 2">{{course.status}}</div>
+										<div ng-show="showCourseTab === 3">
 											<ul class="list-unstyled list-group">
 												<li class="list-group-item" ng-repeat="grade in course.gradeWork">{{grade.name}}
 													<span ng-hide="grade.grade === 'IG'" class="badge badge-success">{{grade.grade}}</span>
@@ -103,8 +101,35 @@
 			</div>
 		</div>
 	</div>
+	<div ng-show="mainTab === 'feedbackWeekly'">
+		<div class="row">
+			<div class="col-xs-12 col-md-6">
+				<h4>Feedback enkät</h4>
+				<ul class="list-unstyled list-group">
+					<li class="list-group-item" ng-repeat="question in weeklyFeedback">
+						<h4>{{$index + 1}} {{question.question}}</h4>
+						<textarea ng-if="question.type === 'Text'" id="{{question.$id}}" class="form-control" rows="5"></textarea>
+						<div ng-if="question.type === '5-skala'">
+							<div class="row">
+								<p class="col-xs-8">Ranka hur mucket du håller med från 1 till 5, där 1 är minst.</p>
+							</div>
+							<div class="btn-group" data-toggle="buttons">
+								<label class="btn btn-primary" ng-click="setWeeklyFeedbackChoice(question.$id, 1)">
+										<input type="radio" autocomplete="off">1</label>
+								<label class="btn btn-primary" ng-click="setWeeklyFeedbackChoice(question.$id, 2)">
+										<input type="radio" autocomplete="off">2</label>
+								<label class="btn btn-primary" ng-click="setWeeklyFeedbackChoice(question.$id, 3)">
+										<input type="radio" autocomplete="off">3</label>
+								<label class="btn btn-primary" ng-click="setWeeklyFeedbackChoice(question.$id, 4)">
+										<input type="radio" autocomplete="off">4</label>
+								<label class="btn btn-primary" ng-click="setWeeklyFeedbackChoice(question.$id, 5)">
+										<input type="radio" autocomplete="off">5</label>
+							</div>
+						</div>
+					</li>
+				</ul>
+				<button class="btn btn-clear" ng-click="sendWeeklyFeedback()">Skicka in</button>
+			</div>
+		</div>
+	</div>
 </div>
-<!-- Trigger the modal with a button -->
-<!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>-->
-
-<!-- Modal -->
