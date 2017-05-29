@@ -59,11 +59,11 @@
       </div>
       <div ng-hide="firebaseUser" class="col-xs-2">
         <p>Email</p>
-        <input type="text" class="logininput" ng-model="email" required>
+        <input type="text" class="logininput" ng-model="email">
       </div>
       <div ng-hide="firebaseUser" class="col-xs-2">
         <p>Password</p>
-        <input type="password" class="logininput" ng-model="password" required>
+        <input type="password" class="logininput" ng-model="password">
       </div>
       <button ng-hide="firebaseUser" class="btn btn-default col-xs-2 pull-right loginbutton" ng-click="auth.$signInWithEmailAndPassword(email, password)">Login</button>
       <div ng-if="firebaseUser" class="col-xs-6 pull-right">

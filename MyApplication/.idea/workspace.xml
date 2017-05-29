@@ -53,7 +53,6 @@
     <favorites_list name="MyApplication" />
   </component>
   <component name="FileEditorManager">
-<<<<<<< Updated upstream
 <<<<<<< HEAD
     <leaf>
       <file leaf-file-name="build.gradle" pinned="false" current-in-tab="true">
@@ -62,53 +61,27 @@
             <state relative-caret-position="289">
               <caret line="32" column="47" selection-start-line="32" selection-start-column="47" selection-end-line="32" selection-end-column="47" />
 =======
-=======
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/bettercallnilsson/com/androidapp1/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1144">
               <caret line="66" column="37" selection-start-line="66" selection-start-column="37" selection-end-line="66" selection-end-column="37" />
-<<<<<<< Updated upstream
               <folding />
-=======
-=======
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="StudentActivity.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/bettercallnilsson/com/androidapp1/StudentActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-330">
-              <caret line="68" column="79" selection-start-line="68" selection-start-column="79" selection-end-line="68" selection-end-column="79" />
->>>>>>> Stashed changes
-              <folding>
-                <element signature="imports" expanded="false" />
-              </folding>
->>>>>>> Stashed changes
             </state>
           </provider>
         </entry>
       </file>
-<<<<<<< Updated upstream
       <file leaf-file-name="StudentActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/bettercallnilsson/com/androidapp1/StudentActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="2332">
               <caret line="129" column="39" selection-start-line="129" selection-start-column="39" selection-end-line="129" selection-end-column="39" />
               <folding />
-=======
-      <file leaf-file-name="strings.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" column="25" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="25" />
-              <folding />
             </state>
           </provider>
         </entry>
       </file>
-<<<<<<< Updated upstream
       <file leaf-file-name="FeedbackActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/bettercallnilsson/com/androidapp1/FeedbackActivity.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -127,96 +100,19 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="132">
               <caret line="6" column="31" selection-start-line="6" selection-start-column="31" selection-end-line="6" selection-end-column="31" />
-=======
-      <file leaf-file-name="PresenceActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/bettercallnilsson/com/androidapp1/PresenceActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="42" column="21" selection-start-line="42" selection-start-column="21" selection-end-line="42" selection-end-column="21" />
-              <folding>
-                <element signature="imports" expanded="false" />
-              </folding>
->>>>>>> Stashed changes
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FeedbackActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/bettercallnilsson/com/androidapp1/FeedbackActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-<<<<<<< Updated upstream
-            <state relative-caret-position="440">
-              <caret line="67" column="98" selection-start-line="67" selection-start-column="98" selection-end-line="67" selection-end-column="98" />
-=======
-            <state relative-caret-position="600">
-              <caret line="67" column="0" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
->>>>>>> Stashed changes
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="activity_feedback.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_feedback.xml">
-          <provider editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="25" column="28" selection-start-line="25" selection-start-column="28" selection-end-line="25" selection-end-column="28" />
->>>>>>> Stashed changes
-              <folding />
-            </state>
-          </provider>
-          <provider selected="true" editor-type-id="android-designer2">
-            <state />
-          </provider>
-        </entry>
-      </file>
-<<<<<<< Updated upstream
       <file leaf-file-name="PresenceActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/bettercallnilsson/com/androidapp1/PresenceActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1276">
               <caret line="77" column="0" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
-<<<<<<< Updated upstream
 >>>>>>> d91183f521d524d23d60694e70791b15438d4723
-=======
-=======
-      <file leaf-file-name="list_layout.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/list_layout.xml">
-          <provider editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
->>>>>>> Stashed changes
               <folding />
             </state>
-          </provider>
-          <provider selected="true" editor-type-id="android-designer2">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CourseList.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/bettercallnilsson/com/androidapp1/CourseList.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="495">
-              <caret line="42" column="53" selection-start-line="42" selection-start-column="53" selection-end-line="42" selection-end-column="53" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="menulayout.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/menulayout.xml">
-          <provider editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
->>>>>>> Stashed changes
-              <folding />
-            </state>
-          </provider>
-          <provider selected="true" editor-type-id="android-designer2">
-            <state />
           </provider>
         </entry>
       </file>
@@ -2279,7 +2175,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/bettercallnilsson/com/androidapp1/MainActivity.java" />
         <option value="$USER_HOME$/.android/build-cache/80e7227bdd3a8ab244c572dae4d94ddbacd9bc96/output/jars/classes.jar!/com/google/firebase/auth/FirebaseAuth.class" />
         <option value="$PROJECT_DIR$/app/src/main/java/bettercallnilsson/com/androidapp1/StudentActivity.java" />
-<<<<<<< Updated upstream
         <option value="$PROJECT_DIR$/app/src/main/java/bettercallnilsson/com/androidapp1/gradeSitterGitter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/bettercallnilsson/com/androidapp1/userinformation.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/bettercallnilsson/com/androidapp1/Users.java" />
@@ -2289,16 +2184,7 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_presence.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/bettercallnilsson/com/androidapp1/PresenceActivity.java" />
-<<<<<<< Updated upstream
         <option value="$PROJECT_DIR$/app/src/main/java/bettercallnilsson/com/androidapp1/FeedbackActivity.java" />
-=======
-=======
-        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/bettercallnilsson/com/androidapp1/PresenceActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/bettercallnilsson/com/androidapp1/FeedbackActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_presence.xml" />
->>>>>>> Stashed changes
->>>>>>> Stashed changes
       </list>
     </option>
   </component>
@@ -2334,24 +2220,12 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-<<<<<<< Updated upstream
 <<<<<<< HEAD
       <pane id="ProjectPane" />
       <pane id="Scratches" />
       <pane id="PackagesPane" />
 =======
 >>>>>>> d91183f521d524d23d60694e70791b15438d4723
-=======
-<<<<<<< Updated upstream
-=======
-      <pane id="Scope" />
-      <pane id="Scratches" />
-      <pane id="PackagesPane" />
-      <pane id="ProjectPane">
-        <subPane />
-      </pane>
->>>>>>> Stashed changes
->>>>>>> Stashed changes
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -2359,15 +2233,11 @@
               <option name="myItemId" value="MyApplication" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
             </PATH_ELEMENT>
-<<<<<<< Updated upstream
 <<<<<<< HEAD
             <PATH_ELEMENT>
               <option name="myItemId" value="Gradle Scripts" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidBuildScriptsGroupNode" />
 =======
-=======
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -2415,18 +2285,6 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
 >>>>>>> d91183f521d524d23d60694e70791b15438d4723
             </PATH_ELEMENT>
-<<<<<<< Updated upstream
-=======
-            <PATH_ELEMENT>
-              <option name="myItemId" value="androidapp1" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-=======
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Gradle Scripts" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidBuildScriptsGroupNode" />
->>>>>>> Stashed changes
-            </PATH_ELEMENT>
->>>>>>> Stashed changes
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -3075,17 +2933,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/bettercallnilsson/com/androidapp1/CourseList.java">
       <provider selected="true" editor-type-id="text-editor">
-<<<<<<< Updated upstream
         <state relative-caret-position="352">
           <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-<<<<<<< Updated upstream
-=======
-          <folding />
-=======
-        <state relative-caret-position="900">
-          <caret line="76" column="25" selection-start-line="76" selection-start-column="25" selection-end-line="76" selection-end-column="25" />
->>>>>>> Stashed changes
->>>>>>> Stashed changes
         </state>
       </provider>
     </entry>
@@ -3121,19 +2970,11 @@
         </state>
       </provider>
     </entry>
-<<<<<<< Updated upstream
     <entry file="file://$PROJECT_DIR$/app/src/main/java/bettercallnilsson/com/androidapp1/CourseList.java">
       <provider selected="true" editor-type-id="text-editor">
-=======
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_student.xml">
-      <provider editor-type-id="text-editor">
->>>>>>> Stashed changes
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/bettercallnilsson/com/androidapp1/MainActivity.java">
@@ -3277,7 +3118,6 @@
         </state>
       </provider>
     </entry>
-<<<<<<< Updated upstream
     <entry file="jar://$USER_HOME$/.android/build-cache/80e7227bdd3a8ab244c572dae4d94ddbacd9bc96/output/jars/classes.jar!/com/google/firebase/auth/FirebaseAuth.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="133">
@@ -3289,17 +3129,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="1104" column="72" selection-start-line="1104" selection-start-column="72" selection-end-line="1104" selection-end-column="72" />
-=======
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/menu_activity.xml" />
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
->>>>>>> Stashed changes
         </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-23/android/app/ActivityThread.java">
@@ -3318,7 +3148,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/bettercallnilsson/com/androidapp1/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-<<<<<<< Updated upstream
         <state relative-caret-position="1144">
           <caret line="66" column="37" selection-start-line="66" selection-start-column="37" selection-end-line="66" selection-end-column="37" />
 >>>>>>> d91183f521d524d23d60694e70791b15438d4723
@@ -3378,41 +3207,6 @@
       <provider selected="true" editor-type-id="android-designer2">
         <state />
       </provider>
-<<<<<<< Updated upstream
-=======
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_student.xml">
-=======
-        <state relative-caret-position="990">
-          <caret line="79" column="0" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_student.xml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="570">
-          <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/list_layout.xml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/menulayout.xml">
->>>>>>> Stashed changes
->>>>>>> Stashed changes
       <provider editor-type-id="text-editor">
         <state relative-caret-position="-59">
           <caret line="17" column="8" selection-start-line="17" selection-start-column="8" selection-end-line="17" selection-end-column="8" />
@@ -3423,15 +3217,6 @@
       <provider selected="true" editor-type-id="android-designer2">
         <state />
       </provider>
-<<<<<<< Updated upstream
-=======
-    </entry>
-<<<<<<< Updated upstream
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/list_layout.xml">
-=======
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_feedback.xml">
->>>>>>> Stashed changes
->>>>>>> Stashed changes
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -3441,23 +3226,6 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/mygrades.xml">
       <provider selected="true" editor-type-id="android-designer2">
         <state />
-<<<<<<< Updated upstream
-=======
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/bettercallnilsson/com/androidapp1/Courses.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="36" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="36" />
-          <folding>
-            <element signature="e#429#430#0" expanded="true" />
-            <element signature="e#464#465#0" expanded="true" />
-            <element signature="e#495#496#0" expanded="true" />
-            <element signature="e#527#528#0" expanded="true" />
-            <element signature="e#555#556#0" expanded="true" />
-          </folding>
-        </state>
->>>>>>> Stashed changes
       </provider>
       <provider editor-type-id="text-editor">
         <state relative-caret-position="22">
@@ -3475,58 +3243,18 @@
           <folding />
         </state>
       </provider>
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
->>>>>>> Stashed changes
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/bettercallnilsson/com/androidapp1/myGrades.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="660">
           <caret line="45" column="31" selection-start-line="45" selection-start-column="31" selection-end-line="45" selection-end-column="31" />
-=======
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/bettercallnilsson/com/androidapp1/PresenceActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="42" column="21" selection-start-line="42" selection-start-column="21" selection-end-line="42" selection-end-column="21" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/bettercallnilsson/com/androidapp1/FeedbackActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="67" column="0" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
           <folding />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_presence.xml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="8" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="8" />
->>>>>>> Stashed changes
-          <folding />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/bettercallnilsson/com/androidapp1/StudentActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-<<<<<<< Updated upstream
         <state relative-caret-position="2332">
-=======
-<<<<<<< Updated upstream
-        <state relative-caret-position="740">
->>>>>>> Stashed changes
           <caret line="129" column="39" selection-start-line="129" selection-start-column="39" selection-end-line="129" selection-end-column="39" />
           <folding />
         </state>
@@ -3559,19 +3287,6 @@
         </state>
       </provider>
     </entry>
-<<<<<<< Updated upstream
 >>>>>>> d91183f521d524d23d60694e70791b15438d4723
-=======
-=======
-        <state relative-caret-position="-330">
-          <caret line="68" column="79" selection-start-line="68" selection-start-column="79" selection-end-line="68" selection-end-column="79" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
->>>>>>> Stashed changes
->>>>>>> Stashed changes
   </component>
 </project>

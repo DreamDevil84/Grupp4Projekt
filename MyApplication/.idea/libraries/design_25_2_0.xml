@@ -1,12 +1,17 @@
 <component name="libraryTable">
   <library name="design-25.2.0">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.android/build-cache/8110ac49520184e76b96590d6eaf08a8d1a6a3de/output/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.android/build-cache/8110ac49520184e76b96590d6eaf08a8d1a6a3de/output/res" />
+<<<<<<< HEAD
+      <root url="file://$USER_HOME$/.android/build-cache/0b9cac36aaf061299862998a18b837bbfabf490a/output/res" />
+      <root url="jar://$USER_HOME$/.android/build-cache/0b9cac36aaf061299862998a18b837bbfabf490a/output/jars/classes.jar!/" />
+=======
+      <root url="jar://$USER_HOME$/.android/build-cache/e0be0331f65c82f5e863e9ebfa1c12f555ce2287/output/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.android/build-cache/e0be0331f65c82f5e863e9ebfa1c12f555ce2287/output/res" />
+>>>>>>> d91183f521d524d23d60694e70791b15438d4723
     </CLASSES>
     <JAVADOC />
     <SOURCES>
-      <root url="jar://$USER_HOME$/Library/Android/sdk/extras/android/m2repository/com/android/support/design/25.2.0/design-25.2.0-sources.jar!/" />
+      <root url="jar://$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/design/25.2.0/design-25.2.0-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

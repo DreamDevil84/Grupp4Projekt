@@ -15,14 +15,6 @@
       },
       "oauth_client": [
         {
-          "client_id": "387758932838-jreojp9jfup0qbshf2clolceqpntv824.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "bettercallnilsson.com.androidapp1",
-            "certificate_hash": "73ffaf253cc6c534abe3469fdd4a9f7726414a0d"
-          }
-        },
-        {
           "client_id": "387758932838-ho1t6at0ha3cgb3hn3jbsmh5ab7e4vjs.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -37,13 +29,8 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "387758932838-ho1t6at0ha3cgb3hn3jbsmh5ab7e4vjs.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "status": 1,
+          "other_platform_oauth_client": []
         },
         "ads_service": {
           "status": 2
