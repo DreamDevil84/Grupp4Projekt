@@ -128,6 +128,7 @@
             fref.on('value', function (data) {
                 if (data.exists()) {
                     $scope.gaveFeedbackToday = true;
+                    fref.off('value');
                 };
             });
 
@@ -176,33 +177,48 @@
             };
 
             //veckans feedback
-            // TODO - fixa så att den kollar om det är dags för feedback
-            $scope.timeForWeeklyFeedback = 1;
-            // TODO
+
             var weeklyFeedbackRef = firebase.database().ref().child('feedback/weekly/' + date.getWeek() + '/form');
             var weeklyFeedbackAnswerRef = firebase.database().ref().child('feedback/weekly/' + date.getWeek() + '/answers');
             var weeklyFeedbackAnswerDoneRef = firebase.database().ref().child('feedback/weekly/' + date.getWeek() + '/haveAnswered/' + user);
-            $scope.weeklyFeedback = $firebaseArray(weeklyFeedbackRef);
 
-            $scope.weeklyFeedbackValue = [];
-            $scope.setWeeklyFeedbackChoice = function (id, val) {
-                $scope.weeklyFeedbackValue[id] = val;
-                // console.log($scope.weeklyFeedbackValue[id]);
-                // console.log(val);
+            // TODO - fixa så att den kollar om det är dags för feedback
+            var day = date.getDay();
+            if (day === 0 || day === 5 || day === 6) {
+                weeklyFeedbackAnswerDoneRef.on('value', function (data) {
+                    if (data.val()) {
+                        $scope.timeForWeeklyFeedback = 0;
+                        weeklyFeedbackAnswerDoneRef.off('value');
+                    } else {
+                        $scope.timeForWeeklyFeedback = 1;
+                        $scope.weeklyFeedback = $firebaseArray(weeklyFeedbackRef);
+                        $scope.weeklyFeedbackValue = [];
+                        $scope.setWeeklyFeedbackChoice = function (id, val) {
+                            $scope.weeklyFeedbackValue[id] = val;
+                        };
+                    };
+                });
             };
             $scope.sendWeeklyFeedback = function () {
-                $scope.weeklyFeedback.forEach(function (data) {
-                    var show = 0;
-                    if (data.type === 'Text') {
-                        show = document.getElementById(data.$id).value;
-                        $scope.weeklyFeedbackValue[data.$id] = show;
-                    }
+                weeklyFeedbackAnswerDoneRef.once('value').then(function (data) {
+                    if (data.exists()) {
+                        console.log('already gave feedback');
+                    } else {
+                        $scope.weeklyFeedback.forEach(function (data) {
+                            var show = 0;
+                            if (data.type === 'Text') {
+                                show = document.getElementById(data.$id).value;
+                                $scope.weeklyFeedbackValue[data.$id] = show;
+                            }
+                        });
+                        weeklyFeedbackAnswerRef.child(weeklyFeedbackAnswerRef.push().key).set($scope.weeklyFeedbackValue);
+                        weeklyFeedbackAnswerDoneRef.set(true);
+                        weeklyFeedbackAnswerDoneRef.off('value');
+                    };
                 });
-                weeklyFeedbackAnswerRef.child(weeklyFeedbackAnswerRef.push().key).set($scope.weeklyFeedbackValue);
-                weeklyFeedbackAnswerDoneRef.set(true);
-                // console.log($scope.weeklyFeedbackValue);
+                $scope.timeForWeeklyFeedback = 0;
+                $scope.setMainTab('daily');
             };
-
             //NÄRVARO
 
             var attendanceRef = firebase.database().ref().child('attendance/' + today + '/' + user);
