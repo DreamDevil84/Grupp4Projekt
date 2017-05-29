@@ -70,7 +70,7 @@
 								<div class="modal-content">
 									<div class="modal-header">
 										<button type="button" class="close" data-dismiss="modal">&times;</button>
-										<h4 class="modal-title">Modal Header</h4>
+										<h4 class="modal-title">Lärportal</h4>
 									</div>
 									<div class="modal-body">
 										<ul class="nav nav-tabs">
@@ -78,7 +78,19 @@
 											<li ng-class="{active: showCourseTab === 2}"><a ng-click="setCourseTab(2)">Schema</a></li>
 											<li ng-class="{active: showCourseTab === 3}"><a ng-click="setCourseTab(3)">Betyg</a></li>
 										</ul>
-										<div ng-show="showCourseTab === 1">{{course.details}}</div>
+										<div ng-show="showCourseTab === 1">
+											<h3>{{course.details.title}}</h3>
+											<p>{{course.details.content}}</p>
+											<ul ng-repeat="x in course.details.books">
+												<li><b>{{x.title + " | "}}</b> {{x.desc}}</li>
+											</ul>
+											<br>
+											<ul class="list-unstyled list-group">
+												<li class="list-group-item" ng-repeat="x in course.details.goals">
+													{{x}}
+												</li>
+											</ul>
+										</div>
 										<div ng-show="showCourseTab === 2">{{course.status}}</div>
 										<div ng-show="showCourseTab === 3">
 											<ul class="list-unstyled list-group">
