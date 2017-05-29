@@ -184,7 +184,9 @@
 
             // TODO - fixa så att den kollar om det är dags för feedback
             var day = date.getDay();
-            if (day === 0 || day === 5 || day === 6) {
+            //if (day === 0 || day === 5 || day === 6) {
+
+            if (day >= 0) { //för utveckling
                 weeklyFeedbackAnswerDoneRef.on('value', function (data) {
                     if (data.val()) {
                         $scope.timeForWeeklyFeedback = 0;
