@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Grupp 4 Projekt</title>
+  <title>lärPortalGrupp4</title>
   <!--bootstrap css-->
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
@@ -54,7 +54,7 @@
     <header class="container-fluid" id="topbar">
       <div class="col-xs-6">
         <div>
-          <span id="logo">Edu</span>
+          <strong id="logo" ng-click="auth.signOut()">EDU</strong>
         </div>
       </div>
       <div ng-hide="firebaseUser" class="col-xs-2">
@@ -66,7 +66,7 @@
         <input type="password" class="logininput" ng-model="password">
       </div>
       <button ng-hide="firebaseUser" class="btn btn-default col-xs-2 pull-right loginbutton" ng-click="auth.$signInWithEmailAndPassword(email, password)">Login</button>
-      <div ng-if="firebaseUser" class="col-xs-6 pull-right">
+      <div ng-if="firebaseUser" class="col-xs-6">
         <strong class="col-xs-4" id="usernamedisplay" ng-click="auth.$signOut()">{{ firebaseUser.email }}</strong>
       </div>
       <p ng-if="error"> Error: {{ error }}</p>

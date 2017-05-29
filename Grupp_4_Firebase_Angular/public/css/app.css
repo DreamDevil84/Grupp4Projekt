@@ -10,8 +10,8 @@ textarea{
   resize: none;
 }
 #topbar{
-    background: darkslategray;
-    color: lightblue;
+    background: #000;
+    color: #999;
     height: 4em;
     left: 0px;
     position: fixed;

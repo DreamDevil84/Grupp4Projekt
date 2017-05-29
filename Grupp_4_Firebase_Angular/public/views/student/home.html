@@ -1,5 +1,5 @@
 <div class="ng-cloak">
-	<h1>Hej {{user.firstName}}</h1>
+	<h3>Välkommen {{user.firstName}}</h3>
 	<ul class="nav nav-pills">
 		<li ng-class="{active : mainTab === 'daily'}"><a ng-click="setMainTab('daily')">Dagens aktivitet</a></li>
 		<li ng-class="{active : mainTab === 'onGoing'}"><a ng-click="setMainTab('onGoing')">Aktuella kurser</a></li>
@@ -81,12 +81,13 @@
 										<div ng-show="showCourseTab === 1">
 											<h3>{{course.details.title}}</h3>
 											<p>{{course.details.content}}</p>
+											<br><h4>Kurslitteratur:</h4>
 											<ul ng-repeat="x in course.details.books">
 												<li><b>{{x.title + " | "}}</b> {{x.desc}}</li>
 											</ul>
-											<br>
-											<ul class="list-unstyled list-group">
-												<li class="list-group-item" ng-repeat="x in course.details.goals">
+											
+											<br><ul class="list-unstyled list-group">
+												<li class="list-group-item" ng-repeat="x in course.details.goals" ng-class="assertive">
 													{{x}}
 												</li>
 											</ul>
