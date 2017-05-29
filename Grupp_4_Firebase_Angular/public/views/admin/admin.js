@@ -122,7 +122,7 @@
                         };
 
                         //skapa veckofeedback
-                        var weekFeedbackRef = firebase.database().ref().child('feedback/weekly/' + date.getWeek() + '/form');
+                        var weekFeedbackRef = firebase.database().ref().child('feedback/weekly/'+ date.getFullYear() + "_" + + date.getWeek() + '/form');
                         $scope.weekFeedbackType = 'Svarsalternativ';
                         $scope.setWeeklyFeedbackAnswerType = function (type) {
                                 $scope.weekFeedbackType = type;

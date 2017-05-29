@@ -178,9 +178,9 @@
 
             //veckans feedback
 
-            var weeklyFeedbackRef = firebase.database().ref().child('feedback/weekly/' + date.getWeek() + '/form');
-            var weeklyFeedbackAnswerRef = firebase.database().ref().child('feedback/weekly/' + date.getWeek() + '/answers');
-            var weeklyFeedbackAnswerDoneRef = firebase.database().ref().child('feedback/weekly/' + date.getWeek() + '/haveAnswered/' + user);
+            var weeklyFeedbackRef = firebase.database().ref().child('feedback/weekly/' + date.getFullYear() + "_" + date.getWeek() + '/form');
+            var weeklyFeedbackAnswerRef = firebase.database().ref().child('feedback/weekly/' + date.getFullYear() + "_" + + date.getWeek() + '/answers');
+            var weeklyFeedbackAnswerDoneRef = firebase.database().ref().child('feedback/weekly/' + date.getFullYear() + "_" + + date.getWeek() + '/haveAnswered/' + user);
 
             // TODO - fixa så att den kollar om det är dags för feedback
             var day = date.getDay();
