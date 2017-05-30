@@ -1,23 +1,53 @@
 <div class="ng-cloak">
-    <div>
-        <h1>Hej {{user.firstName}}</h1>
-    </div>
-    <ul class="nav nav-tabs">
-        <li ng-class="{active : teacherTab === 'daily'}"><a ng-click="setMainTab('daily')">Dina Klasser</a></li>
-        <li ng-class="{active : teacherTab === 'attendanceDaily'}"><a ng-click="setMainTab('attendanceDaily')">Dagens närvaro</a></li>
-        <li ng-class="{active : teacherTab === 'archive'}"><a ng-click="setMainTab('archive')">Arkiv</a></li>
-    </ul>
-    <div ng-show="teacherTab === 'daily'">
-        <div class="col-xs-12 col-md-6 col-lg-4">
-            <ul class="list-unstyled list-group">
-                <li class="list-group-item" ng-repeat="student in students">
-                    {{student.firstName}} {{student.lastName}}
-                    <span ng-show="student.attendance.status === 3" class="badge badge-success">Här</span>
-                    <span ng-show="student.attendance.status === 2" class="badge badge-warning">Sen</span>
-                    <span ng-show="student.attendance.status === 1" class="badge badge-error">Ej Här</span>
-                    <span ng-hide="student.attendance.status" class="badge">Ej Svarat</span>
-                </li>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-xs-12 col-md-8">
+            <div>
+                <h1>Hej {{user.firstName}}</h1>
+            </div>
+            <ul class="nav nav-pills">
+                <li ng-class="{active : teacherTab === 'daily'}"><a ng-click="setMainTab('daily')">Dina Klasser</a></li>
+                <li ng-class="{active : teacherTab === 'attendanceDaily'}"><a ng-click="setMainTab('attendanceDaily')">Dagens närvaro</a></li>
+                <li ng-class="{active : teacherTab === 'archive'}"><a ng-click="setMainTab('archive')">Arkiv</a></li>
             </ul>
+        </div>
+    </div>
+    <br>
+    <div ng-show="teacherTab === 'daily'">
+		<div class="row">
+			<div class="col-md-1"></div>
+			<div class="col-xs-12 col-md-5">
+				<ul class="list-unstyled list-group">
+					<li class="list-group-item" ng-repeat="news in teacherNews" ng-hide="$index > newsIndex">
+						<p>{{news.date}}<span ng-if="news.type != 'general'" class="badge pull-right">{{news.type}}</span><span ng-if="news.type === 'general'"
+							 class="badge pull-right">Alla</span></p>
+						<h4>{{news.title}}</h4>
+						<p>{{news.content}}<span class="pull-right">{{news.time}}</span></p>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-1"></div>
+			<div class="col-xs-4">
+				<button class="btn btn-clear" ng-click="moreNews()">Se mer</button>
+			</div>
+		</div>
+	</div>
+    <div ng-show="teacherTab === 'attendanceDaily'">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-xs-12 col-md-6 col-lg-4">
+                <ul class="list-unstyled list-group">
+                    <li class="list-group-item" ng-repeat="student in students">
+                        {{student.firstName}} {{student.lastName}}
+                        <span ng-show="student.attendance.status === 3" class="badge badge-success">Här</span>
+                        <span ng-show="student.attendance.status === 2" class="badge badge-warning">Sen</span>
+                        <span ng-show="student.attendance.status === 1" class="badge badge-error">Ej Här</span>
+                        <span ng-hide="student.attendance.status" class="badge">Ej Svarat</span>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
