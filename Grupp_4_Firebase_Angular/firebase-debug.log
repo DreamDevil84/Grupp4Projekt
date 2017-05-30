@@ -1,105 +1,35 @@
 [debug] ----------------------------------------------------------------------
-[debug] Command:      C:\Program Files\nodejs\node.exe C:\Users\danie\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase serve
+[debug] Command:      /usr/local/Cellar/node/7.7.3/bin/node /usr/local/bin/firebase serve
 [debug] CLI Version:  3.9.0
-[debug] Platform:     win32
-[debug] Node Version: v6.10.0
-[debug] Time:         Thu May 25 2017 13:17:18 GMT+0200 (W. Europe Daylight Time)
+[debug] Platform:     darwin
+[debug] Node Version: v7.7.3
+[debug] Time:         Mon May 29 2017 15:19:07 GMT+0200 (CEST)
 [debug] ----------------------------------------------------------------------
 [debug] 
 [debug] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
 [debug] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
-[debug] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token { refresh_token: '1/u_BrbYk8YtzfxjkukjiHP9-U_t17W72N7vvr1eJF3Ak',
+[debug] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token { refresh_token: '1/6Vfi_N3y3i2aEcJmE52z9ZmXNxmaLzQGpPnYTTORRDI',
   client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
   client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
   grant_type: 'refresh_token',
   scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
- Thu May 25 2017 13:17:19 GMT+0200 (W. Europe Daylight Time)
+ Mon May 29 2017 15:19:07 GMT+0200 (CEST)
 [debug] <<< HTTP RESPONSE 200
 [debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/schoolweb-35754  
- Thu May 25 2017 13:17:20 GMT+0200 (W. Europe Daylight Time)
+ Mon May 29 2017 15:19:07 GMT+0200 (CEST)
 [debug] <<< HTTP RESPONSE 200
 [debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/schoolweb-35754/tokens  
- Thu May 25 2017 13:17:21 GMT+0200 (W. Europe Daylight Time)
+ Mon May 29 2017 15:19:08 GMT+0200 (CEST)
 [debug] <<< HTTP RESPONSE 200
 [info] 
-[info] === Serving from 'C:\G4\Grupp4Projekt\Grupp_4_Firebase_Angular'...
-[info] 
-[debug] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/schoolweb-35754  
- Thu May 25 2017 13:17:26 GMT+0200 (W. Europe Daylight Time)
-[debug] <<< HTTP RESPONSE 200
-[debug] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/387758932838/clients/_:getWebAppConfig  
- Thu May 25 2017 13:17:26 GMT+0200 (W. Europe Daylight Time)
-[debug] <<< HTTP RESPONSE 200
-[info] i  hosting: Serving hosting files from: public
-[info] +  hosting: Local server: http://localhost:5000
-
-[debug] ----------------------------------------------------------------------
-[debug] Command:      C:\Program Files\nodejs\node.exe C:\Users\danie\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase serve
-[debug] CLI Version:  3.9.0
-[debug] Platform:     win32
-[debug] Node Version: v6.10.0
-[debug] Time:         Sun May 28 2017 12:21:06 GMT+0200 (W. Europe Daylight Time)
-[debug] ----------------------------------------------------------------------
-[debug] 
-[debug] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
-[debug] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token { refresh_token: '1/u_BrbYk8YtzfxjkukjiHP9-U_t17W72N7vvr1eJF3Ak',
-  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
-  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
-  grant_type: 'refresh_token',
-  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
- Sun May 28 2017 12:21:07 GMT+0200 (W. Europe Daylight Time)
-[debug] <<< HTTP RESPONSE 200
-[debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/schoolweb-35754  
- Sun May 28 2017 12:21:07 GMT+0200 (W. Europe Daylight Time)
-[debug] <<< HTTP RESPONSE 200
-[debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/schoolweb-35754/tokens  
- Sun May 28 2017 12:21:08 GMT+0200 (W. Europe Daylight Time)
-[debug] <<< HTTP RESPONSE 200
-[info] 
-[info] === Serving from 'C:\G4\Grupp4Projekt\Grupp_4_Firebase_Angular'...
+[info] === Serving from '/Users/sebastiannilsson/GitHub/Grupp4Projekt/Grupp_4_Firebase_Angular'...
 [info] 
 [debug] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/schoolweb-35754  
- Sun May 28 2017 12:21:09 GMT+0200 (W. Europe Daylight Time)
+ Mon May 29 2017 15:19:09 GMT+0200 (CEST)
 [debug] <<< HTTP RESPONSE 200
 [debug] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/387758932838/clients/_:getWebAppConfig  
- Sun May 28 2017 12:21:09 GMT+0200 (W. Europe Daylight Time)
+ Mon May 29 2017 15:19:10 GMT+0200 (CEST)
 [debug] <<< HTTP RESPONSE 200
 [info] i  hosting: Serving hosting files from: public
-[info] +  hosting: Local server: http://localhost:5000
-
-[debug] ----------------------------------------------------------------------
-[debug] Command:      C:\Program Files\nodejs\node.exe C:\Users\danie\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase serve
-[debug] CLI Version:  3.9.0
-[debug] Platform:     win32
-[debug] Node Version: v6.10.0
-[debug] Time:         Mon May 29 2017 09:13:34 GMT+0200 (W. Europe Daylight Time)
-[debug] ----------------------------------------------------------------------
-[debug] 
-[debug] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
-[debug] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
-[debug] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token { refresh_token: '1/u_BrbYk8YtzfxjkukjiHP9-U_t17W72N7vvr1eJF3Ak',
-  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
-  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
-  grant_type: 'refresh_token',
-  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
- Mon May 29 2017 09:13:34 GMT+0200 (W. Europe Daylight Time)
-[debug] <<< HTTP RESPONSE 200
-[debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/schoolweb-35754  
- Mon May 29 2017 09:13:35 GMT+0200 (W. Europe Daylight Time)
-[debug] <<< HTTP RESPONSE 200
-[debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/schoolweb-35754/tokens  
- Mon May 29 2017 09:13:36 GMT+0200 (W. Europe Daylight Time)
-[debug] <<< HTTP RESPONSE 200
-[info] 
-[info] === Serving from 'C:\G4\Grupp4Projekt\Grupp_4_Firebase_Angular'...
-[info] 
-[debug] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/schoolweb-35754  
- Mon May 29 2017 09:13:37 GMT+0200 (W. Europe Daylight Time)
-[debug] <<< HTTP RESPONSE 200
-[debug] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/387758932838/clients/_:getWebAppConfig  
- Mon May 29 2017 09:13:38 GMT+0200 (W. Europe Daylight Time)
-[debug] <<< HTTP RESPONSE 200
-[info] i  hosting: Serving hosting files from: public
-[info] +  hosting: Local server: http://localhost:5000
+[info] ✔  hosting: Local server: http://localhost:5000
 
