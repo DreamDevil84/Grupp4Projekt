@@ -12,10 +12,14 @@ background: linear-gradient(to right, #CFDEF3, #E0EAFC); /* W3C, IE 10+/ Edge, F
   min-height: 100%;
   min-width: 1024px;
 	
+  background-repeat:no-repeat;
+    background-size:cover;
   /* Set up proportionate scaling */
   width: 100%;
   height: auto;
 	
+
+
   /* Set up positioning */
   position: fixed;
   top: 0;
