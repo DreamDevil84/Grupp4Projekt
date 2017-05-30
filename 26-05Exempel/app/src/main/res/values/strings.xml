@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Edu Portal</string>
+    <string name="feedback">Feedback</string>
+    <string name="my_grades">My Grades</string>
+    <string name="stuenden_activity">Student Activity</string>
+    <string name="presence">Presence</string>
+    <string name="title_activity_student">Student</string>
+    <string name="about">About</string>
+    <string name="help">Help</string>
+    <string name="logout">Logout</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tab1frag">Tab1frag</string>
+    <string name="tab2frag">tab2frag</string>
+    <string name="tab3frag">tab3frag</string>
+    <string name="signoutBtn">Sign Out</string>
+    <string name="nameTextView" />
+    <string name="courses">Courses:</string>
+    <string name="betyg">Grades</string>
+    <string name="detaljer">Details</string>
+    <string name="schema">Schedule</string>
+    <string name="textview">TextView</string>
+    <string name="click_on_button_to_submitt_your_presence">Click on button to submitt your presence</string>
+    <string name="presenceBtn">Present</string>
+    <string name="please_give_us_a_feedback">Please give us a feedback</string>
+</resources>
