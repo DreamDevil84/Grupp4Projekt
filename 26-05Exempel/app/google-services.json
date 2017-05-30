@@ -1,0 +1,130 @@
+{
+  "project_info": {
+    "project_number": "387758932838",
+    "firebase_url": "https://schoolweb-35754.firebaseio.com",
+    "project_id": "schoolweb-35754",
+    "storage_bucket": "schoolweb-35754.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:387758932838:android:1c436e80ddef362e",
+        "android_client_info": {
+          "package_name": "bettercallnilsson.com.androidapp1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "387758932838-jreojp9jfup0qbshf2clolceqpntv824.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "bettercallnilsson.com.androidapp1",
+            "certificate_hash": "73ffaf253cc6c534abe3469fdd4a9f7726414a0d"
+          }
+        },
+        {
+          "client_id": "387758932838-ho1t6at0ha3cgb3hn3jbsmh5ab7e4vjs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfja84dNuzfk0lG4btRqmwqtonFVaUw3I"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "387758932838-ho1t6at0ha3cgb3hn3jbsmh5ab7e4vjs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:387758932838:android:fb0a265bc3b5f008",
+        "android_client_info": {
+          "package_name": "edutrailbaseportalversion.com.eduportal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "387758932838-0d4nlthqqi7coqo6vsfatc9ucr6dattc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edutrailbaseportalversion.com.eduportal",
+            "certificate_hash": "35e1b184d0c5c571478c2433459ab92f2284b865"
+          }
+        },
+        {
+          "client_id": "387758932838-ho1t6at0ha3cgb3hn3jbsmh5ab7e4vjs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfja84dNuzfk0lG4btRqmwqtonFVaUw3I"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "387758932838-ho1t6at0ha3cgb3hn3jbsmh5ab7e4vjs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:387758932838:android:7674c5ae8a08df81",
+        "android_client_info": {
+          "package_name": "edutrailproject.com.edunewproject1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "387758932838-ho1t6at0ha3cgb3hn3jbsmh5ab7e4vjs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfja84dNuzfk0lG4btRqmwqtonFVaUw3I"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
