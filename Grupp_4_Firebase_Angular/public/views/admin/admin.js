@@ -89,6 +89,12 @@
                                 });
                         };
 
+                        //admin kurs tabbar
+                        $scope.adminClassTab = 'create';
+                        $scope.setAdminClassTab = function (tab) {
+                                $scope.adminClassTab = tab;
+                        };
+
 
                         //admin kurser
                         $scope.createCourse = function (code, name, description) {
@@ -99,6 +105,120 @@
                                         description
                                 })
                         };
+
+                        //admin klasser
+                        $scope.createClass = function (name, school) {
+                                var nameRef = firebase.database().ref().child('schools/schoolName');
+                                nameRef.update({
+                                        [school]: true
+                                })
+                                var ref = firebase.database().ref().child('schools/' + school + '/classes/' + name);
+                                ref.set({
+                                        teacher: 'placeholder'
+                                })
+                        };
+                        $scope.showSchools = [];
+                        var schoolsRef = firebase.database().ref().child('schools/schoolName');
+                        schoolsRef.once('value').then(function (data) {
+                                data.forEach(function (dataSnap) {
+                                        $scope.showSchools.push({
+                                                name: dataSnap.key
+                                        });
+                                })
+                        });
+                        $scope.chosenSchool = 'Välj skola';
+                        $scope.showClasses = [];
+                        $scope.studentListForClasses = [];
+                        $scope.showClassList = function (school) {
+                                $scope.chosenClass = 'Välj klass';
+                                $scope.chosenSchool = school;
+                                var classes = [];
+                                var classRef = firebase.database().ref().child('schools/' + school + '/classes');
+                                // $scope.showClasses = $firebaseArray(classRef);
+                                classRef.once('value').then(function (data) {
+                                        $scope.showClasses = [];
+                                        var classes = $firebaseArray(classRef);
+                                        data.forEach(function (dataSnap) {
+                                                console.log(dataSnap.key);
+                                                $scope.showClasses.push({
+                                                        name: dataSnap.key,
+                                                        school: school
+                                                });
+                                        })
+                                });
+                                var studentsRef = firebase.database().ref().child('schools/' + school + '/students');
+                                var students = [];
+                                $scope.studentListForClasses = [];
+                                studentsRef.once('value').then(function (data) {
+                                        data.forEach(function (snapshot) {
+                                                students.push(snapshot.key);
+                                        })
+                                        // console.log(students);
+                                        students.forEach(function (student) {
+                                                var getStudentsRef = firebase.database().ref().child('users/' + student + '/name');
+                                                var studentnames = $firebaseArray(getStudentsRef);
+                                                getStudentsRef.once('value').then(function (data) {
+                                                        // console.log(student);
+                                                        $scope.studentListForClasses.push({
+                                                                name: data.val(),
+                                                                uid: student
+                                                        });
+                                                })
+                                        })
+                                });
+                                var teacherRef = firebase.database().ref().child('schools/' + school + '/teachers');
+                                var teacher = [];
+                                $scope.teacherListForClasses = [];
+                                teacherRef.once('value').then(function (data) {
+                                        data.forEach(function (snapshot) {
+                                                teacher.push(snapshot.key);
+                                        })
+                                        // console.log(teacher);
+                                        teacher.forEach(function (teacher) {
+                                                var getTeacherRef = firebase.database().ref().child('users/' + teacher + '/name');
+                                                var teachernames = $firebaseArray(getTeacherRef);
+                                                getTeacherRef.once('value').then(function (data) {
+                                                        // console.log(student);
+                                                        $scope.teacherListForClasses.push({
+                                                                name: data.val(),
+                                                                uid: teacher
+                                                        });
+                                                })
+                                        })
+                                })
+                        };
+                        $scope.chosenClass = 'Välj klass';
+                        $scope.showMembersListForClass = function (school, theClass) {
+                                $scope.chosenClass = theClass;
+                                var membersRef = firebase.database().ref().child('schools/' + school + '/classes/' + theClass);
+                                $scope.classMemberList = $firebaseArray(membersRef);
+                        };
+                        $scope.setActiveMemberInClassList = function (id, name) {
+                                $scope.activeMemberInClassList = {
+                                        id: id,
+                                        name: name
+                                };
+                        };
+                        $scope.setActiveMemberForClassList = function (id, name) {
+                                $scope.activeMemberForClassList = {
+                                        id: id,
+                                        name: name
+                                };
+                        }
+                        $scope.transferToClass = function (id, name) {
+                                var ref = firebase.database().ref().child('schools/' + $scope.chosenSchool + '/classes/' + $scope.chosenClass);
+                                ref.update({
+                                        [id]: name
+                                })
+                        };
+                        $scope.transferFromClass = function (id) {
+                                var ref = firebase.database().ref().child('schools/' + $scope.chosenSchool + '/classes/' + $scope.chosenClass + '/' + id);
+                                ref.remove()
+                                        .then(
+                                        console.log('Remove successfull')
+                                        );
+                                $scope.activeMemberInClassList = "";
+                        }
 
                         //admin användare
                         $scope.createUser = function (fname, lname, email, password, type) {
@@ -122,7 +242,7 @@
                         };
 
                         //skapa veckofeedback
-                        var weekFeedbackRef = firebase.database().ref().child('feedback/weekly/'+ date.getFullYear() + "_" + + date.getWeek() + '/form');
+                        var weekFeedbackRef = firebase.database().ref().child('feedback/weekly/' + date.getFullYear() + "_" + + date.getWeek() + '/form');
                         $scope.weekFeedbackType = 'Svarsalternativ';
                         $scope.setWeeklyFeedbackAnswerType = function (type) {
                                 $scope.weekFeedbackType = type;

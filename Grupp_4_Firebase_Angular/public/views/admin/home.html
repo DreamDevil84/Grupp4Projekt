@@ -14,6 +14,7 @@
             </ul>
         </div>
     </div>
+    <br>
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-xs-12 col-md-8">
@@ -22,6 +23,7 @@
                     <li ng-class="{active : adminNewsTab === 'read'}"><a ng-click="setAdminNewsTab('read')">Läs Nyheter</a></li>
                     <li ng-class="{active : adminNewsTab === 'create'}"><a ng-click="setAdminNewsTab('create')">Skapa Nyheter</a></li>
                 </ul>
+                <br>
                 <div ng-show="adminNewsTab === 'read'">
                     <ul class="col-xs-12 col-md-8 list-unstyled list-group">
                         <li class="list-group-item" ng-repeat="news in allNews" ng-show="$index <= newsIndex">
@@ -41,7 +43,7 @@
                         <div>Nyheter</div>
                         <input type="text" ng-model="news">
                         <div class="dropdown">
-                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
                                 aria-expanded="true">
                             {{newsTypeName}}
                             <span class="caret"></span>
@@ -83,8 +85,98 @@
     </div>
     <div class="row">
         <div class="col-md-1"></div>
-        <div ng-show="adminTab === 'classes'">
-
+        <div class="col-xs-12 col-md-8">
+            <div ng-show="adminTab === 'classes'">
+                <div class="row">
+                    <ul class="nav nav-tabs">
+                        <li ng-class="{active : adminClassTab === 'create'}"><a ng-click="setAdminClassTab('create')">Skapa Klasser</a></li>
+                        <li ng-class="{active : adminClassTab === 'handle'}"><a ng-click="setAdminClassTab('handle')">Hantera Klasser</a></li>
+                    </ul>
+                </div>
+                <br>
+                <div ng-show="adminClassTab === 'create'">
+                    <form>
+                        <h2>Skapa ny klass</h2>
+                        <div>Klassnamn :</div>
+                        <input type="text" ng-model="className">
+                        <br>
+                        <div>Skola: </div>
+                        <input type="text" ng-model="schoolName">
+                        <br>
+                        <button class="btn btn-clear" ng-click="createClass(className, schoolName)">Skapa!</button>
+                    </form>
+                </div>
+                <div ng-show="adminClassTab === 'handle'">
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-xs-12 col-md-11 ">
+                            <h4>Välj skola och klass</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-xs-3">
+                            <div class="input-group">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="pickSchoolShow" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="true">{{chosenSchool}}<span class="caret"></span></button>
+                                    <ul class="dropdown-menu" aria-labelledby="pickSchoolShow">
+                                        <li ng-repeat="school in showSchools">
+                                            <a ng-click="showClassList(school.name)">{{school.name}}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="input-group-btn">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="pickClassShow" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="true">{{chosenClass}}<span class="caret"></span></button>
+                                    <ul class="dropdown-menu" aria-labelledby="pickClassShow">
+                                        <li ng-repeat="class in showClasses">
+                                            <a ng-click="showMembersListForClass(class.school, class.name)">{{class.name}}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-1"></div>
+                        <div class="col-xs-3 text-center"><h4>Studenter</h4></div>
+                        <div class="col-xs-3 text-center"><h4>Lärare</h4></div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-xs-3">
+                            <ul class="list-unstyled list-group">
+                                <li ng-hide="member.$id === 'placeholder'" class="list-group-item edu-clickable" ng-class="{active : activeMemberInClassList.id === member.$id}"
+                                    id="{{member.$id}}" ng-click="setActiveMemberInClassList(member.$id, member)" ng-repeat="member in classMemberList">
+                                    {{member.$value}}
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-xs-1">
+                            <div class="btns-for-class-transfer">
+                                <button class="btn btn-clear" ng-click="transferToClass(activeMemberForClassList.id, activeMemberForClassList.name)"><<</button>
+                                <button class="btn btn-clear" ng-click="transferFromClass(activeMemberInClassList.id)">>></button>
+                            </div>
+                        </div>
+                        <div class="col-xs-3">
+                            <ul ng-hide="chosenClass == 'Välj klass'" class="list-unstyled list-group">
+                                <li class="list-group-item edu-clickable" ng-class="{active : activeMemberForClassList.id === student.uid}" ng-repeat="student in studentListForClasses"
+                                    id="{{student.uid}}" ng-click="setActiveMemberForClassList(student.uid, student.name)">
+                                    <div>{{student.name}}</div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-xs-3">
+                            <ul ng-hide="chosenClass == 'Välj klass'" class="list-unstyled list-group">
+                                <li class="list-group-item edu-clickable" ng-class="{active : activeMemberForClassList.id === teacher.uid}" ng-repeat="teacher in teacherListForClasses"
+                                    id="{{teacher.uid}}" ng-click="setActiveMemberForClassList(teacher.uid, teacher.name)">
+                                    <div>{{teacher.name}}</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">
@@ -109,40 +201,41 @@
             </form>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-xs-12 col-md-8">
-            <div ng-show="adminTab === 'feedback'">
-                <div class="col-xs-12">
-                    <h4>Skapa veckans feedback</h4>
-                </div>
-                <div class="row">
-                    <div class="col-xs-6">
+</div>
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-xs-12 col-md-8">
+        <div ng-show="adminTab === 'feedback'">
+            <div class="col-xs-12">
+                <h4>Skapa veckans feedback</h4>
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
                     <label>Fråga:</label>
-                        <div class="form-group">
-                            <textarea class="form-control" rows="5" ng-model="weeklyFeedbackQuestion"></textarea>
-                            <br>
-                            <div class="dropdown">
-                                <button class="btn btn-clear" ng-click="addWeeklyFeedbackQuestion(weeklyFeedbackQuestion, weekFeedbackType)">Lägg till</button>
-                                <button class="btn btn-default dropdown-toggle" type="button" id="weekFeedbackType" data-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="true">{{weekFeedbackType}}<span class="caret"></span></button>
-                                <ul class="dropdown-menu" aria-labelledby="weekFeedbackType">
-                                    <li><a ng-click="setWeeklyFeedbackAnswerType('Text')">Text</a></li>
-                                    <li><a ng-click="setWeeklyFeedbackAnswerType('5-skala')">5-skala</a></li>
-                                </ul>
-                            </div>
+                    <div class="form-group">
+                        <textarea class="form-control" rows="5" ng-model="weeklyFeedbackQuestion"></textarea>
+                        <br>
+                        <div class="dropdown">
+                            <button class="btn btn-clear" ng-click="addWeeklyFeedbackQuestion(weeklyFeedbackQuestion, weekFeedbackType)">Lägg till</button>
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="weekFeedbackType" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="true">{{weekFeedbackType}}<span class="caret"></span></button>
+                            <ul class="dropdown-menu" aria-labelledby="weekFeedbackType">
+                                <li><a ng-click="setWeeklyFeedbackAnswerType('Text')">Text</a></li>
+                                <li><a ng-click="setWeeklyFeedbackAnswerType('5-skala')">5-skala</a></li>
+                            </ul>
                         </div>
                     </div>
-                    <div class="col-xs-6">
-                        <ul class="list-unstyled list-group">
-                            <li class="list-group-item" ng-repeat="question in weeklyFeedbackForm">
-                                <p>{{question.question}}</p>
-                                <h4>{{question.type}}</h4>
-                            </li>
-                        </ul>
-                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <ul class="list-unstyled list-group">
+                        <li class="list-group-item" ng-repeat="question in weeklyFeedbackForm">
+                            <p>{{question.question}}</p>
+                            <h4>{{question.type}}</h4>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>

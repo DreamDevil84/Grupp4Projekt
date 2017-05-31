@@ -42,6 +42,19 @@ textarea{
     position: absolute;
     margin-top: 1.2em;
 }
+.btns-for-class-transfer{
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  min-height: 100%;
+}
+.div-inline{
+  display: inline-block;
+}
+.edu-clickable{
+  cursor: pointer;
+  cursor: hand
+}
 .loginrow{
     height: 1em;
 }
