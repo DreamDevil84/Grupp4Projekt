@@ -1,6 +1,45 @@
 body{
   margin-left: 1em;
+  background: #E0EAFC;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #CFDEF3, #E0EAFC);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #CFDEF3, #E0EAFC); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+ 
 }
+
+.bgimage{
+  background-image: url('../img/school.jpg');
+   /* Set rules to fill background */
+  min-height: 100%;
+  min-width: 1024px;
+	
+  background-repeat:no-repeat;
+    background-size:cover;
+  /* Set up proportionate scaling */
+  width: 100%;
+  height: auto;
+	
+
+
+  /* Set up positioning */
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+@media screen and (max-width: 1024px) { /* Specific to this particular image */
+  .bgimage {
+    left: 50%;
+    margin-left: -512px;   /* 50% */
+  }
+}
+
+
+.container {
+
+padding-top: 50px;
+
+}
+
 li>.list-group-item{
   max-width: 20em;
   word-wrap: break-word;
@@ -12,13 +51,20 @@ textarea{
 #topbar{
     background: #000;
     color: #999;
-    height: 4em;
+    height: 5em;
     left: 0px;
     position: fixed;
     width: 100%;
     top: 0px;
     z-index: 1000;
+    text-indent: 100px;
+    
 }
+
+
+
+
+
 #filler{
   height: 4em;
 }
@@ -28,9 +74,34 @@ textarea{
   background-repeat: no-repeat;
 }
 #logo{
+    padding: 10px; 
     font-weight: bold;
-    font-size: 3em;
+    font-size: 4em;
+    color: #1E90FF;
+    text-shadow: 1px 1px #CFDEF3, 
+                2px 2px #CFDEF3, 
+                3px 3px #CFDEF3;
+   
 }
+
+#logo:hover {
+   position: relative; 
+   cursor: pointer;
+  cursor: hand;
+   top: -3px; 
+   left: -3px; 
+   text-shadow: 1px 1px #CFDEF3, 
+                2px 2px #CFDEF3, 
+                3px 3px #CFDEF3, 
+                4px 4px #CFDEF3, 
+                5px 5px #CFDEF3, 
+                6px 6px #CFDEF3;
+}
+
+#usernamedisplay {
+  color:#CFDEF3;
+}
+
 #loginbox{
     height: 4em;
     position: relative;
