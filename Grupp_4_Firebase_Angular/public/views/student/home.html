@@ -33,13 +33,7 @@
 						<p>{{news.content}}<span class="pull-right">{{news.time}}</span></p>
 					</li>
 				</ul>
-				<div class="row">
-					<div class="col-md-1"></div>
-						<div class="col-xs-4">
-							<button id="moreBtn" class="btn btn-success" ng-click="moreNews()">Se mer</button>
-						</div>
-					</div>
-				</div>
+				<button id="moreBtn" class="btn btn-clear" ng-click="moreNews()">Se mer</button>
 			</div>
 			<div class="col-xs-12 col-sm-6 col-md-4">
 				<div class="attendance-box">
@@ -58,6 +52,7 @@
 				<span ng-show="gaveFeedbackToday">Du har gett feedback idag.</span>
 			</div>
 		</div>
+	</div>
 	<div ng-show="mainTab != 'daily'">
 		<div class="row">
 			<div class="col-md-1"></div>
@@ -156,4 +151,5 @@
 			</div>
 		</div>
 	</div>
+</div>
 </div>

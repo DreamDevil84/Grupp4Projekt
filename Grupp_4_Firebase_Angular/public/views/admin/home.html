@@ -73,6 +73,7 @@
                         <li ng-class="{active : adminCourseTab === 'courseDetails'}"><a ng-click="setAdminCoursesTab('courseDetails')">Kursdetaljer</a></li>
                     </ul>
                 </div>
+                <br>
                 <div ng-show="adminCourseTab === 'create'">
                     <form>
                         <h2>Skapa ny kurs</h2>
@@ -89,14 +90,70 @@
                     </form>
                 </div>
                 <div ng-show="adminCourseTab === 'courseDetails'">
-                    <p>Välj Kurs:</p>
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="courseDetailsPick" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="true">{{courseDetailChoice}}<span class="caret"></span></button>
-                        <ul class="dropdown-menu" aria-labelledby="courseDetailsPick">
-                            <li ng-repeat="course in allCourses"><a ng-click="setChosenCourseForDetails(course.$id)">{{course.$id}}</a></li>
-                        </ul>
+                    <div class="row">
+                        <p>Välj Kurs:</p>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="courseDetailsPick" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="true">{{courseDetailChoice}}<span class="caret"></span></button>
+                            <ul class="dropdown-menu" aria-labelledby="courseDetailsPick">
+                                <li ng-repeat="course in allCourses"><a ng-click="setChosenCourseForDetails(course.$id)">{{course.$id}}</a></li>
+                            </ul>
+                        </div>
                     </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <div ng-hide="courseDetailChoice === 'Välj kurs'">
+                                <form>
+                                    <div>Titel: </div>
+                                    <input type="text" ng-model="courseDetailTitle">
+                                    <br>
+                                    <div>Detaljer: </div>
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <textarea class="form-control" rows="6" type="text" ng-model="courseDetailText"></textarea>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div>Lägg till bok: </div>
+                                    <br>
+                                    <p>Titel: </p><input type="text" ng-model="courseBookTitle"><br>
+                                    <p>Beskrivning: </p><input type="text" ng-model="courseBookDescription">
+                                    <button class="btn btn-clear" ng-click="addCourseBook(courseBookTitle, courseBookDescription)">Lägg till</button>
+                                    <br>
+                                    <p>Betygsmål</p>
+                                    <br>
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <span>G </span><textarea class="form-control" type="text" ng-model="gradeGReq"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <span>VG</span><textarea class="form-control" type="text" ng-model="gradeVGReq"></textarea>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <button class="btn btn-clear" ng-click="uppdateCourse(courseDetailTitle, courseDetailText, gradeGReq, gradeVGReq)">Uppdatera!</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <ul ng-hide="courseDetailChoice === 'Välj kurs'" class="list-unstyled list-group">
+                                <li class="list-group-item">{{courseDetails.title}}</li>
+                                <li class="list-group-item">{{courseDetails.content}}</li>
+                                <li class="list-group-item" ng-repeat="book in courseBooks">
+                                    <strong>{{book.$id}}</strong><button class="btn btn-clear pull-right" ng-click="removeCourseBook(book.$id)">X</button>
+                                    <br> {{book.$value}}
+                                    {{book.key}} {{book.index}} {{book.$key}} {{book.$index}}
+                                </li>
+                                <li class="list-group-item">G: {{courseDetails.goals.G}}</li>
+                                <li class="list-group-item">VG: {{courseDetails.goals.VG}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
                 </div>
             </div>
         </div>
@@ -271,3 +328,4 @@
         </div>
     </div>
 </div>
+<br><br>

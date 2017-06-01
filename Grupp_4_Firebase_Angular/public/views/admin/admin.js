@@ -120,7 +120,37 @@
                         $scope.courseDetailChoice = 'Välj kurs';
                         $scope.setChosenCourseForDetails = function (name) {
                                 $scope.courseDetailChoice = name;
-                        }
+                                var courseDetailRef = firebase.database().ref().child('courses/' + name + '/details');
+                                $scope.courseDetails = $firebaseObject(courseDetailRef);
+                                var courseBooksRef = firebase.database().ref().child('courses/' + name + '/books');
+                                $scope.courseBooks = $firebaseArray(courseBooksRef);
+                        };
+
+                        $scope.addCourseBook = function(title, content){
+                                var makeBookRef = firebase.database().ref().child('courses/' + $scope.courseDetailChoice + '/books');
+                                makeBookRef.update({
+                                        [title]: content
+                                });
+                        };
+
+                        $scope.removeCourseBook = function (id) {
+                                var bookRef = firebase.database().ref().child('courses/' + $scope.courseDetailChoice + '/books/' + id);
+                                console.log(id);
+                                bookRef.remove();
+                        };
+
+                        $scope.uppdateCourse = function (title, content, gReq, vgReq) {
+                                $scope.courseDetailChoice7
+                                var courseUpdateRef = firebase.database().ref().child('courses/' + $scope.courseDetailChoice + '/details');
+                                courseUpdateRef.update({
+                                        title: title,
+                                        content: content,
+                                        goals: {
+                                                G: gReq,
+                                                VG: vgReq
+                                        }
+                                })
+                        };
 
                         //admin klasser
                         $scope.createClass = function (name, school) {
@@ -234,7 +264,7 @@
                                 ref.update({
                                         [id]: name
                                 })
-                                var sRef = firebase.database().ref().child('users/' + id + '/groups');
+                                var sRef = firebase.database().ref().child('users/' + id + '/groups/class');
                                 sRef.update({
                                         [$scope.chosenClass]: true
                                 })
@@ -245,7 +275,7 @@
                                         .then(
                                         console.log('Remove successfull')
                                         );
-                                var sRef = firebase.database().ref().child('users/' + id + '/groups/' + $scope.chosenClass);
+                                var sRef = firebase.database().ref().child('users/' + id + '/groups/class' + $scope.chosenClass);
                                 sRef.remove();
                                 $scope.activeMemberInClassList = "";
                         }
@@ -267,7 +297,9 @@
                                                 name: fname + ' ' + lname,
                                                 type: type,
                                                 groups: {
-                                                        school: true
+                                                        school: {
+                                                                [school]: true
+                                                        }
                                                 }
                                         });
                                         var sRef = firebase.database().ref().child('schools/' + school + '/' + type + 's');
