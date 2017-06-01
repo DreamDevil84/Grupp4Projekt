@@ -20,7 +20,9 @@
             });
             $scope.email = 'student@edu.com';
             $scope.password = '123456';
-
+            $scope.myLogin = function($scope){
+                auth.$signInWithEmailAndPassword(email, password);
+        };
 
         })
 })();
