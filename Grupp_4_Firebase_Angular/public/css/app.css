@@ -16,8 +16,8 @@ body{
   right: 0px;
   margin-bottom: 0px;
   height: 2.5em;
-  background-color: darkslategray;
-  color: lightslategray;
+  background-color: #000;
+  color: #fff;
 }
 
 .bgimage{
@@ -84,28 +84,30 @@ textarea{
 }
 #logo{
     padding: 10px; 
+    font-family: calibri,arial,sans-serif;
     font-weight: bold;
     font-size: 4em;
-    color: #1E90FF;
-    text-shadow: 1px 1px #CFDEF3, 
-                2px 2px #CFDEF3, 
-                3px 3px #CFDEF3;
+    color: #fff;
+    text-shadow: 1px 1px #EE7202, 
+                2px 2px #EE7202, 
+                3px 3px #EE7202;
    
 }
 
-#logo:hover {
+/*#logo:hover {
    position: relative; 
    cursor: pointer;
   cursor: hand;
    top: -3px; 
    left: -3px; 
-   text-shadow: 1px 1px #CFDEF3, 
-                2px 2px #CFDEF3, 
-                3px 3px #CFDEF3, 
-                4px 4px #CFDEF3, 
-                5px 5px #CFDEF3, 
-                6px 6px #CFDEF3;
-}
+   text-shadow: 
+                1px 1px #EE7202, 
+                2px 2px #EE7202,
+                3px 3px #EE7202, 
+                4px 4px #EE7202, 
+                5px 5px #EE7202, 
+                6px 6px #EE7202;
+}*/
 
 #usernamedisplay {
   color:#CFDEF3;
