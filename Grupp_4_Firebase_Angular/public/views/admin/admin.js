@@ -89,22 +89,38 @@
                                 });
                         };
 
-                        //admin kurs tabbar
+                        //admin Klass tabbar
                         $scope.adminClassTab = 'create';
                         $scope.setAdminClassTab = function (tab) {
                                 $scope.adminClassTab = tab;
                         };
 
-
+                        //admin kurs tabbar
+                        $scope.adminCourseTab = 'create';
+                        $scope.setAdminCoursesTab = function (tab) {
+                                $scope.adminCourseTab = tab;
+                                if (tab === 'courseDetails') {
+                                        var cRef = firebase.database().ref().child('courses/courseNames');
+                                        $scope.allCourses = $firebaseArray(cRef);
+                                }
+                        }
                         //admin kurser
                         $scope.createCourse = function (code, name, description) {
                                 var ref = firebase.database().ref().child('courses/' + code);
                                 ref.set({
                                         id: code,
                                         title: name,
-                                        description
+                                        description: description
                                 })
+                                var cref = firebase.database().ref().child('courses/courseNames');
+                                cref.update({
+                                        [code]: true
+                                });
                         };
+                        $scope.courseDetailChoice = 'Välj kurs';
+                        $scope.setChosenCourseForDetails = function (name) {
+                                $scope.courseDetailChoice = name;
+                        }
 
                         //admin klasser
                         $scope.createClass = function (name, school) {
@@ -114,8 +130,10 @@
                                 })
                                 var ref = firebase.database().ref().child('schools/' + school + '/classes/' + name);
                                 ref.set({
-                                        teacher: 'placeholder'
+                                        placeholder: true
                                 })
+                                $scope.chosenSchool = 'Välj skola';
+                                $scope.chosenClass = 'Välj klass'
                         };
                         $scope.showSchools = [];
                         var schoolsRef = firebase.database().ref().child('schools/schoolName');
@@ -190,38 +208,50 @@
                         $scope.chosenClass = 'Välj klass';
                         $scope.showMembersListForClass = function (school, theClass) {
                                 $scope.chosenClass = theClass;
-                                var membersRef = firebase.database().ref().child('schools/' + school + '/classes/' + theClass);
-                                $scope.classMemberList = $firebaseArray(membersRef);
+                                $scope.classMemberList = [];
+                                var sRef = firebase.database().ref().child('schools/' + school + '/classes/' + theClass + '/student');
+                                var tRef = firebase.database().ref().child('schools/' + school + '/classes/' + theClass + '/teacher');
+                                $scope.classMemberListStudents = $firebaseArray(sRef);
+                                $scope.classMemberListTeachers = $firebaseArray(tRef);
+
                         };
-                        $scope.setActiveMemberInClassList = function (id, name) {
+                        $scope.setActiveMemberInClassList = function (id, name, type) {
                                 $scope.activeMemberInClassList = {
                                         id: id,
-                                        name: name
+                                        name: name,
+                                        type: type
                                 };
                         };
-                        $scope.setActiveMemberForClassList = function (id, name) {
+                        $scope.setActiveMemberForClassList = function (id, name, type) {
                                 $scope.activeMemberForClassList = {
                                         id: id,
-                                        name: name
+                                        name: name,
+                                        type: type
                                 };
                         }
-                        $scope.transferToClass = function (id, name) {
-                                var ref = firebase.database().ref().child('schools/' + $scope.chosenSchool + '/classes/' + $scope.chosenClass);
+                        $scope.transferToClass = function (id, name, type) {
+                                var ref = firebase.database().ref().child('schools/' + $scope.chosenSchool + '/classes/' + $scope.chosenClass + '/' + type);
                                 ref.update({
                                         [id]: name
                                 })
+                                var sRef = firebase.database().ref().child('users/' + id + '/groups');
+                                sRef.update({
+                                        [$scope.chosenClass]: true
+                                })
                         };
-                        $scope.transferFromClass = function (id) {
-                                var ref = firebase.database().ref().child('schools/' + $scope.chosenSchool + '/classes/' + $scope.chosenClass + '/' + id);
+                        $scope.transferFromClass = function (id, type) {
+                                var ref = firebase.database().ref().child('schools/' + $scope.chosenSchool + '/classes/' + $scope.chosenClass + '/' + type + '/' + id);
                                 ref.remove()
                                         .then(
                                         console.log('Remove successfull')
                                         );
+                                var sRef = firebase.database().ref().child('users/' + id + '/groups/' + $scope.chosenClass);
+                                sRef.remove();
                                 $scope.activeMemberInClassList = "";
                         }
 
                         //admin användare
-                        $scope.createUser = function (fname, lname, email, password, type) {
+                        $scope.createUser = function (fname, lname, email, password, type, school) {
                                 var config = {
                                         apiKey: "AIzaSyB3UdUl1As-W_3gHCf-aDadJw0myIOvdR8",
                                         authDomain: "schoolweb-35754.firebaseapp.com",
@@ -234,7 +264,15 @@
                                                 email: email,
                                                 firstName: fname,
                                                 lastName: lname,
-                                                type: type
+                                                name: fname + ' ' + lname,
+                                                type: type,
+                                                groups: {
+                                                        school: true
+                                                }
+                                        });
+                                        var sRef = firebase.database().ref().child('schools/' + school + '/' + type + 's');
+                                        sRef.update({
+                                                [firebaseUser.uid]: true
                                         });
                                         console.log("User " + firebaseUser.uid + " created successfully!");
                                         secondaryApp.auth().signOut();

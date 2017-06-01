@@ -172,3 +172,95 @@
 [info] i  hosting: Serving hosting files from: public
 [info] +  hosting: Local server: http://localhost:5000
 
+[debug] Error: socket hang up
+    at createHangUpError (_http_client.js:254:15)
+    at TLSSocket.socketOnEnd (_http_client.js:346:23)
+    at emitNone (events.js:91:20)
+    at TLSSocket.emit (events.js:185:7)
+    at endReadableNT (_stream_readable.js:974:12)
+    at _combinedTickCallback (internal/process/next_tick.js:74:11)
+    at process._tickCallback (internal/process/next_tick.js:98:9)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] Error: socket hang up
+    at createHangUpError (_http_client.js:254:15)
+    at TLSSocket.socketCloseListener (_http_client.js:286:23)
+    at emitOne (events.js:101:20)
+    at TLSSocket.emit (events.js:188:7)
+    at _handle.close (net.js:498:12)
+    at TCP.done [as _onclose] (_tls_wrap.js:325:7)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] Error: socket hang up
+    at createHangUpError (_http_client.js:254:15)
+    at TLSSocket.socketOnEnd (_http_client.js:346:23)
+    at emitNone (events.js:91:20)
+    at TLSSocket.emit (events.js:185:7)
+    at endReadableNT (_stream_readable.js:974:12)
+    at _combinedTickCallback (internal/process/next_tick.js:74:11)
+    at process._tickCallback (internal/process/next_tick.js:98:9)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] Error: socket hang up
+    at createHangUpError (_http_client.js:254:15)
+    at TLSSocket.socketCloseListener (_http_client.js:286:23)
+    at emitOne (events.js:101:20)
+    at TLSSocket.emit (events.js:188:7)
+    at _handle.close (net.js:498:12)
+    at TCP.done [as _onclose] (_tls_wrap.js:325:7)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] Error: socket hang up
+    at createHangUpError (_http_client.js:254:15)
+    at TLSSocket.socketOnEnd (_http_client.js:346:23)
+    at emitNone (events.js:91:20)
+    at TLSSocket.emit (events.js:185:7)
+    at endReadableNT (_stream_readable.js:974:12)
+    at _combinedTickCallback (internal/process/next_tick.js:74:11)
+    at process._tickCallback (internal/process/next_tick.js:98:9)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] Error: socket hang up
+    at createHangUpError (_http_client.js:254:15)
+    at TLSSocket.socketCloseListener (_http_client.js:286:23)
+    at emitOne (events.js:101:20)
+    at TLSSocket.emit (events.js:188:7)
+    at _handle.close (net.js:498:12)
+    at TCP.done [as _onclose] (_tls_wrap.js:325:7)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] ----------------------------------------------------------------------
+[debug] Command:      C:\Program Files\nodejs\node.exe C:\Users\danie\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase serve
+[debug] CLI Version:  3.9.0
+[debug] Platform:     win32
+[debug] Node Version: v6.10.0
+[debug] Time:         Thu Jun 01 2017 11:14:19 GMT+0200 (W. Europe Daylight Time)
+[debug] ----------------------------------------------------------------------
+[debug] 
+[debug] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token { refresh_token: '1/u_BrbYk8YtzfxjkukjiHP9-U_t17W72N7vvr1eJF3Ak',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Thu Jun 01 2017 11:14:19 GMT+0200 (W. Europe Daylight Time)
+[debug] <<< HTTP RESPONSE 200
+[debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/schoolweb-35754  
+ Thu Jun 01 2017 11:14:19 GMT+0200 (W. Europe Daylight Time)
+[debug] <<< HTTP RESPONSE 200
+[debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/schoolweb-35754/tokens  
+ Thu Jun 01 2017 11:14:20 GMT+0200 (W. Europe Daylight Time)
+[debug] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from 'C:\G4\Grupp4Projekt\Grupp_4_Firebase_Angular'...
+[info] 
+[debug] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/schoolweb-35754  
+ Thu Jun 01 2017 11:14:21 GMT+0200 (W. Europe Daylight Time)
+[debug] <<< HTTP RESPONSE 200
+[debug] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/387758932838/clients/_:getWebAppConfig  
+ Thu Jun 01 2017 11:14:22 GMT+0200 (W. Europe Daylight Time)
+[debug] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: public
+[info] +  hosting: Local server: http://localhost:5000
+
