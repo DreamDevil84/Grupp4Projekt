@@ -33,6 +33,13 @@
 						<p>{{news.content}}<span class="pull-right">{{news.time}}</span></p>
 					</li>
 				</ul>
+				<div class="row">
+					<div class="col-md-1"></div>
+						<div class="col-xs-4">
+							<button id="moreBtn" class="btn btn-success" ng-click="moreNews()">Se mer</button>
+						</div>
+					</div>
+				</div>
 			</div>
 			<div class="col-xs-12 col-sm-6 col-md-4">
 				<div class="attendance-box">
@@ -51,13 +58,6 @@
 				<span ng-show="gaveFeedbackToday">Du har gett feedback idag.</span>
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-md-1"></div>
-			<div class="col-xs-4">
-				<button class="btn btn-clear" ng-click="moreNews()">Se mer</button>
-			</div>
-		</div>
-	</div>
 	<div ng-show="mainTab != 'daily'">
 		<div class="row">
 			<div class="col-md-1"></div>
@@ -135,7 +135,7 @@
 						<textarea ng-if="question.type === 'Text'" id="{{question.$id}}" class="form-control" rows="5"></textarea>
 						<div ng-if="question.type === '5-skala'">
 							<div class="row">
-								<p class="col-xs-8">Ranka hur mucket du håller med från 1 till 5, där 1 är minst.</p>
+								<p class="col-xs-8">Ranka från 1 -> 5 hur mycket du håller med, där 1 är minst.</p>
 							</div>
 							<div class="btn-group" data-toggle="buttons">
 								<label class="btn btn-primary" ng-click="setWeeklyFeedbackChoice(question.$id, 1)">
