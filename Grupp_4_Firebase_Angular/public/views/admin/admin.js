@@ -126,7 +126,7 @@
                                 $scope.courseBooks = $firebaseArray(courseBooksRef);
                         };
 
-                        $scope.addCourseBook = function(title, content){
+                        $scope.addCourseBook = function (title, content) {
                                 var makeBookRef = firebase.database().ref().child('courses/' + $scope.courseDetailChoice + '/books');
                                 makeBookRef.update({
                                         [title]: content
@@ -140,7 +140,7 @@
                         };
 
                         $scope.uppdateCourse = function (title, content, gReq, vgReq) {
-                                $scope.courseDetailChoice7
+                                // $scope.courseDetailChoice = '';
                                 var courseUpdateRef = firebase.database().ref().child('courses/' + $scope.courseDetailChoice + '/details');
                                 courseUpdateRef.update({
                                         title: title,
@@ -264,7 +264,7 @@
                                 ref.update({
                                         [id]: name
                                 })
-                                var sRef = firebase.database().ref().child('users/' + id + '/groups/class');
+                                var sRef = firebase.database().ref().child('users/' + id + '/groups/school/' + $scope.chosenSchool + '/class');
                                 sRef.update({
                                         [$scope.chosenClass]: true
                                 })
@@ -275,7 +275,7 @@
                                         .then(
                                         console.log('Remove successfull')
                                         );
-                                var sRef = firebase.database().ref().child('users/' + id + '/groups/class' + $scope.chosenClass);
+                                var sRef = firebase.database().ref().child('users/' + id + '/groups/school/' + $scope.chosenSchool + '/class' + $scope.chosenClass);
                                 sRef.remove();
                                 $scope.activeMemberInClassList = "";
                         }
@@ -298,7 +298,9 @@
                                                 type: type,
                                                 groups: {
                                                         school: {
-                                                                [school]: true
+                                                                name: {
+                                                                        [school]: true
+                                                                }
                                                         }
                                                 }
                                         });
