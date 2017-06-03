@@ -144,8 +144,7 @@
                                 <li class="list-group-item">{{courseDetails.content}}</li>
                                 <li class="list-group-item" ng-repeat="book in courseBooks">
                                     <strong>{{book.$id}}</strong><button class="btn btn-clear pull-right" ng-click="removeCourseBook(book.$id)">X</button>
-                                    <br> {{book.$value}}
-                                    {{book.key}} {{book.index}} {{book.$key}} {{book.$index}}
+                                    <br> {{book.$value}} {{book.key}} {{book.index}} {{book.$key}} {{book.$index}}
                                 </li>
                                 <li class="list-group-item">G: {{courseDetails.goals.G}}</li>
                                 <li class="list-group-item">VG: {{courseDetails.goals.VG}}</li>
@@ -293,33 +292,70 @@
     </div>
     <div class="row">
         <div class="col-md-1"></div>
-        <div class="col-xs-12 col-md-8">
+        <div class="col-xs-12 col-md-10">
             <div ng-show="adminTab === 'feedback'">
-                <div class="col-xs-12">
-                    <h4>Skapa veckans feedback</h4>
-                </div>
-                <div class="row">
-                    <div class="col-xs-6">
-                        <label>Fråga:</label>
-                        <div class="form-group">
-                            <textarea class="form-control" rows="5" ng-model="weeklyFeedbackQuestion"></textarea>
-                            <br>
-                            <div class="dropdown">
-                                <button class="btn btn-clear" ng-click="addWeeklyFeedbackQuestion(weeklyFeedbackQuestion, weekFeedbackType)">Lägg till</button>
-                                <button class="btn btn-secondary dropdown-toggle" type="button" id="weekFeedbackType" data-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="true">{{weekFeedbackType}}<span class="caret"></span></button>
-                                <ul class="dropdown-menu" aria-labelledby="weekFeedbackType">
-                                    <li><a ng-click="setWeeklyFeedbackAnswerType('Text')">Text</a></li>
-                                    <li><a ng-click="setWeeklyFeedbackAnswerType('5-skala')">5-skala</a></li>
-                                </ul>
+                <ul class="nav nav-tabs">
+                    <li ng-class="{active : adminFeedbackTab === 'create'}"><a ng-click="setAdminFeedbackTab('create')">Skapa</a></li>
+                    <li ng-class="{active : adminFeedbackTab === 'handle'}"><a ng-click="setAdminFeedbackTab('handle')">Se existerande</a></li>
+                </ul>
+                <br>
+                <div ng-show="adminFeedbackTab === 'create'" class="row">
+                    <div class="col-xs-12">
+                        <h4>Skapa veckans feedback</h4>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <label>Fråga:</label>
+                            <div class="form-group">
+                                <textarea class="form-control" rows="5" ng-model="weeklyFeedbackQuestion"></textarea>
+                                <br>
+                                <div class="dropdown">
+                                    <button class="btn btn-clear" ng-click="addWeeklyFeedbackQuestion(weeklyFeedbackQuestion, weekFeedbackType)">Lägg till</button>
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="weekFeedbackType" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="true">{{weekFeedbackType}}<span class="caret"></span></button>
+                                    <ul class="dropdown-menu" aria-labelledby="weekFeedbackType">
+                                        <li><a ng-click="setWeeklyFeedbackAnswerType('Text')">Text</a></li>
+                                        <li><a ng-click="setWeeklyFeedbackAnswerType('5-skala')">5-skala</a></li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
+                        <div class="col-xs-6">
+                            <ul class="list-unstyled list-group">
+                                <li class="list-group-item" ng-repeat="question in weeklyFeedbackForm">
+                                    <p>{{question.question}}</p>
+                                    <h4>{{question.type}}</h4>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="col-xs-6">
+                </div>
+                <div ng-show="adminFeedbackTab === 'handle'" class="row">
+                    <div class="col-xs-12 col-md-3">
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="feedbackWeekSelect" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="true">{{feedbackWeekSelect}}<span class="caret"></span></button>
+                            <ul class="dropdown-menu" aria-labelledby="feedbackWeekSelect">
+                                <li ng-repeat="week in feedBackWeeks"><a ng-click="weeklyFeedbackSelectForView(week)">{{week}}</a></li>
+                            </ul>
+                        </div>
+                        <br>
+                        <div class="dropdown" ng-hide="feedbackWeekSelect === 'Välj vecka'">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="feedbackQuestionSelect" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="true">{{feedbackQuestionSelect.question}}<span class="caret"></span></button>
+                            <ul class="dropdown-menu" aria-labelledby="feedbackQuestionSelect">
+                                <li ng-repeat="question in feedBackWeeksQuestion"><a ng-click="weeklyFeedbackSelectForViewQuestion(question)">{{question.question}}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-9" ng-hide="feedbackQuestionSelect.question === 'Välj fråga'">
+                        <div>{{feedbackQuestionSelect.question}}</div>
+                        <br>
                         <ul class="list-unstyled list-group">
-                            <li class="list-group-item" ng-repeat="question in weeklyFeedbackForm">
-                                <p>{{question.question}}</p>
-                                <h4>{{question.type}}</h4>
+                            <li class="list-group-item" ng-repeat="feedback in showFeedback">
+                                <ul class="list-unstyled">
+                                    <li ng-repeat="answer in feedback"><span ng-show="answer.id === feedbackQuestionSelect.id">{{answer.answer}}</span></li>
+                                </ul>
                             </li>
                         </ul>
                     </div>
@@ -327,5 +363,5 @@
             </div>
         </div>
     </div>
-</div>
-<br><br>
+    <br>
+    <br>

@@ -177,12 +177,11 @@
             };
 
             //veckans feedback
+            var weeklyFeedbackRef = firebase.database().ref().child('feedback/weekly/');
+            var weeklyFeedbackFormRef = weeklyFeedbackRef.child(date.getFullYear() + "_" + date.getWeek() + '/form');
+            var weeklyFeedbackAnswerRef = weeklyFeedbackRef.child(date.getFullYear() + "_" + + date.getWeek() + '/answers');
+            var weeklyFeedbackAnswerDoneRef = weeklyFeedbackRef.child(date.getFullYear() + "_" + + date.getWeek() + '/haveAnswered/' + user);
 
-            var weeklyFeedbackRef = firebase.database().ref().child('feedback/weekly/' + date.getFullYear() + "_" + date.getWeek() + '/form');
-            var weeklyFeedbackAnswerRef = firebase.database().ref().child('feedback/weekly/' + date.getFullYear() + "_" + + date.getWeek() + '/answers');
-            var weeklyFeedbackAnswerDoneRef = firebase.database().ref().child('feedback/weekly/' + date.getFullYear() + "_" + + date.getWeek() + '/haveAnswered/' + user);
-
-            // TODO - fixa så att den kollar om det är dags för feedback
             var day = date.getDay();
             //if (day === 0 || day === 5 || day === 6) {
 
@@ -193,7 +192,14 @@
                         weeklyFeedbackAnswerDoneRef.off('value');
                     } else {
                         $scope.timeForWeeklyFeedback = 1;
-                        $scope.weeklyFeedback = $firebaseArray(weeklyFeedbackRef);
+                        weeklyFeedbackFormRef.once('value').then(function (form) {
+                            if (form.val()) {
+                                $scope.weeklyFeedback = $firebaseArray(weeklyFeedbackFormRef);
+                            }
+                            else {
+                                $scope.weeklyFeedback = $firebaseArray(weeklyFeedbackRef.child('default'));
+                            }
+                        })
                         $scope.weeklyFeedbackValue = [];
                         $scope.setWeeklyFeedbackChoice = function (id, val) {
                             $scope.weeklyFeedbackValue[id] = val;

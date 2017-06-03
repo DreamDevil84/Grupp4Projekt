@@ -8,7 +8,7 @@
             <ul class="nav nav-pills">
                 <li ng-class="{active : teacherTab === 'daily'}"><a ng-click="setMainTab('daily')">Dina Klasser</a></li>
                 <li ng-class="{active : teacherTab === 'attendance'}"><a ng-click="setMainTab('attendance')">Närvaro</a></li>
-                <li ng-class="{active : teacherTab === 'archive'}"><a ng-click="setMainTab('archive')">Arkiv</a></li>
+                <li ng-class="{active : teacherTab === 'feedback'}"><a ng-click="setMainTab('feedback')">Feedback</a></li>
             </ul>
         </div>
     </div>
@@ -42,7 +42,6 @@
                 <ul class="nav nav-tabs">
                     <li ng-class="{active : attendanceTab === 'daily'}"><a ng-click="setAttendanceTab('daily')">Dagens</a></li>
                     <li ng-class="{active : attendanceTab === 'course'}"><a ng-click="setAttendanceTab('course')">Kursnärvaro</a></li>
-                    <li ng-class="{active : attendanceTab === 'archive'}"><a ng-click="setAttendanceTab('archive')">Arkiv</a></li>
                 </ul>
             </div>
         </div>
@@ -72,16 +71,71 @@
                     <tr ng-repeat="student in studentAttendanceStats">
                         <td>{{student.name}}</td>
                         <td ng-repeat="date in student.attendance">
-                        <span ng-show="date.attend === 3" class="badge badge-success">Här</span>
-                        <span ng-show="date.attend === 2" class="badge badge-warning">Sen</span>
-                        <span ng-show="date.attend === 1 || date.attend === 0" class="badge badge-error">Ej Här</span></td>
+                            <span ng-show="date.attend === 3" class="badge badge-success">Här</span>
+                            <span ng-show="date.attend === 2" class="badge badge-warning">Sen</span>
+                            <span ng-show="date.attend === 1 || date.attend === 0" class="badge badge-error">Ej Här</span></td>
                     </tr>
                 </table>
-                <!--<ul class="list-unstyled list-group">
-                    <li class="list-group-item" ng-repeat="student in studentAttendanceStats">
-
-                    </li>
-                </ul>-->
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-xs-12 col-md-10">
+            <div ng-show="teacherTab === 'feedback'">
+                <ul class="nav nav-tabs">
+                    <li ng-class="{active : feedbackTab === 'daily'}"><a ng-click="setFeedbackTab('daily')">Dagens</a></li>
+                    <li ng-class="{active : feedbackTab === 'weekly'}"><a ng-click="setFeedbackTab('weekly')">Veckans</a></li>
+                </ul>
+                <br>
+                <div ng-show="feedbackTab === 'daily'">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <button class="btn btn-clear" ng-click="increaseDailyFeedbackIndex()">Se äldre</button>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <ul class="list-unstyled list-group">
+                                <li class="list-group-item" ng-repeat="feed in dailyFeedback" ng-hide="$index > dailyFeedbackIndex">
+                                    Likes: <strong>{{feed.likes}}</strong><br>{{feed.$index}} Röster: <span>{{feed.votes}}</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div ng-show="feedbackTab === 'weekly'">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-3">
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="feedbackWeekSelect" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="true">{{feedbackWeekSelect}}<span class="caret"></span></button>
+                                <ul class="dropdown-menu" aria-labelledby="feedbackWeekSelect">
+                                    <li ng-repeat="week in feedBackWeeks"><a ng-click="weeklyFeedbackSelectForView(week)">{{week}}</a></li>
+                                </ul>
+                            </div>
+                            <br>
+                            <div class="dropdown" ng-hide="feedbackWeekSelect === 'Välj vecka'">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="feedbackQuestionSelect" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="true">{{feedbackQuestionSelect.question}}<span class="caret"></span></button>
+                                <ul class="dropdown-menu" aria-labelledby="feedbackQuestionSelect">
+                                    <li ng-repeat="question in feedBackWeeksQuestion"><a ng-click="weeklyFeedbackSelectForViewQuestion(question)">{{question.question}}</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-9" ng-hide="feedbackQuestionSelect.question === 'Välj fråga'">
+                            <div>{{feedbackQuestionSelect.question}}</div>
+                            <br>
+                            <ul class="list-unstyled list-group">
+                                <li class="list-group-item" ng-repeat="feedback in showFeedback">
+                                    <ul class="list-unstyled">
+                                        <li ng-repeat="answer in feedback"><span ng-show="answer.id === feedbackQuestionSelect.id">{{answer.answer}}</span></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

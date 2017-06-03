@@ -312,21 +312,90 @@
                                         secondaryApp.auth().signOut();
                                 });
                         };
+                        //veckofeedbacktabbar
+                        $scope.adminFeedbackTab = 'create';
+                        $scope.setAdminFeedbackTab = function (tab) {
+                                $scope.adminFeedbackTab = tab;
+                        }
 
                         //skapa veckofeedback
-                        var weekFeedbackRef = firebase.database().ref().child('feedback/weekly/' + date.getFullYear() + "_" + + date.getWeek() + '/form');
+                        var weekFeedbackFormRef = firebase.database().ref().child('feedback/weekly/' + date.getFullYear() + "_" + + date.getWeek() + '/form');
                         $scope.weekFeedbackType = 'Svarsalternativ';
                         $scope.setWeeklyFeedbackAnswerType = function (type) {
                                 $scope.weekFeedbackType = type;
                         };
-                        $scope.weeklyFeedbackForm = $firebaseArray(weekFeedbackRef);
+                        $scope.weeklyFeedbackForm = $firebaseArray(weekFeedbackFormRef);
                         $scope.addWeeklyFeedbackQuestion = function (text, type) {
                                 if (type != 'Svarsalternativ') {
-                                        weekFeedbackRef.push({
+                                        weekFeedbackFormRef.push({
                                                 question: text,
                                                 type: type
                                         });
                                 };
                         };
+
+                        //läs veckofeedback
+                        var weekFeedbackWeekRef = firebase.database().ref().child('feedback/weekly');
+                        $scope.feedBackWeeks = [];
+                        weekFeedbackWeekRef.once('value').then(function (data) {
+                                data.forEach(function (week) {
+                                        if (week.key !== 'default') {
+                                                $scope.feedBackWeeks.push(week.key);
+                                        }
+                                })
+                                // console.log($scope.feedBackWeeks);
+                        });
+                        $scope.feedbackWeekSelect = 'Välj vecka';
+                        $scope.feedbackQuestionSelect = { question: 'Välj fråga' };
+                        $scope.weeklyFeedbackSelectForViewQuestion = function (question) {
+                                $scope.feedbackQuestionSelect = question;
+                        }
+                        $scope.feedBackWeeksQuestion = [];
+                        var ticker = 0;
+                        $scope.showFeedback = [];
+                        $scope.weeklyFeedbackSelectForView = function (week) {
+                                $scope.showFeedback = [];
+                                $scope.feedbackWeekSelect = week;
+                                weekFeedbackWeekRef.child(week + '/form').once('value').then(function (data) {
+                                        if (data.val()) {
+                                                data.forEach(function (form) {
+                                                        console.log(form.key);
+                                                        $scope.feedBackWeeksQuestion.push({
+                                                                question: form.val().question,
+                                                                id: form.key
+                                                        })
+                                                });
+                                                getWeeklyQuestions(week);
+                                        } else {
+                                                weekFeedbackWeekRef.child('default').once('value').then(function (data) {
+                                                        data.forEach(function (data) {
+                                                                console.log(data.key);
+                                                                $scope.feedBackWeeksQuestion.push({
+                                                                        question: data.val().question,
+                                                                        id: data.key
+                                                                })
+                                                        });
+                                                        getWeeklyQuestions(week);
+                                                });
+                                        }
+                                        // console.log(data.val());
+                                })
+                        }
+                        var getWeeklyQuestions = function (week) {
+                                weekFeedbackWeekRef.child(week + '/answers').once('value').then(function (data) {
+                                        data.forEach(function (answers) {
+                                                var temp = [];
+                                                answers.forEach(function (snap) {
+                                                        temp.push({
+                                                                answer: snap.val(),
+                                                                id: snap.key
+                                                        })
+                                                })
+                                                $scope.showFeedback.push(temp);
+                                        })
+                                        console.log($scope.showFeedback);
+                                })
+                                var showFeedback = $firebaseArray(weekFeedbackWeekRef.child(week + '/answers'));
+                        }
                 });
 })();

@@ -1,6 +1,6 @@
 (function () {
     angular.module('app')
-        .controller('TeacherCtrl', function (currentAuth, AttendanceList, $scope, $firebaseObject, $firebaseArray) {
+        .controller('TeacherCtrl', function (currentAuth, DailyFeedbackList, AttendanceList, $scope, $firebaseObject, $firebaseArray) {
             var user = currentAuth.uid;
             var userRef = firebase.database().ref().child('users/' + user);
             $scope.user = $firebaseObject(userRef);
@@ -18,7 +18,7 @@
                         })
                     })
                 })
-                console.log(mySchool + ' + ' + myClass);
+                // console.log(mySchool + ' + ' + myClass);
                 $scope.userLoaded = 1;
 
                 //skaffar dagens datum, används för andra funktioner
@@ -146,10 +146,86 @@
                             })
                         })
                     });
-                    console.log($scope.studentAttendanceStats);
+                    // console.log($scope.studentAttendanceStats);
                 })
 
+                //feedback för lärare
+                $scope.feedbackTab = 'daily'
+                $scope.setFeedbackTab = function (tab) {
+                    $scope.feedbackTab = tab;
+                }
 
+                //läs daglig feedback
+                $scope.dailyFeedbackIndex = 0;
+                $scope.increaseDailyFeedbackIndex = function () {
+                    $scope.dailyFeedbackIndex = $scope.dailyFeedbackIndex + 2;
+                };
+                var dailyFeedbackRef = firebase.database().ref().child('feedback/daily');
+                $scope.dailyFeedback = $firebaseArray(dailyFeedbackRef);
+
+                //läs veckofeedback
+                var weekFeedbackWeekRef = firebase.database().ref().child('feedback/weekly');
+                $scope.feedBackWeeks = [];
+                weekFeedbackWeekRef.once('value').then(function (data) {
+                    data.forEach(function (week) {
+                        if (week.key !== 'default') {
+                            $scope.feedBackWeeks.push(week.key);
+                        }
+                    })
+                    // console.log($scope.feedBackWeeks);
+                });
+                $scope.feedbackWeekSelect = 'Välj vecka';
+                $scope.feedbackQuestionSelect = { question: 'Välj fråga' };
+                $scope.weeklyFeedbackSelectForViewQuestion = function (question) {
+                    $scope.feedbackQuestionSelect = question;
+                }
+                $scope.feedBackWeeksQuestion = [];
+                var ticker = 0;
+                $scope.showFeedback = [];
+                $scope.weeklyFeedbackSelectForView = function (week) {
+                    $scope.showFeedback = [];
+                    $scope.feedbackWeekSelect = week;
+                    weekFeedbackWeekRef.child(week + '/form').once('value').then(function (data) {
+                        if (data.val()) {
+                            data.forEach(function (form) {
+                                // console.log(form.key);
+                                $scope.feedBackWeeksQuestion.push({
+                                    question: form.val().question,
+                                    id: form.key
+                                })
+                            });
+                            getWeeklyQuestions(week);
+                        } else {
+                            weekFeedbackWeekRef.child('default').once('value').then(function (data) {
+                                data.forEach(function (data) {
+                                    console.log(data.key);
+                                    $scope.feedBackWeeksQuestion.push({
+                                        question: data.val().question,
+                                        id: data.key
+                                    })
+                                });
+                                getWeeklyQuestions(week);
+                            });
+                        }
+                        // console.log(data.val());
+                    })
+                }
+                var getWeeklyQuestions = function (week) {
+                    weekFeedbackWeekRef.child(week + '/answers').once('value').then(function (data) {
+                        data.forEach(function (answers) {
+                            var temp = [];
+                            answers.forEach(function (snap) {
+                                temp.push({
+                                    answer: snap.val(),
+                                    id: snap.key
+                                })
+                            })
+                            $scope.showFeedback.push(temp);
+                        })
+                        console.log($scope.showFeedback);
+                    })
+                    var showFeedback = $firebaseArray(weekFeedbackWeekRef.child(week + '/answers'));
+                }
             });
             $scope.showAll = $scope.userLoaded * $scope.newsLoaded * $scope.studentsLoaded;
         });
