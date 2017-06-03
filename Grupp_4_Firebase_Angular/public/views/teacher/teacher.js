@@ -1,11 +1,17 @@
 (function () {
     angular.module('app')
         .controller('TeacherCtrl', function (currentAuth, DailyFeedbackList, AttendanceList, $scope, $firebaseObject, $firebaseArray) {
+
+            // var switchRef = firebase.database().ref().child('news');
+            // switchRef.once('value').then(function(data){
+            //     switchRef.child('Newton/YAPP-APP').set(data.val());
+            // })
+
             var user = currentAuth.uid;
             var userRef = firebase.database().ref().child('users/' + user);
             $scope.user = $firebaseObject(userRef);
-            var myClass = 'mehe';
-            var mySchool = 'blaha';
+            var myClass = '';
+            var mySchool = '';
             $scope.newsLoaded = 0;
             $scope.userLoaded = 0;
             $scope.studentsLoaded = 0;
@@ -44,7 +50,7 @@
 
                 //lärarens nyheter
 
-                var teacherNewsRef = firebase.database().ref().child('news');
+                var teacherNewsRef = firebase.database().ref().child('news/' + mySchool + '/' + myClass);
 
                 $scope.teacherNews = [];
 
@@ -150,7 +156,7 @@
                 })
 
                 //feedback för lärare
-                $scope.feedbackTab = 'daily'
+                $scope.feedbackTab = 'daily';
                 $scope.setFeedbackTab = function (tab) {
                     $scope.feedbackTab = tab;
                 }
@@ -160,11 +166,12 @@
                 $scope.increaseDailyFeedbackIndex = function () {
                     $scope.dailyFeedbackIndex = $scope.dailyFeedbackIndex + 2;
                 };
-                var dailyFeedbackRef = firebase.database().ref().child('feedback/daily');
+                var feedbackRef = firebase.database().ref().child('feedback/' + mySchool + '/' + myClass);
+                var dailyFeedbackRef = feedbackRef.child('daily');
                 $scope.dailyFeedback = $firebaseArray(dailyFeedbackRef);
 
                 //läs veckofeedback
-                var weekFeedbackWeekRef = firebase.database().ref().child('feedback/weekly');
+                var weekFeedbackWeekRef = feedbackRef.child('weekly');
                 $scope.feedBackWeeks = [];
                 weekFeedbackWeekRef.once('value').then(function (data) {
                     data.forEach(function (week) {
