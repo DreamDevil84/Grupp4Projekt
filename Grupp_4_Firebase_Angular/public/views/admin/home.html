@@ -17,7 +17,7 @@
     <br>
     <div class="row">
         <div class="col-md-1"></div>
-        <div class="col-xs-12 col-md-8">
+        <div class="col-xs-12 col-md-10">
             <div ng-show="adminTab === 'news'">
                 <ul class="nav nav-tabs">
                     <li ng-class="{active : adminNewsTab === 'read'}"><a ng-click="setAdminNewsTab('read')">Läs Nyheter</a></li>
@@ -65,14 +65,12 @@
     </div>
     <div class="row">
         <div class="col-md-1"></div>
-        <div class="col-xs-12 col-md-8">
+        <div class="col-xs-12 col-md-10">
             <div ng-show="adminTab === 'courses'">
-                <div class="row">
-                    <ul class="nav nav-tabs">
-                        <li ng-class="{active : adminCourseTab === 'create'}"><a ng-click="setAdminCoursesTab('create')">Skapa Kurser</a></li>
-                        <li ng-class="{active : adminCourseTab === 'courseDetails'}"><a ng-click="setAdminCoursesTab('courseDetails')">Kursdetaljer</a></li>
-                    </ul>
-                </div>
+                <ul class="nav nav-tabs">
+                    <li ng-class="{active : adminCourseTab === 'create'}"><a ng-click="setAdminCoursesTab('create')">Skapa Kurser</a></li>
+                    <li ng-class="{active : adminCourseTab === 'courseDetails'}"><a ng-click="setAdminCoursesTab('courseDetails')">Kursdetaljer</a></li>
+                </ul>
                 <br>
                 <div ng-show="adminCourseTab === 'create'">
                     <form>
@@ -159,14 +157,12 @@
     </div>
     <div class="row">
         <div class="col-md-1"></div>
-        <div class="col-xs-12 col-md-8">
+        <div class="col-xs-12 col-md-10">
             <div ng-show="adminTab === 'classes'">
-                <div class="row">
-                    <ul class="nav nav-tabs">
-                        <li ng-class="{active : adminClassTab === 'create'}"><a ng-click="setAdminClassTab('create')">Skapa Klasser</a></li>
-                        <li ng-class="{active : adminClassTab === 'handle'}"><a ng-click="setAdminClassTab('handle')">Hantera Klasser</a></li>
-                    </ul>
-                </div>
+                <ul class="nav nav-tabs">
+                    <li ng-class="{active : adminClassTab === 'create'}"><a ng-click="setAdminClassTab('create')">Skapa Klasser</a></li>
+                    <li ng-class="{active : adminClassTab === 'handle'}"><a ng-click="setAdminClassTab('handle')">Hantera Klasser</a></li>
+                </ul>
                 <br>
                 <div ng-show="adminClassTab === 'create'">
                     <form>
@@ -183,7 +179,7 @@
                 <div ng-show="adminClassTab === 'handle'">
                     <div class="row">
                         <div class="col-md-1"></div>
-                        <div class="col-xs-12 col-md-11 ">
+                        <div class="col-xs-12 col-md-10 ">
                             <h4>Välj skola och klass</h4>
                         </div>
                     </div>
@@ -268,7 +264,7 @@
     <div class="row">
         <div class="col-md-1"></div>
         <div ng-show="adminTab === 'users'">
-            <form class="col-xs-12 col-md-8">
+            <form class="col-xs-12 col-md-10">
                 <div>Skola :</div>
                 <input type="text" ng-model="school">
                 <br>
@@ -303,31 +299,29 @@
                     <div class="col-xs-12">
                         <h4>Skapa veckans feedback</h4>
                     </div>
-                    <div class="row">
-                        <div class="col-xs-6">
-                            <label>Fråga:</label>
-                            <div class="form-group">
-                                <textarea class="form-control" rows="5" ng-model="weeklyFeedbackQuestion"></textarea>
-                                <br>
-                                <div class="dropdown">
-                                    <button class="btn btn-clear" ng-click="addWeeklyFeedbackQuestion(weeklyFeedbackQuestion, weekFeedbackType)">Lägg till</button>
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="weekFeedbackType" data-toggle="dropdown" aria-haspopup="true"
-                                        aria-expanded="true">{{weekFeedbackType}}<span class="caret"></span></button>
-                                    <ul class="dropdown-menu" aria-labelledby="weekFeedbackType">
-                                        <li><a ng-click="setWeeklyFeedbackAnswerType('Text')">Text</a></li>
-                                        <li><a ng-click="setWeeklyFeedbackAnswerType('5-skala')">5-skala</a></li>
-                                    </ul>
-                                </div>
+                    <div class="col-xs-6">
+                        <label>Fråga:</label>
+                        <div class="form-group">
+                            <textarea class="form-control" rows="5" ng-model="weeklyFeedbackQuestion"></textarea>
+                            <br>
+                            <div class="dropdown">
+                                <button class="btn btn-clear" ng-click="addWeeklyFeedbackQuestion(weeklyFeedbackQuestion, weekFeedbackType)">Lägg till</button>
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="weekFeedbackType" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="true">{{weekFeedbackType}}<span class="caret"></span></button>
+                                <ul class="dropdown-menu" aria-labelledby="weekFeedbackType">
+                                    <li><a ng-click="setWeeklyFeedbackAnswerType('Text')">Text</a></li>
+                                    <li><a ng-click="setWeeklyFeedbackAnswerType('5-skala')">5-skala</a></li>
+                                </ul>
                             </div>
                         </div>
-                        <div class="col-xs-6">
-                            <ul class="list-unstyled list-group">
-                                <li class="list-group-item" ng-repeat="question in weeklyFeedbackForm">
-                                    <p>{{question.question}}</p>
-                                    <h4>{{question.type}}</h4>
-                                </li>
-                            </ul>
-                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <ul class="list-unstyled list-group">
+                            <li class="list-group-item" ng-repeat="question in weeklyFeedbackForm">
+                                <p>{{question.question}}</p>
+                                <h4>{{question.type}}</h4>
+                            </li>
+                        </ul>
                     </div>
                 </div>
                 <div ng-show="adminFeedbackTab === 'handle'" class="row">
