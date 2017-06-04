@@ -84,7 +84,7 @@ textarea{
 #logo{
     font-family: calibri,arial,sans-serif;
     font-weight: bold;
-    font-size: 4em;
+    font-size: 3em;
     color: #fff;
     text-shadow: 1px 1px #EE7202, 
                 2px 2px #EE7202, 
@@ -109,6 +109,8 @@ textarea{
 
 #usernamedisplay {
   color:#CFDEF3;
+  position: relative;
+  top: 1.5em;
 }
 
 #loginbox{
@@ -117,10 +119,6 @@ textarea{
 }
 #morenews{
   margin-top: 5px;
-}
-#usernamedisplay{
-    position: absolute;
-    margin-top: 1.2em;
 }
 .btns-for-class-transfer{
   display: flex;
@@ -148,7 +146,7 @@ textarea{
 }
 .loginbutton{
   width: 5em;
-  margin-top: 2.2rem;
+  margin-top: 1.5rem;
 }
 .fullscreen{
     height: 100%;

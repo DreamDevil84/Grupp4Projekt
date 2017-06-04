@@ -120,7 +120,7 @@
                     $scope.newsIndex = $scope.newsIndex + 2;
                 };
 
-                $scope.showCourseTab = 1;
+                $scope.showCourseTab = 'details';
                 $scope.setCourseTab = function (tab) {
                     $scope.showCourseTab = tab;
                 };

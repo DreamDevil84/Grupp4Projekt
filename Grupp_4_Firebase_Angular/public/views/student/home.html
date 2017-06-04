@@ -77,11 +77,11 @@
 									</div>
 									<div class="modal-body">
 										<ul class="nav nav-tabs">
-											<li ng-class="{active: showCourseTab === 1}"><a ng-click="setCourseTab(1)">Kursdetaljer</a></li>
-											<li ng-class="{active: showCourseTab === 2}"><a ng-click="setCourseTab(2)">Schema</a></li>
-											<li ng-class="{active: showCourseTab === 3}"><a ng-click="setCourseTab(3)">Betyg</a></li>
+											<li ng-class="{active: showCourseTab === 'details'}"><a ng-click="setCourseTab('details')">Kursdetaljer</a></li>
+											<li ng-class="{active: showCourseTab === 'schedule'}"><a ng-click="setCourseTab('schedule')">Schema</a></li>
+											<li ng-class="{active: showCourseTab === 'grades'}"><a ng-click="setCourseTab('grades')">Betyg</a></li>
 										</ul>
-										<div ng-show="showCourseTab === 1">
+										<div ng-show="showCourseTab === 'details'">
 											<h3>{{course.details.title}}</h3>
 											<p>{{course.details.content}}</p>
 											<br>
@@ -97,8 +97,38 @@
 												</li>
 											</ul>
 										</div>
-										<div ng-show="showCourseTab === 2">{{course.status}}</div>
-										<div ng-show="showCourseTab === 3">
+										<div ng-show="showCourseTab === 'schedule'">
+											<br>
+											<table class="table table-bordered">
+												<th>
+													Datum
+													<td>
+														Tid
+													</td>
+													<td>
+														Moment
+													</td>
+													<td>
+														Referensliteratur
+													</td>
+												</th>
+												<tr ng-repeat="(key, val) in course.details.schedule">
+													<td>
+														{{key}}
+													</td>
+													<td>
+														{{val.time}}
+													</td>
+													<td>
+														{{val.momentum}}
+													</td>
+													<td>
+														<div ng-repeat="(key, value) in val.books">{{key}}</div>
+													</td>
+												</tr>
+											</table>
+										</div>
+										<div ng-show="showCourseTab === 'grades'">
 											<ul class="list-unstyled list-group">
 												<li class="list-group-item" ng-repeat="grade in course.gradeWork">{{grade.name}}
 													<span ng-hide="grade.grade === 'IG'" class="badge badge-success">{{grade.grade}}</span>

@@ -18,8 +18,8 @@
                     $location.path('/home');
                 };
             });
-            $scope.email = 'student@edu.com';
-            $scope.password = '123456';
+            $scope.email = '';
+            $scope.password = '';
 
             $scope.myLogin = function ($scope) {
                 auth.$signInWithEmailAndPassword(email, password);

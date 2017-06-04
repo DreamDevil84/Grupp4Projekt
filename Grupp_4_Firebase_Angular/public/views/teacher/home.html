@@ -6,14 +6,15 @@
                 <h1>Hej {{user.firstName}}</h1>
             </div>
             <ul class="nav nav-pills">
-                <li ng-class="{active : teacherTab === 'daily'}"><a ng-click="setMainTab('daily')">Dina Klasser</a></li>
+                <li ng-class="{active : teacherTab === 'news'}"><a ng-click="setMainTab('news')">Nyheter</a></li>
+                <li ng-class="{active : teacherTab === 'courses'}"><a ng-click="setMainTab('courses')">Dina Klasser</a></li>
                 <li ng-class="{active : teacherTab === 'attendance'}"><a ng-click="setMainTab('attendance')">Närvaro</a></li>
                 <li ng-class="{active : teacherTab === 'feedback'}"><a ng-click="setMainTab('feedback')">Feedback</a></li>
             </ul>
         </div>
     </div>
     <br>
-    <div ng-show="teacherTab === 'daily'">
+    <div ng-show="teacherTab === 'news'">
         <div class="row">
             <div class="col-md-1"></div>
             <div class="col-xs-12 col-md-5">
@@ -32,6 +33,120 @@
             <div class="col-md-1"></div>
             <div class="col-xs-4">
                 <button class="btn btn-clear" ng-click="moreNews()">Se mer</button>
+            </div>
+        </div>
+    </div>
+    <div ng-show="teacherTab === 'courses'">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-xs-4 col-md-3">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="pickCourseSchedule" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="true">{{pickCourseScheduleSelected}}<span class="caret"></span></button>
+                    <ul class="dropdown-menu" aria-labelledby="pickCourseSchedule">
+                        <li ng-repeat="course in myCourses"><a ng-click="setPickCourseScheduleSelected(course.$id)">{{course.$id}}</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div ng-hide="pickCourseScheduleSelected === 'Välj Kurs'" class="row">
+            <div class="col-md-1"></div>
+            <div class="col-xs-4 col-md-3">
+                <form>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <p>Datum</p>
+                            <input type="date" class="form-control" ng-model="date">
+                        </div>
+                    </div>
+                    <br>
+                    <p>Tid</p>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <p>Börjar</p>
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="scheduleTimeStart" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="true">{{scheduleTimeStartSelected.time}}<span class="caret"></span></button>
+                                <ul class="dropdown-menu" aria-labelledby="scheduleTimeStart">
+                                    <li ng-repeat="timeStart in selectStartTime"><a ng-click="setScheduleTimeStartSelected(timeStart.time, timeStart.index)">{{timeStart.time}}</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div ng-hide="scheduleTimeStartSelected.time === 'Välj tid'">
+                                <p>Slutar</p>
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="scheduleTimeEnd" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="true">{{scheduleTimeEndSelected.time}}<span class="caret"></span></button>
+                                    <ul class="dropdown-menu" aria-labelledby="scheduleTimeEnd">
+                                        <li ng-repeat="timeEnd in selectEndTime"><a ng-click="setScheduleTimeEndSelected(timeEnd.time, timeEnd.index)">{{timeEnd.time}}</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <p>Moment</p>
+                            <input type="text" class="form-control" ng-model="momentum">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <p class="col-xs-12">Böcker</p>
+                        <div class="col-xs-6">
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="courseBooks" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="true">Välj Bok<span class="caret"></span></button>
+                                <ul class="dropdown-menu" aria-labelledby="courseBooks">
+                                    <li ng-repeat="book in courseBooks"><a ng-click="addCourseBook(book)">{{book.$id}}</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <ul class="list-unstyled list-group">
+                                <li class="list-group-item" ng-repeat="book in todaysCourseBooks">
+                                    {{book.$id}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <br>
+                    <button class="btn btn-clear" ng-click="addDateToSchedule(date,scheduleTimeStartSelected.time, scheduleTimeEndSelected.time, momentum)">Lägg Till</button>
+                </form>
+            </div>
+            <div class="col-xs-1"></div>
+            <div class="col-xs-5">
+                <table class="table table-bordered">
+                    <th>
+                        Datum
+                        <td>
+                            Tid
+                        </td>
+                        <td>
+                            Moment
+                        </td>
+                        <td>
+                            Referensliteratur
+                        </td>
+                    </th>
+                    <tr ng-repeat="class in mySchedule">
+                        <td>
+                            {{class.$id}}
+                        </td>
+                        <td>
+                            {{class.time}}
+                        </td>
+                        <td>
+                            {{class.momentum}}
+                        </td>
+                        <td>
+                            <div ng-repeat="(key, value) in class.books">{{key}}</div>
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>
@@ -141,3 +256,5 @@
         </div>
     </div>
 </div>
+<br>
+<br>

@@ -1,6 +1,6 @@
 (function () {
     angular.module('app')
-        .controller('TeacherCtrl', function (currentAuth, DailyFeedbackList, AttendanceList, $scope, $firebaseObject, $firebaseArray) {
+        .controller('TeacherCtrl', function (currentAuth, ScheduleTimes, DailyFeedbackList, AttendanceList, $scope, $firebaseObject, $firebaseArray) {
 
             // var switchRef = firebase.database().ref().child('news');
             // switchRef.once('value').then(function(data){
@@ -19,12 +19,18 @@
                 data.forEach(function (school) {
                     mySchool = school.key;
                     school.forEach(function (classes) {
-                        classes.forEach(function (theClass) {
-                            myClass = theClass.key;
-                        })
+                        if (classes.key === 'class') {
+                            classes.forEach(function (theClass) {
+                                myClass = theClass.key;
+
+                            })
+                        }
                     })
-                })
-                // console.log(mySchool + ' + ' + myClass);
+                });
+                var classRef = firebase.database().ref().child('schools/' + mySchool + '/classes/' + myClass);
+                var myStudents = classRef.child('student');
+                var studentIds = [];
+                console.log(mySchool + ' + ' + myClass);
                 $scope.userLoaded = 1;
 
                 //skaffar dagens datum, används för andra funktioner
@@ -41,7 +47,7 @@
                     return Math.ceil((((this - onejan) / 86400000) + onejan.getDay() + 1) / 7);
                 }
 
-                $scope.teacherTab = 'daily';
+                $scope.teacherTab = 'news';
                 $scope.setMainTab = function (tab) {
                     $scope.teacherTab = tab;
                 };
@@ -76,9 +82,66 @@
 
 
 
-                var classRef = firebase.database().ref().child('schools/' + mySchool + '/classes/' + myClass);
-                var myStudents = classRef.child('student');
-                var studentIds = [];
+
+
+                //kurs schema
+
+                var myCourse = '';
+                var myCoursesRef = userRef.child('groups/school/' + mySchool + '/courses');
+                $scope.myCourses = $firebaseArray(myCoursesRef);
+
+                $scope.pickCourseScheduleSelected = 'Välj Kurs';
+                $scope.setPickCourseScheduleSelected = function (course) {
+                    $scope.pickCourseScheduleSelected = course;
+                    var myCourse = course;
+
+                    var scheduleRef = firebase.database().ref().child('courses/' + myCourse + '/details/schedule');
+                    $scope.mySchedule = $firebaseArray(scheduleRef);
+
+                    $scope.selectStartTime = ScheduleTimes;
+                    $scope.scheduleTimeStartSelected = {
+                        time: 'Välj tid',
+                        index: 0
+                    };
+                    $scope.selectEndTime = ScheduleTimes;
+                    $scope.scheduleTimeEndSelected = {
+                        time: 'Välj tid',
+                        index: 0
+                    };
+                    $scope.setScheduleTimeStartSelected = function (time, index) {
+                        $scope.scheduleTimeStartSelected = {
+                            time: time,
+                            index: index
+                        }
+                    };
+                    $scope.setScheduleTimeEndSelected = function (time, index) {
+                        $scope.scheduleTimeEndSelected = {
+                            time: time,
+                            index: index
+                        }
+                    };
+                    var courseBooksRef = firebase.database().ref().child('courses/' + myCourse + '/books');
+                    $scope.courseBooks = $firebaseArray(courseBooksRef);
+                    $scope.todaysCourseBooks = [];
+                    $scope.addCourseBook = function (book) {
+                        $scope.todaysCourseBooks.push(book);
+                    };
+
+                    $scope.addDateToSchedule = function (theDate, timeStart, timeEnd, momentum) {
+                        var newDate = theDate.getFullYear() + '-' + ('0' + (theDate.getMonth() + 1)).slice(-2) + '-' + ('0' + theDate.getDate()).slice(-2);
+                        scheduleRef.update({
+                            [newDate]: {
+                                time: timeStart + ' - ' + timeEnd,
+                                momentum: momentum
+                            }
+                        })
+                        $scope.todaysCourseBooks.forEach(function (data) {
+                            scheduleRef.child(newDate + '/books').update({
+                                [data.$id]: data.$value
+                            })
+                        });
+                    };
+                }
 
                 //hantera närvaro
 
