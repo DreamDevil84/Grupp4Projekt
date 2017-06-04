@@ -20,9 +20,28 @@
             });
             $scope.email = 'student@edu.com';
             $scope.password = '123456';
-            $scope.myLogin = function($scope){
+
+            $scope.myLogin = function ($scope) {
                 auth.$signInWithEmailAndPassword(email, password);
-        };
+            }
+            $('#wrongPassword').hide();
+
+            $scope.closeLogin = function () {
+                $('#wrongPassword').hide();
+            };
+
+            $scope.login = function (email, password) {
+                firebase.auth().signInWithEmailAndPassword(email, password).then(function () {
+                    $('#login').modal('hide');
+                }).catch(function (error) {
+                    // Handle Errors here.
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    console.log(error);
+                    $('#wrongPassword').show();
+                    // ...
+                });
+            }
 
         })
 })();

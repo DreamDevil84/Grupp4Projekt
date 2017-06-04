@@ -66,13 +66,11 @@ textarea{
 #topbar{
     background: #000;
     color: #999;
-    height: 5em;
     left: 0px;
     position: fixed;
     width: 100%;
     top: 0px;
     z-index: 1000;
-    text-indent: 100px;
     
 }
 #filler{
@@ -84,7 +82,6 @@ textarea{
   background-repeat: no-repeat;
 }
 #logo{
-    padding: 10px; 
     font-family: calibri,arial,sans-serif;
     font-weight: bold;
     font-size: 4em;
@@ -95,7 +92,7 @@ textarea{
    
 }
 
-/*#logo:hover {
+#logo:hover {
    position: relative; 
    cursor: pointer;
   cursor: hand;
@@ -108,7 +105,7 @@ textarea{
                 4px 4px #EE7202, 
                 5px 5px #EE7202, 
                 6px 6px #EE7202;
-}*/
+}
 
 #usernamedisplay {
   color:#CFDEF3;
@@ -151,7 +148,7 @@ textarea{
 }
 .loginbutton{
   width: 5em;
-  margin-top: 1em;
+  margin-top: 2.2rem;
 }
 .fullscreen{
     height: 100%;

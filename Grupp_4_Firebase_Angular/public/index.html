@@ -52,26 +52,75 @@
 <body ng-app="app" class="ng-cloak">
   <div ng-controller="LoginCtrl">
     <header class="container-fluid" id="topbar">
-      <div class="col-xs-6">
-        <div>
+      <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-xs-2">
           <strong id="logo" ng-click="auth.signOut()">EDU</strong>
         </div>
-      </div>
-      <div ng-hide="firebaseUser" class="col-xs-2">
-        <p>Email</p>
-        <input type="text" class="logininput" ng-model="email" name="username" required>
-      </div>
-      <div ng-hide="firebaseUser" class="col-xs-2">
-        <p>Password</p>
-        <input type="password" class="logininput" ng-model="password" name="password" required>
-      </div>
-      <button ng-hide="firebaseUser" class="btn btn-default col-xs-2 pull-right loginbutton" ng-click="auth.$signInWithEmailAndPassword(email, password)">Login</button>
-      <div ng-if="firebaseUser" class="col-xs-6">
-        <strong class="col-xs-4" id="usernamedisplay" ng-click="auth.$signOut()">{{ firebaseUser.email }}</strong>
+        <div class="col-xs-8 col-md-6">
+          <strong class="col-xs-4" id="usernamedisplay">{{ firebaseUser.email }}</strong>
+        </div>
+        <button ng-hide="firebaseUser" class="btn btn-default col-xs-2 loginbutton" data-toggle="modal" data-target="#login">Log in</button>
+        <button ng-show="firebaseUser" class="btn btn-default col-xs-2 loginbutton" ng-click="auth.$signOut()">Log out</button>
       </div>
       <p ng-if="error"> Error: {{ error }}</p>
     </header>
     <div id="filler"></div>
+    <!-- Modal -->
+    <div class="modal" id="login" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Inloggning</h4>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-xs-12">
+                <h4>Välkommen. Skriv in dina användaruppgifter nedan.</h4>
+              </div>
+              <div class="row">
+                <div class="col-xs-1"></div>
+                <div class="col-xs-11">
+                  <p>Email</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-1"></div>
+                <div class="col-xs-6">
+                  <input type="text" class="form-control" ng-model="email" name="username" required>
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-xs-1"></div>
+                <div class="col-xs-11">
+                  <p>Lösenord</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-1"></div>
+                <div class="col-xs-6">
+                  <input type="password" class="form-control" ng-model="password" name="password" required>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-1"></div>
+              <div class="col-xs-6">
+                <br>
+                <span id="wrongPassword">* Fel användarnamn eller lösenord!!!</span>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="closeLogin()">Stäng</button>
+              <!--<button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="auth.$signInWithEmailAndPassword(email, password)">Logga in</button>-->
+              <button type="button" class="btn btn-primary" ng-click="login(email, password)">Logga in</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="content-container">
     <div ng-view></div>
