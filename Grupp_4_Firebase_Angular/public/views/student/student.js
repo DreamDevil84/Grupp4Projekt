@@ -6,6 +6,12 @@
             var user = currentAuth.uid;
             var userRef = firebase.database().ref().child('users/' + user);
             $scope.user = $firebaseObject(userRef);
+            userRef.once('value').then(function (data) {
+                var type = data.val().type;
+                if (type !== 'student') {
+                    $location.path('/' + type);
+                }
+            });
             var mySchool = '';
             var myClass = '';
             userRef.child('groups/school').once('value').then(function (data) {

@@ -7,7 +7,7 @@
 
             return function (today, student) {
                 // create a reference to the database node where we will store our data
-                var ref = firebase.database().ref().child('attendance/' + today + '/' + student);
+                var ref = firebase.database().ref().child('attendance/Newton/YAPP-APP/' + today + '/' + student);
                 // return it as a synchronized object
                 return $firebaseObject(ref);
             }
@@ -16,7 +16,7 @@
 
             return function (date) {
                 // create a reference to the database node where we will store our data
-                var ref = firebase.database().ref().child('feedback/daily/' + date);
+                var ref = firebase.database().ref().child('feedback/Newton/YAPP-APP/daily/' + date);
                 // return it as a synchronized object
                 return $firebaseObject(ref);
             }

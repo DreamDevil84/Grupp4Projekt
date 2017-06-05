@@ -1,6 +1,6 @@
 (function () {
     angular.module('app')
-        .controller('TeacherCtrl', function (currentAuth, ScheduleTimes, DailyFeedbackList, AttendanceList, $scope, $firebaseObject, $firebaseArray) {
+        .controller('TeacherCtrl', function (currentAuth, ScheduleTimes, DailyFeedbackList, AttendanceList, $location, $scope, $firebaseObject, $firebaseArray) {
 
             // var switchRef = firebase.database().ref().child('news');
             // switchRef.once('value').then(function(data){
@@ -10,6 +10,12 @@
             var user = currentAuth.uid;
             var userRef = firebase.database().ref().child('users/' + user);
             $scope.user = $firebaseObject(userRef);
+            userRef.once('value').then(function (data) {
+                var type = data.val().type;
+                if (type !== 'teacher') {
+                    $location.path('/' + type);
+                }
+            });
             var myClass = '';
             var mySchool = '';
             $scope.newsLoaded = 0;

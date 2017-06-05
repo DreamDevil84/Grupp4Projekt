@@ -1,15 +1,22 @@
 (function () {
         angular.module('app')
-                .controller('AdminCtrl', function (currentAuth, $scope, $firebaseObject, $firebaseArray) {
+                .controller('AdminCtrl', function (currentAuth, $location, $scope, $firebaseObject, $firebaseArray) {
                         var user = currentAuth.uid;
                         var userRef = firebase.database().ref().child('users/' + user);
                         $scope.user = $firebaseObject(userRef);
+                        userRef.once('value').then(function (data) {
+                                var type = data.val().type;
+                                if (type !== 'admin') {
+                                        $location.path('/' + type);
+                                }
+                        });
+
                         var mySchool = '';
                         userRef.child('groups/school').once('value').then(function (data) {
                                 data.forEach(function (school) {
                                         mySchool = school.key;
                                 })
-                                console.log(mySchool);
+                                // console.log(mySchool);
 
                                 //skaffar dagens datum, används för andra funktioner
                                 var date = new Date();
